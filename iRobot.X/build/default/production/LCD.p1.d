@@ -2,4 +2,8 @@
  build/default/production/LCD.p1:  \
  LCD.c  \
 main.h  \
-LCD.h 
+SPI.h  \
+LCD.h  \
+ADC.h  \
+motor.h  \
+ser.h 

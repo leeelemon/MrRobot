@@ -1,11 +1,11 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"2651 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
+"2651 F:\Program Files\Microchip\xc8\v1.38\include\pic16f877a.h
 [v _TMR0IF `Vb ~T0 @X0 0 e@90 ]
 "55
 [v _TMR0 `Vuc ~T0 @X0 0 e@1 ]
 "2537
 [v _RC2 `Vb ~T0 @X0 0 e@58 ]
-"28 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic.h
+"28 F:\Program Files\Microchip\xc8\v1.38\include\pic.h
 [v ___nop `(v ~T0 @X0 0 ef ]
 [p i ___nop ]
 [p mainexit ]
@@ -23,13 +23,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ser_getch `(uc ~T0 @X0 0 ef ]
 "36 LCD.h
 [v _lcdWriteToDigitBCD `(v ~T0 @X0 0 ef1`ui ]
-"2513 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
+"2513 F:\Program Files\Microchip\xc8\v1.38\include\pic16f877a.h
 [v _RB0 `Vb ~T0 @X0 0 e@48 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic16f877a.h: 49: extern volatile unsigned char INDF @ 0x000;
-"51 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
+"51 F:\Program Files\Microchip\xc8\v1.38\include\pic16f877a.h
 [; ;pic16f877a.h: 51: asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
 [; ;pic16f877a.h: 55: extern volatile unsigned char TMR0 @ 0x001;
@@ -1042,21 +1042,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 186: extern unsigned char __resetbits;
 [; ;pic.h: 187: extern __bit __powerdown;
 [; ;pic.h: 188: extern __bit __timeout;
-"7 main.h
-[p x BOREN=OFF ]
-[p x CPD=OFF ]
-[p x WRT=OFF ]
-[p x FOSC=HS ]
-[p x WDTE=OFF ]
-[p x CP=OFF ]
-[p x LVP=OFF ]
-[p x PWRTE=OFF ]
-"24
-[v _rxbyte `uc ~T0 @X0 1 e ]
-[i _rxbyte
--> -> 0 `i `uc
+"6 ADC.h
+[v _adcRAW `Vui ~T0 @X0 1 e ]
+[i _adcRAW
+-> -> 0 `i `ui
 ]
-[; ;main.h: 24: unsigned char rxbyte = 0;
+[; ;ADC.h: 6: volatile unsigned int adcRAW = 0;
+"7
+[v _Distance `Vui ~T0 @X0 1 e ]
+[i _Distance
+-> -> 0 `i `ui
+]
+[; ;ADC.h: 7: volatile unsigned int Distance = 0;
+[; ;ADC.h: 9: void ADCMain(void);
+[; ;ADC.h: 10: void setupADC(void);
+[; ;ADC.h: 11: unsigned int getADC(void);
+[; ;ADC.h: 12: unsigned int adcConvertMM(unsigned int);
 "17 LCD.h
 [v _stepCountNeg `Vui ~T0 @X0 1 e ]
 [i _stepCountNeg
@@ -1076,20 +1077,55 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LCD.h: 33: void lcdWriteString(char * s);
 [; ;LCD.h: 36: void lcdWriteToDigitBCD(unsigned int data);
 [; ;LCD.h: 39: void setupLCD(void);
+[; ;SPI.h: 7: void setupSPI(void);
+[; ;SPI.h: 8: unsigned char spi_transfer(unsigned char data);
+[; ;motor.h: 6: void moveCW(void);
+[; ;motor.h: 7: void moveCCW(void);
+"9 motor.h
+[v _stepCount `c ~T0 @X0 1 e ]
+[i _stepCount
+-> -> 0 `i `c
+]
+[; ;motor.h: 9: signed char stepCount = 0;
+"10
+[v _negativeFlag `uc ~T0 @X0 1 e ]
+[i _negativeFlag
+-> -> 0 `i `uc
+]
+[; ;motor.h: 10: char negativeFlag = 0;
+"11
+[v _currentStep `uc ~T0 @X0 1 e ]
+[i _currentStep
+-> -> 0 `i `uc
+]
+[; ;motor.h: 11: char currentStep = 0;
 [; ;ser.h: 7: void ser_init(void);
 [; ;ser.h: 10: void ser_putch(unsigned char c);
 [; ;ser.h: 13: unsigned char ser_getch();
-[; ;SPI.h: 7: void setupSPI(void);
-[; ;SPI.h: 8: unsigned char spi_transfer(unsigned char data);
+"13 main.h
+[p x BOREN=OFF ]
+[p x CPD=OFF ]
+[p x WRT=OFF ]
+[p x FOSC=HS ]
+[p x WDTE=OFF ]
+[p x CP=OFF ]
+[p x LVP=OFF ]
+[p x PWRTE=OFF ]
+"30
+[v _rxbyte `uc ~T0 @X0 1 e ]
+[i _rxbyte
+-> -> 0 `i `uc
+]
+[; ;main.h: 30: unsigned char rxbyte = 0;
 "7 main.c
 [v _time_count `Vui ~T0 @X0 1 e ]
 [; ;main.c: 7: volatile unsigned int time_count;
 "8
 [v _FLAG_1000MS `Vb ~T0 @X0 1 e ]
 [; ;main.c: 8: volatile bit FLAG_1000MS;
-[v F1125 `(v ~T0 @X0 1 tf ]
+[v F1142 `(v ~T0 @X0 1 tf ]
 "12
-[v _isr `IF1125 ~T0 @X0 1 e ]
+[v _isr `IF1142 ~T0 @X0 1 e ]
 {
 [; ;main.c: 12: void interrupt isr(void){
 [e :U _isr ]

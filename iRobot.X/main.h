@@ -4,6 +4,12 @@
 #define	MAIN_H
 
 #include <xc.h>
+#include "ADC.h"
+#include "LCD.h"
+#include "SPI.h"
+#include "motor.h"
+#include "ser.h"
+
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
 //Defines

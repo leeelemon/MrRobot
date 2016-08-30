@@ -1,24 +1,28 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"2583 F:\Program Files\Microchip\xc8\v1.38\include\pic16f877a.h
-[v _RE2 `Vb ~T0 @X0 0 e@74 ]
-"2581
-[v _RE1 `Vb ~T0 @X0 0 e@73 ]
-"2579
-[v _RE0 `Vb ~T0 @X0 0 e@72 ]
-"331
-[v _PORTD `Vuc ~T0 @X0 0 e@8 ]
+"160 F:\Program Files\Microchip\xc8\v1.38\include\pic16f877a.h
+[v _PORTA `Vuc ~T0 @X0 0 e@5 ]
+"1288
+[v _TRISA `Vuc ~T0 @X0 0 e@133 ]
+"1124
+[v _ADCON0 `Vuc ~T0 @X0 0 e@31 ]
+"2175
+[v _ADCON1 `Vuc ~T0 @X0 0 e@159 ]
 [v F1091 `(v ~T0 @X0 1 tf1`ul ]
 "152 F:\Program Files\Microchip\xc8\v1.38\include\pic.h
 [v __delay `JF1091 ~T0 @X0 0 e ]
 [p i __delay ]
-"2175 F:\Program Files\Microchip\xc8\v1.38\include\pic16f877a.h
-[v _ADCON1 `Vuc ~T0 @X0 0 e@159 ]
-"392
-[v _PORTE `Vuc ~T0 @X0 0 e@9 ]
-"1459
-[v _TRISD `Vuc ~T0 @X0 0 e@136 ]
-"1520
-[v _TRISE `Vuc ~T0 @X0 0 e@137 ]
+"11 ADC.h
+[v _getADC `(ui ~T0 @X0 0 ef ]
+"30 LCD.h
+[v _lcdSetCursor `(v ~T0 @X0 0 ef1`uc ]
+"36
+[v _lcdWriteToDigitBCD `(v ~T0 @X0 0 ef1`ui ]
+"1118 F:\Program Files\Microchip\xc8\v1.38\include\pic16f877a.h
+[v _ADRESH `Vuc ~T0 @X0 0 e@30 ]
+"2169
+[v _ADRESL `Vuc ~T0 @X0 0 e@158 ]
+"2445
+[v _GO `Vb ~T0 @X0 0 e@250 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -1111,271 +1115,122 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;main.h: 30: unsigned char rxbyte = 0;
-"9 LCD.c
-[v _lcdWriteControl `(v ~T0 @X0 1 ef1`uc ]
+"8 ADC.c
+[v _setupADC `(v ~T0 @X0 1 ef ]
 {
-[; ;LCD.c: 9: void lcdWriteControl(unsigned char databyte){
-[e :U _lcdWriteControl ]
-[v _databyte `uc ~T0 @X0 1 r1 ]
+[; ;ADC.c: 8: void setupADC(void){
+[e :U _setupADC ]
 [f ]
-[; ;LCD.c: 10: RE2 = 0;
+[; ;ADC.c: 9: PORTA = 0;
+"9
+[e = _PORTA -> -> 0 `i `uc ]
+[; ;ADC.c: 10: TRISA = 0b11111111;
 "10
-[e = _RE2 -> -> 0 `i `b ]
-[; ;LCD.c: 11: RE1 = 0;
-"11
-[e = _RE1 -> -> 0 `i `b ]
-[; ;LCD.c: 12: RE0 = 0;
-"12
-[e = _RE0 -> -> 0 `i `b ]
-[; ;LCD.c: 13: PORTD = databyte;
+[e = _TRISA -> -> 255 `i `uc ]
+[; ;ADC.c: 13: ADCON0 = 0b10001001;
 "13
-[e = _PORTD _databyte ]
-[; ;LCD.c: 14: RE2 = 1;
+[e = _ADCON0 -> -> 137 `i `uc ]
+[; ;ADC.c: 14: ADCON1 = 0b00000010;
 "14
-[e = _RE2 -> -> 1 `i `b ]
-[; ;LCD.c: 15: RE2 = 0;
-"15
-[e = _RE2 -> -> 0 `i `b ]
-[; ;LCD.c: 16: _delay((unsigned long)((2)*(20000000/4000.0)));
+[e = _ADCON1 -> -> 2 `i `uc ]
+[; ;ADC.c: 16: _delay((unsigned long)((50)*(20000000/4000000.0)));
 "16
-[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;LCD.c: 17: }
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 20000000 `l `d .4000000.0 `ul ]
+[; ;ADC.c: 17: }
 "17
 [e :UE 96 ]
 }
-"20
-[v _lcdWriteData `(v ~T0 @X0 1 ef1`uc ]
+"19
+[v _ADCMain `(v ~T0 @X0 1 ef ]
 {
-[; ;LCD.c: 20: void lcdWriteData(unsigned char databyte){
-[e :U _lcdWriteData ]
-[v _databyte `uc ~T0 @X0 1 r1 ]
+[; ;ADC.c: 19: void ADCMain(void){
+[e :U _ADCMain ]
 [f ]
-[; ;LCD.c: 21: RE2 = 0;
+[; ;ADC.c: 21: getADC();
 "21
-[e = _RE2 -> -> 0 `i `b ]
-[; ;LCD.c: 22: RE1 = 0;
+[e ( _getADC ..  ]
+[; ;ADC.c: 22: lcdSetCursor(0b10000000);
 "22
-[e = _RE1 -> -> 0 `i `b ]
-[; ;LCD.c: 23: RE0 = 1;
+[e ( _lcdSetCursor (1 -> -> 128 `i `uc ]
+[; ;ADC.c: 23: lcdWriteToDigitBCD(adcRAW);
 "23
-[e = _RE0 -> -> 1 `i `b ]
-[; ;LCD.c: 24: PORTD = databyte;
-"24
-[e = _PORTD _databyte ]
-[; ;LCD.c: 25: RE2 = 1;
-"25
-[e = _RE2 -> -> 1 `i `b ]
-[; ;LCD.c: 26: RE2 = 0;
+[e ( _lcdWriteToDigitBCD (1 _adcRAW ]
+[; ;ADC.c: 26: }
 "26
-[e = _RE2 -> -> 0 `i `b ]
-[; ;LCD.c: 27: _delay((unsigned long)((1)*(20000000/4000.0)));
-"27
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;LCD.c: 28: }
-"28
 [e :UE 97 ]
 }
+"29
+[v _getADC `(ui ~T0 @X0 1 ef ]
+{
+[; ;ADC.c: 29: unsigned int getADC(void){
+[e :U _getADC ]
+[f ]
+[; ;ADC.c: 31: ADRESH = 0;
 "31
-[v _lcdSetCursor `(v ~T0 @X0 1 ef1`uc ]
-{
-[; ;LCD.c: 31: void lcdSetCursor(unsigned char address){
-[e :U _lcdSetCursor ]
-[v _address `uc ~T0 @X0 1 r1 ]
-[f ]
-[; ;LCD.c: 32: address |= 0b10000000;
+[e = _ADRESH -> -> 0 `i `uc ]
+[; ;ADC.c: 32: ADRESL = 0;
 "32
-[e =| _address -> -> 128 `i `uc ]
-[; ;LCD.c: 33: lcdWriteControl(address);
-"33
-[e ( _lcdWriteControl (1 _address ]
-[; ;LCD.c: 34: }
+[e = _ADRESL -> -> 0 `i `uc ]
+[; ;ADC.c: 34: GO = 1;
 "34
-[e :UE 98 ]
-}
-"36
-[v _lcdWriteString `(v ~T0 @X0 1 ef1`*uc ]
-{
-[; ;LCD.c: 36: void lcdWriteString(char * s){
-[e :U _lcdWriteString ]
-[v _s `*uc ~T0 @X0 1 r1 ]
-[f ]
-[; ;LCD.c: 38: while(*s) lcdWriteData(*s++);
-"38
-[e $U 100  ]
-[e :U 101 ]
-[e ( _lcdWriteData (1 *U ++ _s * -> -> 1 `i `x -> -> # *U _s `i `x ]
+[e = _GO -> -> 1 `i `b ]
+[; ;ADC.c: 35: while(GO) continue;
+"35
+[e $U 99  ]
 [e :U 100 ]
-[e $ != -> *U _s `i -> -> -> 0 `i `uc `i 101  ]
-[e :U 102 ]
-[; ;LCD.c: 39: }
+[e $U 99  ]
+[e :U 99 ]
+[e $ _GO 100  ]
+[e :U 101 ]
+[; ;ADC.c: 39: adcRAW = (4*ADRESH);
 "39
-[e :UE 99 ]
-}
+[e = _adcRAW -> * -> 4 `i -> _ADRESH `i `ui ]
+[; ;ADC.c: 41: switch(ADRESL){
+"41
+[e $U 103  ]
+{
+[; ;ADC.c: 42: case 0b01000000: adcRAW = adcRAW + 1;
 "42
-[v _lcdWriteToDigitBCD `(v ~T0 @X0 1 ef1`ui ]
-{
-[; ;LCD.c: 42: void lcdWriteToDigitBCD(unsigned int data){
-[e :U _lcdWriteToDigitBCD ]
-[v _data `ui ~T0 @X0 1 r1 ]
-[f ]
-"43
-[v _OnesDigit `ui ~T0 @X0 1 a ]
-[v _TensDigit `ui ~T0 @X0 1 a ]
-[v _HunsDigit `ui ~T0 @X0 1 a ]
-[v _ThouDigit `ui ~T0 @X0 1 a ]
-[v _TenThouDigit `ui ~T0 @X0 1 a ]
-[; ;LCD.c: 43: unsigned int OnesDigit, TensDigit, HunsDigit, ThouDigit, TenThouDigit;
-[; ;LCD.c: 46: OnesDigit = data;
-"46
-[e = _OnesDigit _data ]
-[; ;LCD.c: 47: TensDigit = 0;
-"47
-[e = _TensDigit -> -> 0 `i `ui ]
-[; ;LCD.c: 48: HunsDigit = 0;
-"48
-[e = _HunsDigit -> -> 0 `i `ui ]
-[; ;LCD.c: 49: ThouDigit = 0;
-"49
-[e = _ThouDigit -> -> 0 `i `ui ]
-[; ;LCD.c: 50: TenThouDigit = 0;
-"50
-[e = _TenThouDigit -> -> 0 `i `ui ]
-[; ;LCD.c: 53: while (OnesDigit >= 10000){
-"53
-[e $U 104  ]
-[e :U 105 ]
-{
-[; ;LCD.c: 54: OnesDigit = OnesDigit - 10000;
-"54
-[e = _OnesDigit - _OnesDigit -> -> 10000 `i `ui ]
-[; ;LCD.c: 55: TenThouDigit++;
-"55
-[e ++ _TenThouDigit -> -> 1 `i `ui ]
-"56
-}
 [e :U 104 ]
-"53
-[e $ >= _OnesDigit -> -> 10000 `i `ui 105  ]
+[e = _adcRAW + _adcRAW -> -> 1 `i `ui ]
+[; ;ADC.c: 43: break;
+"43
+[e $U 102  ]
+[; ;ADC.c: 44: case 0b10000000: adcRAW = adcRAW + 2;
+"44
+[e :U 105 ]
+[e = _adcRAW + _adcRAW -> -> 2 `i `ui ]
+[; ;ADC.c: 45: break;
+"45
+[e $U 102  ]
+[; ;ADC.c: 46: case 0b11000000: adcRAW = adcRAW + 3;
+"46
 [e :U 106 ]
-[; ;LCD.c: 56: }
-[; ;LCD.c: 58: while (OnesDigit >= 1000){
-"58
-[e $U 107  ]
-[e :U 108 ]
-{
-[; ;LCD.c: 59: OnesDigit = OnesDigit - 1000;
-"59
-[e = _OnesDigit - _OnesDigit -> -> 1000 `i `ui ]
-[; ;LCD.c: 60: ThouDigit++;
-"60
-[e ++ _ThouDigit -> -> 1 `i `ui ]
-"61
-}
+[e = _adcRAW + _adcRAW -> -> 3 `i `ui ]
+[; ;ADC.c: 47: break;
+"47
+[e $U 102  ]
+[; ;ADC.c: 48: default: adcRAW = adcRAW;
+"48
 [e :U 107 ]
-"58
-[e $ >= _OnesDigit -> -> 1000 `i `ui 108  ]
-[e :U 109 ]
-[; ;LCD.c: 61: }
-[; ;LCD.c: 63: while (OnesDigit >= 100){
-"63
-[e $U 110  ]
-[e :U 111 ]
-{
-[; ;LCD.c: 64: OnesDigit = OnesDigit - 100;
-"64
-[e = _OnesDigit - _OnesDigit -> -> 100 `i `ui ]
-[; ;LCD.c: 65: HunsDigit++;
-"65
-[e ++ _HunsDigit -> -> 1 `i `ui ]
-"66
+[e = _adcRAW _adcRAW ]
+"49
 }
-[e :U 110 ]
-"63
-[e $ >= _OnesDigit -> -> 100 `i `ui 111  ]
-[e :U 112 ]
-[; ;LCD.c: 66: }
-[; ;LCD.c: 68: while (OnesDigit >= 10){
-"68
-[e $U 113  ]
-[e :U 114 ]
-{
-[; ;LCD.c: 69: OnesDigit = OnesDigit - 10;
-"69
-[e = _OnesDigit - _OnesDigit -> -> 10 `i `ui ]
-[; ;LCD.c: 70: TensDigit++;
-"70
-[e ++ _TensDigit -> -> 1 `i `ui ]
-"71
-}
-[e :U 113 ]
-"68
-[e $ >= _OnesDigit -> -> 10 `i `ui 114  ]
-[e :U 115 ]
-[; ;LCD.c: 71: }
-[; ;LCD.c: 73: if (TenThouDigit > 0)
-"73
-[e $ ! > _TenThouDigit -> -> 0 `i `ui 116  ]
-[; ;LCD.c: 74: lcdWriteData((unsigned int)TenThouDigit + 48);
-"74
-[e ( _lcdWriteData (1 -> + _TenThouDigit -> -> 48 `i `ui `uc ]
-[e :U 116 ]
-[; ;LCD.c: 76: if (ThouDigit > 0)
-"76
-[e $ ! > _ThouDigit -> -> 0 `i `ui 117  ]
-[; ;LCD.c: 77: lcdWriteData((unsigned int)ThouDigit + 48);
-"77
-[e ( _lcdWriteData (1 -> + _ThouDigit -> -> 48 `i `ui `uc ]
-[e :U 117 ]
-[; ;LCD.c: 79: lcdWriteData((unsigned int)HunsDigit + 48);
-"79
-[e ( _lcdWriteData (1 -> + _HunsDigit -> -> 48 `i `ui `uc ]
-[; ;LCD.c: 80: lcdWriteData((unsigned int)TensDigit + 48);
-"80
-[e ( _lcdWriteData (1 -> + _TensDigit -> -> 48 `i `ui `uc ]
-[; ;LCD.c: 81: lcdWriteData((unsigned int)OnesDigit + 48);
-"81
-[e ( _lcdWriteData (1 -> + _OnesDigit -> -> 48 `i `ui `uc ]
-[; ;LCD.c: 83: }
-"83
-[e :UE 103 ]
-}
-"86
-[v _setupLCD `(v ~T0 @X0 1 ef ]
-{
-[; ;LCD.c: 86: void setupLCD(void){
-[e :U _setupLCD ]
-[f ]
-[; ;LCD.c: 88: ADCON1 = 0b00000010;
-"88
-[e = _ADCON1 -> -> 2 `i `uc ]
-[; ;LCD.c: 90: PORTD = 0;
-"90
-[e = _PORTD -> -> 0 `i `uc ]
-[; ;LCD.c: 91: PORTE = 0;
-"91
-[e = _PORTE -> -> 0 `i `uc ]
-[; ;LCD.c: 93: TRISD = 0b00000000;
-"93
-[e = _TRISD -> -> 0 `i `uc ]
-[; ;LCD.c: 94: TRISE = 0b00000000;
-"94
-[e = _TRISE -> -> 0 `i `uc ]
-[; ;LCD.c: 97: lcdWriteControl(0b00000001);
-"97
-[e ( _lcdWriteControl (1 -> -> 1 `i `uc ]
-[; ;LCD.c: 98: lcdWriteControl(0b00111000);
-"98
-[e ( _lcdWriteControl (1 -> -> 56 `i `uc ]
-[; ;LCD.c: 99: lcdWriteControl(0b00001100);
-"99
-[e ( _lcdWriteControl (1 -> -> 12 `i `uc ]
-[; ;LCD.c: 100: lcdWriteControl(0b00000110);
-"100
-[e ( _lcdWriteControl (1 -> -> 6 `i `uc ]
-[; ;LCD.c: 101: lcdWriteControl(0b00000010);
-"101
-[e ( _lcdWriteControl (1 -> -> 2 `i `uc ]
-[; ;LCD.c: 103: }
-"103
-[e :UE 118 ]
+[; ;ADC.c: 49: }
+[e $U 102  ]
+"41
+[e :U 103 ]
+[e [\ _ADRESL , $ -> -> 64 `i `uc 104
+ , $ -> -> 128 `i `uc 105
+ , $ -> -> 192 `i `uc 106
+ 107 ]
+"49
+[e :U 102 ]
+[; ;ADC.c: 51: return(adcRAW);
+"51
+[e ) _adcRAW ]
+[e $UE 98  ]
+[; ;ADC.c: 52: }
+"52
+[e :UE 98 ]
 }

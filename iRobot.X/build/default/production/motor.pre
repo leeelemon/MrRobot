@@ -1,5 +1,5 @@
 
-# 1 "SPI.c"
+# 1 "motor.c"
 
 # 26 "F:\Program Files\Microchip\xc8\v1.38\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -1496,35 +1496,103 @@ unsigned char ser_getch();
 # 30
 unsigned char rxbyte = 0;
 
-# 4 "SPI.c"
-void setupSPI(void){
+# 5 "motor.c"
+void moveCW(void){
 
-TRISB = 0b00000000;
+if (stepCount == 0) negativeFlag = 1;
 
-SSPSTAT = 0b01000000;
-SSPCON = 0b00100000;
-TRISC = 0b11010000;
-PORTC = 0b00000011;
+stepCount--;
 
 
-OPTION_REG = 0b00000100;
+switch(currentStep){
 
-TMR0IE = 1;
+case 7: PORTC = 0b00011011;
+currentStep--;
+break;
 
+case 6: PORTC = 0b00010111;
+currentStep--;
+break;
 
-(GIE = 1);
+case 5: PORTC = 0b00110101;
+currentStep--;
+break;
+
+case 4: PORTC = 0b00100111;
+currentStep--;
+break;
+
+case 3: PORTC = 0b00101011;
+currentStep--;
+break;
+
+case 2: PORTC = 0b00101110;
+currentStep--;
+break;
+
+case 1: PORTC = 0b00111100;
+currentStep--;
+break;
+
+case 0: PORTC = 0b00011110;
+currentStep = 7;
+break;
+
+default: PORTC = 0b00111001;
+break;
 }
 
+_delay((unsigned long)((3)*(20000000/4000.0)));
 
-unsigned char spi_transfer(unsigned char data){
-unsigned char temp = 0;
-
-SSPIF = 0;
-SSPBUF = data;
-
-while (SSPIF == 0);
-temp = SSPBUF;
-SSPIF = 0;
-
-return temp;
 }
+
+void moveCCW(void){
+
+if (stepCount == (-1)) negativeFlag = 0;
+
+stepCount++;
+
+
+switch(currentStep){
+case 0: PORTC = 0b00101110;
+currentStep++;
+break;
+
+case 1: PORTC = 0b00101011;
+currentStep++;
+break;
+
+case 2: PORTC = 0b00100111;
+currentStep++;
+break;
+
+case 3: PORTC = 0b00110101;
+currentStep++;
+break;
+
+case 4: PORTC = 0b00010111;
+currentStep++;
+break;
+
+case 5: PORTC = 0b00011011;
+currentStep++;
+break;
+
+case 6: PORTC = 0b00011110;
+currentStep++;
+break;
+
+case 7: PORTC = 0b00111100;
+currentStep = 0;
+break;
+
+default: PORTC = 0b00111001;
+break;
+}
+
+_delay((unsigned long)((3)*(20000000/4000.0)));
+
+
+
+}
+
