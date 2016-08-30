@@ -1,24 +1,10 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"2583 F:\Program Files\Microchip\xc8\v1.38\include\pic16f877a.h
-[v _RE2 `Vb ~T0 @X0 0 e@74 ]
-"2581
-[v _RE1 `Vb ~T0 @X0 0 e@73 ]
-"2579
-[v _RE0 `Vb ~T0 @X0 0 e@72 ]
-"331
-[v _PORTD `Vuc ~T0 @X0 0 e@8 ]
+"270 F:\Program Files\Microchip\xc8\v1.38\include\pic16f877a.h
+[v _PORTC `Vuc ~T0 @X0 0 e@7 ]
 [v F1091 `(v ~T0 @X0 1 tf1`ul ]
 "152 F:\Program Files\Microchip\xc8\v1.38\include\pic.h
 [v __delay `JF1091 ~T0 @X0 0 e ]
 [p i __delay ]
-"2175 F:\Program Files\Microchip\xc8\v1.38\include\pic16f877a.h
-[v _ADCON1 `Vuc ~T0 @X0 0 e@159 ]
-"392
-[v _PORTE `Vuc ~T0 @X0 0 e@9 ]
-"1459
-[v _TRISD `Vuc ~T0 @X0 0 e@136 ]
-"1520
-[v _TRISE `Vuc ~T0 @X0 0 e@137 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -1111,271 +1097,261 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;main.h: 30: unsigned char rxbyte = 0;
-"9 LCD.c
-[v _lcdWriteControl `(v ~T0 @X0 1 ef1`uc ]
+"5 motor.c
+[v _moveCW `(v ~T0 @X0 1 ef ]
 {
-[; ;LCD.c: 9: void lcdWriteControl(unsigned char databyte){
-[e :U _lcdWriteControl ]
-[v _databyte `uc ~T0 @X0 1 r1 ]
+[; ;motor.c: 5: void moveCW(void){
+[e :U _moveCW ]
 [f ]
-[; ;LCD.c: 10: RE2 = 0;
-"10
-[e = _RE2 -> -> 0 `i `b ]
-[; ;LCD.c: 11: RE1 = 0;
-"11
-[e = _RE1 -> -> 0 `i `b ]
-[; ;LCD.c: 12: RE0 = 0;
+[; ;motor.c: 7: if (stepCount == 0) negativeFlag = 1;
+"7
+[e $ ! == -> _stepCount `i -> 0 `i 97  ]
+[e = _negativeFlag -> -> 1 `i `uc ]
+[e :U 97 ]
+[; ;motor.c: 9: stepCount--;
+"9
+[e -- _stepCount -> -> 1 `i `c ]
+[; ;motor.c: 12: switch(currentStep){
 "12
-[e = _RE0 -> -> 0 `i `b ]
-[; ;LCD.c: 13: PORTD = databyte;
-"13
-[e = _PORTD _databyte ]
-[; ;LCD.c: 14: RE2 = 1;
+[e $U 99  ]
+{
+[; ;motor.c: 14: case 7: PORTC = 0b00011011;
 "14
-[e = _RE2 -> -> 1 `i `b ]
-[; ;LCD.c: 15: RE2 = 0;
+[e :U 100 ]
+[e = _PORTC -> -> 27 `i `uc ]
+[; ;motor.c: 15: currentStep--;
 "15
-[e = _RE2 -> -> 0 `i `b ]
-[; ;LCD.c: 16: _delay((unsigned long)((2)*(20000000/4000.0)));
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 16: break;
 "16
-[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;LCD.c: 17: }
-"17
+[e $U 98  ]
+[; ;motor.c: 18: case 6: PORTC = 0b00010111;
+"18
+[e :U 101 ]
+[e = _PORTC -> -> 23 `i `uc ]
+[; ;motor.c: 19: currentStep--;
+"19
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 20: break;
+"20
+[e $U 98  ]
+[; ;motor.c: 22: case 5: PORTC = 0b00110101;
+"22
+[e :U 102 ]
+[e = _PORTC -> -> 53 `i `uc ]
+[; ;motor.c: 23: currentStep--;
+"23
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 24: break;
+"24
+[e $U 98  ]
+[; ;motor.c: 26: case 4: PORTC = 0b00100111;
+"26
+[e :U 103 ]
+[e = _PORTC -> -> 39 `i `uc ]
+[; ;motor.c: 27: currentStep--;
+"27
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 28: break;
+"28
+[e $U 98  ]
+[; ;motor.c: 30: case 3: PORTC = 0b00101011;
+"30
+[e :U 104 ]
+[e = _PORTC -> -> 43 `i `uc ]
+[; ;motor.c: 31: currentStep--;
+"31
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 32: break;
+"32
+[e $U 98  ]
+[; ;motor.c: 34: case 2: PORTC = 0b00101110;
+"34
+[e :U 105 ]
+[e = _PORTC -> -> 46 `i `uc ]
+[; ;motor.c: 35: currentStep--;
+"35
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 36: break;
+"36
+[e $U 98  ]
+[; ;motor.c: 38: case 1: PORTC = 0b00111100;
+"38
+[e :U 106 ]
+[e = _PORTC -> -> 60 `i `uc ]
+[; ;motor.c: 39: currentStep--;
+"39
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 40: break;
+"40
+[e $U 98  ]
+[; ;motor.c: 42: case 0: PORTC = 0b00011110;
+"42
+[e :U 107 ]
+[e = _PORTC -> -> 30 `i `uc ]
+[; ;motor.c: 43: currentStep = 7;
+"43
+[e = _currentStep -> -> 7 `i `uc ]
+[; ;motor.c: 44: break;
+"44
+[e $U 98  ]
+[; ;motor.c: 46: default: PORTC = 0b00111001;
+"46
+[e :U 108 ]
+[e = _PORTC -> -> 57 `i `uc ]
+[; ;motor.c: 47: break;
+"47
+[e $U 98  ]
+"48
+}
+[; ;motor.c: 48: }
+[e $U 98  ]
+"12
+[e :U 99 ]
+[e [\ _currentStep , $ -> -> 7 `i `uc 100
+ , $ -> -> 6 `i `uc 101
+ , $ -> -> 5 `i `uc 102
+ , $ -> -> 4 `i `uc 103
+ , $ -> -> 3 `i `uc 104
+ , $ -> -> 2 `i `uc 105
+ , $ -> -> 1 `i `uc 106
+ , $ -> -> 0 `i `uc 107
+ 108 ]
+"48
+[e :U 98 ]
+[; ;motor.c: 50: _delay((unsigned long)((3)*(20000000/4000.0)));
+"50
+[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;motor.c: 52: }
+"52
 [e :UE 96 ]
 }
-"20
-[v _lcdWriteData `(v ~T0 @X0 1 ef1`uc ]
-{
-[; ;LCD.c: 20: void lcdWriteData(unsigned char databyte){
-[e :U _lcdWriteData ]
-[v _databyte `uc ~T0 @X0 1 r1 ]
-[f ]
-[; ;LCD.c: 21: RE2 = 0;
-"21
-[e = _RE2 -> -> 0 `i `b ]
-[; ;LCD.c: 22: RE1 = 0;
-"22
-[e = _RE1 -> -> 0 `i `b ]
-[; ;LCD.c: 23: RE0 = 1;
-"23
-[e = _RE0 -> -> 1 `i `b ]
-[; ;LCD.c: 24: PORTD = databyte;
-"24
-[e = _PORTD _databyte ]
-[; ;LCD.c: 25: RE2 = 1;
-"25
-[e = _RE2 -> -> 1 `i `b ]
-[; ;LCD.c: 26: RE2 = 0;
-"26
-[e = _RE2 -> -> 0 `i `b ]
-[; ;LCD.c: 27: _delay((unsigned long)((1)*(20000000/4000.0)));
-"27
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;LCD.c: 28: }
-"28
-[e :UE 97 ]
-}
-"31
-[v _lcdSetCursor `(v ~T0 @X0 1 ef1`uc ]
-{
-[; ;LCD.c: 31: void lcdSetCursor(unsigned char address){
-[e :U _lcdSetCursor ]
-[v _address `uc ~T0 @X0 1 r1 ]
-[f ]
-[; ;LCD.c: 32: address |= 0b10000000;
-"32
-[e =| _address -> -> 128 `i `uc ]
-[; ;LCD.c: 33: lcdWriteControl(address);
-"33
-[e ( _lcdWriteControl (1 _address ]
-[; ;LCD.c: 34: }
-"34
-[e :UE 98 ]
-}
-"36
-[v _lcdWriteString `(v ~T0 @X0 1 ef1`*uc ]
-{
-[; ;LCD.c: 36: void lcdWriteString(char * s){
-[e :U _lcdWriteString ]
-[v _s `*uc ~T0 @X0 1 r1 ]
-[f ]
-[; ;LCD.c: 38: while(*s) lcdWriteData(*s++);
-"38
-[e $U 100  ]
-[e :U 101 ]
-[e ( _lcdWriteData (1 *U ++ _s * -> -> 1 `i `x -> -> # *U _s `i `x ]
-[e :U 100 ]
-[e $ != -> *U _s `i -> -> -> 0 `i `uc `i 101  ]
-[e :U 102 ]
-[; ;LCD.c: 39: }
-"39
-[e :UE 99 ]
-}
-"42
-[v _lcdWriteToDigitBCD `(v ~T0 @X0 1 ef1`ui ]
-{
-[; ;LCD.c: 42: void lcdWriteToDigitBCD(unsigned int data){
-[e :U _lcdWriteToDigitBCD ]
-[v _data `ui ~T0 @X0 1 r1 ]
-[f ]
-"43
-[v _OnesDigit `ui ~T0 @X0 1 a ]
-[v _TensDigit `ui ~T0 @X0 1 a ]
-[v _HunsDigit `ui ~T0 @X0 1 a ]
-[v _ThouDigit `ui ~T0 @X0 1 a ]
-[v _TenThouDigit `ui ~T0 @X0 1 a ]
-[; ;LCD.c: 43: unsigned int OnesDigit, TensDigit, HunsDigit, ThouDigit, TenThouDigit;
-[; ;LCD.c: 46: OnesDigit = data;
-"46
-[e = _OnesDigit _data ]
-[; ;LCD.c: 47: TensDigit = 0;
-"47
-[e = _TensDigit -> -> 0 `i `ui ]
-[; ;LCD.c: 48: HunsDigit = 0;
-"48
-[e = _HunsDigit -> -> 0 `i `ui ]
-[; ;LCD.c: 49: ThouDigit = 0;
-"49
-[e = _ThouDigit -> -> 0 `i `ui ]
-[; ;LCD.c: 50: TenThouDigit = 0;
-"50
-[e = _TenThouDigit -> -> 0 `i `ui ]
-[; ;LCD.c: 53: while (OnesDigit >= 10000){
-"53
-[e $U 104  ]
-[e :U 105 ]
-{
-[; ;LCD.c: 54: OnesDigit = OnesDigit - 10000;
 "54
-[e = _OnesDigit - _OnesDigit -> -> 10000 `i `ui ]
-[; ;LCD.c: 55: TenThouDigit++;
-"55
-[e ++ _TenThouDigit -> -> 1 `i `ui ]
-"56
-}
-[e :U 104 ]
-"53
-[e $ >= _OnesDigit -> -> 10000 `i `ui 105  ]
-[e :U 106 ]
-[; ;LCD.c: 56: }
-[; ;LCD.c: 58: while (OnesDigit >= 1000){
-"58
-[e $U 107  ]
-[e :U 108 ]
+[v _moveCCW `(v ~T0 @X0 1 ef ]
 {
-[; ;LCD.c: 59: OnesDigit = OnesDigit - 1000;
-"59
-[e = _OnesDigit - _OnesDigit -> -> 1000 `i `ui ]
-[; ;LCD.c: 60: ThouDigit++;
-"60
-[e ++ _ThouDigit -> -> 1 `i `ui ]
-"61
-}
-[e :U 107 ]
-"58
-[e $ >= _OnesDigit -> -> 1000 `i `ui 108  ]
-[e :U 109 ]
-[; ;LCD.c: 61: }
-[; ;LCD.c: 63: while (OnesDigit >= 100){
-"63
-[e $U 110  ]
-[e :U 111 ]
-{
-[; ;LCD.c: 64: OnesDigit = OnesDigit - 100;
-"64
-[e = _OnesDigit - _OnesDigit -> -> 100 `i `ui ]
-[; ;LCD.c: 65: HunsDigit++;
-"65
-[e ++ _HunsDigit -> -> 1 `i `ui ]
-"66
-}
-[e :U 110 ]
-"63
-[e $ >= _OnesDigit -> -> 100 `i `ui 111  ]
-[e :U 112 ]
-[; ;LCD.c: 66: }
-[; ;LCD.c: 68: while (OnesDigit >= 10){
-"68
-[e $U 113  ]
-[e :U 114 ]
-{
-[; ;LCD.c: 69: OnesDigit = OnesDigit - 10;
-"69
-[e = _OnesDigit - _OnesDigit -> -> 10 `i `ui ]
-[; ;LCD.c: 70: TensDigit++;
-"70
-[e ++ _TensDigit -> -> 1 `i `ui ]
-"71
-}
-[e :U 113 ]
-"68
-[e $ >= _OnesDigit -> -> 10 `i `ui 114  ]
-[e :U 115 ]
-[; ;LCD.c: 71: }
-[; ;LCD.c: 73: if (TenThouDigit > 0)
-"73
-[e $ ! > _TenThouDigit -> -> 0 `i `ui 116  ]
-[; ;LCD.c: 74: lcdWriteData((unsigned int)TenThouDigit + 48);
-"74
-[e ( _lcdWriteData (1 -> + _TenThouDigit -> -> 48 `i `ui `uc ]
-[e :U 116 ]
-[; ;LCD.c: 76: if (ThouDigit > 0)
-"76
-[e $ ! > _ThouDigit -> -> 0 `i `ui 117  ]
-[; ;LCD.c: 77: lcdWriteData((unsigned int)ThouDigit + 48);
-"77
-[e ( _lcdWriteData (1 -> + _ThouDigit -> -> 48 `i `ui `uc ]
-[e :U 117 ]
-[; ;LCD.c: 79: lcdWriteData((unsigned int)HunsDigit + 48);
-"79
-[e ( _lcdWriteData (1 -> + _HunsDigit -> -> 48 `i `ui `uc ]
-[; ;LCD.c: 80: lcdWriteData((unsigned int)TensDigit + 48);
-"80
-[e ( _lcdWriteData (1 -> + _TensDigit -> -> 48 `i `ui `uc ]
-[; ;LCD.c: 81: lcdWriteData((unsigned int)OnesDigit + 48);
-"81
-[e ( _lcdWriteData (1 -> + _OnesDigit -> -> 48 `i `ui `uc ]
-[; ;LCD.c: 83: }
-"83
-[e :UE 103 ]
-}
-"86
-[v _setupLCD `(v ~T0 @X0 1 ef ]
-{
-[; ;LCD.c: 86: void setupLCD(void){
-[e :U _setupLCD ]
+[; ;motor.c: 54: void moveCCW(void){
+[e :U _moveCCW ]
 [f ]
-[; ;LCD.c: 88: ADCON1 = 0b00000010;
+[; ;motor.c: 56: if (stepCount == (-1)) negativeFlag = 0;
+"56
+[e $ ! == -> _stepCount `i -U -> 1 `i 110  ]
+[e = _negativeFlag -> -> 0 `i `uc ]
+[e :U 110 ]
+[; ;motor.c: 58: stepCount++;
+"58
+[e ++ _stepCount -> -> 1 `i `c ]
+[; ;motor.c: 61: switch(currentStep){
+"61
+[e $U 112  ]
+{
+[; ;motor.c: 62: case 0: PORTC = 0b00101110;
+"62
+[e :U 113 ]
+[e = _PORTC -> -> 46 `i `uc ]
+[; ;motor.c: 63: currentStep++;
+"63
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 64: break;
+"64
+[e $U 111  ]
+[; ;motor.c: 66: case 1: PORTC = 0b00101011;
+"66
+[e :U 114 ]
+[e = _PORTC -> -> 43 `i `uc ]
+[; ;motor.c: 67: currentStep++;
+"67
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 68: break;
+"68
+[e $U 111  ]
+[; ;motor.c: 70: case 2: PORTC = 0b00100111;
+"70
+[e :U 115 ]
+[e = _PORTC -> -> 39 `i `uc ]
+[; ;motor.c: 71: currentStep++;
+"71
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 72: break;
+"72
+[e $U 111  ]
+[; ;motor.c: 74: case 3: PORTC = 0b00110101;
+"74
+[e :U 116 ]
+[e = _PORTC -> -> 53 `i `uc ]
+[; ;motor.c: 75: currentStep++;
+"75
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 76: break;
+"76
+[e $U 111  ]
+[; ;motor.c: 78: case 4: PORTC = 0b00010111;
+"78
+[e :U 117 ]
+[e = _PORTC -> -> 23 `i `uc ]
+[; ;motor.c: 79: currentStep++;
+"79
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 80: break;
+"80
+[e $U 111  ]
+[; ;motor.c: 82: case 5: PORTC = 0b00011011;
+"82
+[e :U 118 ]
+[e = _PORTC -> -> 27 `i `uc ]
+[; ;motor.c: 83: currentStep++;
+"83
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 84: break;
+"84
+[e $U 111  ]
+[; ;motor.c: 86: case 6: PORTC = 0b00011110;
+"86
+[e :U 119 ]
+[e = _PORTC -> -> 30 `i `uc ]
+[; ;motor.c: 87: currentStep++;
+"87
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 88: break;
 "88
-[e = _ADCON1 -> -> 2 `i `uc ]
-[; ;LCD.c: 90: PORTD = 0;
+[e $U 111  ]
+[; ;motor.c: 90: case 7: PORTC = 0b00111100;
 "90
-[e = _PORTD -> -> 0 `i `uc ]
-[; ;LCD.c: 91: PORTE = 0;
+[e :U 120 ]
+[e = _PORTC -> -> 60 `i `uc ]
+[; ;motor.c: 91: currentStep = 0;
 "91
-[e = _PORTE -> -> 0 `i `uc ]
-[; ;LCD.c: 93: TRISD = 0b00000000;
-"93
-[e = _TRISD -> -> 0 `i `uc ]
-[; ;LCD.c: 94: TRISE = 0b00000000;
+[e = _currentStep -> -> 0 `i `uc ]
+[; ;motor.c: 92: break;
+"92
+[e $U 111  ]
+[; ;motor.c: 94: default: PORTC = 0b00111001;
 "94
-[e = _TRISE -> -> 0 `i `uc ]
-[; ;LCD.c: 97: lcdWriteControl(0b00000001);
-"97
-[e ( _lcdWriteControl (1 -> -> 1 `i `uc ]
-[; ;LCD.c: 98: lcdWriteControl(0b00111000);
+[e :U 121 ]
+[e = _PORTC -> -> 57 `i `uc ]
+[; ;motor.c: 95: break;
+"95
+[e $U 111  ]
+"96
+}
+[; ;motor.c: 96: }
+[e $U 111  ]
+"61
+[e :U 112 ]
+[e [\ _currentStep , $ -> -> 0 `i `uc 113
+ , $ -> -> 1 `i `uc 114
+ , $ -> -> 2 `i `uc 115
+ , $ -> -> 3 `i `uc 116
+ , $ -> -> 4 `i `uc 117
+ , $ -> -> 5 `i `uc 118
+ , $ -> -> 6 `i `uc 119
+ , $ -> -> 7 `i `uc 120
+ 121 ]
+"96
+[e :U 111 ]
+[; ;motor.c: 98: _delay((unsigned long)((3)*(20000000/4000.0)));
 "98
-[e ( _lcdWriteControl (1 -> -> 56 `i `uc ]
-[; ;LCD.c: 99: lcdWriteControl(0b00001100);
-"99
-[e ( _lcdWriteControl (1 -> -> 12 `i `uc ]
-[; ;LCD.c: 100: lcdWriteControl(0b00000110);
-"100
-[e ( _lcdWriteControl (1 -> -> 6 `i `uc ]
-[; ;LCD.c: 101: lcdWriteControl(0b00000010);
-"101
-[e ( _lcdWriteControl (1 -> -> 2 `i `uc ]
-[; ;LCD.c: 103: }
-"103
-[e :UE 118 ]
+[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;motor.c: 102: }
+"102
+[e :UE 109 ]
 }

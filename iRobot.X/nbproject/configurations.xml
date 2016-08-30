@@ -20,6 +20,10 @@
       <itemPath>SPI.h</itemPath>
       <itemPath>main.h</itemPath>
       <itemPath>ser.c</itemPath>
+      <itemPath>ADC.c</itemPath>
+      <itemPath>ADC.h</itemPath>
+      <itemPath>motor.c</itemPath>
+      <itemPath>motor.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

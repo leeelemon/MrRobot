@@ -1,17 +1,17 @@
 
 # 1 "main.c"
 
-# 26 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\htc.h"
+# 26 "F:\Program Files\Microchip\xc8\v1.38\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
 
 extern double __fpnormalize(double);
 
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\xc8debug.h"
+# 13 "F:\Program Files\Microchip\xc8\v1.38\include\xc8debug.h"
 #pragma intrinsic(__builtin_software_breakpoint)
 extern void __builtin_software_breakpoint(void);
 
-# 49 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h"
+# 49 "F:\Program Files\Microchip\xc8\v1.38\include\pic16f877a.h"
 extern volatile unsigned char INDF @ 0x000;
 
 asm("INDF equ 00h");
@@ -1411,21 +1411,21 @@ extern volatile __bit nW @ (((unsigned) &SSPSTAT)*8) + 2;
 extern volatile __bit nWRITE @ (((unsigned) &SSPSTAT)*8) + 2;
 
 
-# 27 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic.h"
+# 27 "F:\Program Files\Microchip\xc8\v1.38\include\pic.h"
 #pragma intrinsic(__nop)
 extern void __nop(void);
 
 # 77
 extern unsigned int flash_read(unsigned short addr);
 
-# 114 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\eeprom_routines.h"
+# 114 "F:\Program Files\Microchip\xc8\v1.38\include\eeprom_routines.h"
 extern void eeprom_write(unsigned char addr, unsigned char value);
 extern unsigned char eeprom_read(unsigned char addr);
 extern void eecpymem(volatile unsigned char *to, __eeprom unsigned char *from, unsigned char size);
 extern void memcpyee(__eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 
 
-# 151 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic.h"
+# 151 "F:\Program Files\Microchip\xc8\v1.38\include\pic.h"
 #pragma intrinsic(_delay)
 extern __nonreentrant void _delay(unsigned long);
 
@@ -1434,12 +1434,14 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
+# 6 "ADC.h"
+volatile unsigned int adcRAW = 0;
+volatile unsigned int Distance = 0;
 
-# 7 "main.h"
-#pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
-
-# 24
-unsigned char rxbyte = 0;
+void ADCMain(void);
+void setupADC(void);
+unsigned int getADC(void);
+unsigned int adcConvertMM(unsigned int);
 
 # 17 "LCD.h"
 volatile unsigned int stepCountNeg = 0;
@@ -1466,6 +1468,18 @@ void lcdWriteToDigitBCD(unsigned int data);
 
 void setupLCD(void);
 
+# 7 "SPI.h"
+void setupSPI(void);
+unsigned char spi_transfer(unsigned char data);
+
+# 6 "motor.h"
+void moveCW(void);
+void moveCCW(void);
+
+signed char stepCount = 0;
+char negativeFlag = 0;
+char currentStep = 0;
+
 # 7 "ser.h"
 void ser_init(void);
 
@@ -1475,9 +1489,12 @@ void ser_putch(unsigned char c);
 
 unsigned char ser_getch();
 
-# 7 "SPI.h"
-void setupSPI(void);
-unsigned char spi_transfer(unsigned char data);
+
+# 13 "main.h"
+#pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
+
+# 30
+unsigned char rxbyte = 0;
 
 # 7 "main.c"
 volatile unsigned int time_count;

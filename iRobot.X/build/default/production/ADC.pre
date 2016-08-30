@@ -1,5 +1,5 @@
 
-# 1 "SPI.c"
+# 1 "ADC.c"
 
 # 26 "F:\Program Files\Microchip\xc8\v1.38\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -1496,35 +1496,50 @@ unsigned char ser_getch();
 # 30
 unsigned char rxbyte = 0;
 
-# 4 "SPI.c"
-void setupSPI(void){
-
-TRISB = 0b00000000;
-
-SSPSTAT = 0b01000000;
-SSPCON = 0b00100000;
-TRISC = 0b11010000;
-PORTC = 0b00000011;
+# 8 "ADC.c"
+void setupADC(void){
+PORTA = 0;
+TRISA = 0b11111111;
 
 
-OPTION_REG = 0b00000100;
+ADCON0 = 0b10001001;
+ADCON1 = 0b00000010;
 
-TMR0IE = 1;
+_delay((unsigned long)((50)*(20000000/4000000.0)));
+}
+
+void ADCMain(void){
+
+getADC();
+lcdSetCursor(0b10000000);
+lcdWriteToDigitBCD(adcRAW);
 
 
-(GIE = 1);
 }
 
 
-unsigned char spi_transfer(unsigned char data){
-unsigned char temp = 0;
+unsigned int getADC(void){
 
-SSPIF = 0;
-SSPBUF = data;
+ADRESH = 0;
+ADRESL = 0;
 
-while (SSPIF == 0);
-temp = SSPBUF;
-SSPIF = 0;
+GO = 1;
+while(GO) continue;
 
-return temp;
+
+
+adcRAW = (4*ADRESH);
+
+switch(ADRESL){
+case 0b01000000: adcRAW = adcRAW + 1;
+break;
+case 0b10000000: adcRAW = adcRAW + 2;
+break;
+case 0b11000000: adcRAW = adcRAW + 3;
+break;
+default: adcRAW = adcRAW;
 }
+
+return(adcRAW);
+}
+
