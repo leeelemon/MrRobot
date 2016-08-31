@@ -3,9 +3,13 @@
 #include "LCD.h"
 #include "ser.h"
 #include "SPI.h"
+#include "ADC.h"
+#include "motor.h"
 
 volatile unsigned int time_count;
 volatile bit FLAG_1000MS;
+unsigned char PB8Counter = 0;
+unsigned int x = 0;
 
 
 // Interrupt service routine
@@ -23,10 +27,11 @@ void interrupt isr(void){
 
         if(time_count % 1000 == 0){
             FLAG_1000MS = 1;	// Raise flag for 500ms
-            time_count = 0;	// Clear time_count
-        
-        
+            time_count = 0;	// Clear time_count        
         }
+        if (PB8 == 1)
+            PB8Counter++;
+        
     }
 }
 
@@ -34,14 +39,15 @@ void interrupt isr(void){
 
 
 void main(void){
-    signed int highByte = 0;
-    signed int lowByte = 0;
-    signed int dist = 0;
+
+    
     
 //Initialise and setup
     setupSPI();
     ser_init();
-    setupLCD();   
+    setupLCD();
+    setupADC();
+    
     unsigned char controlByte = 0b00001101;
     spi_transfer(controlByte);
 
@@ -59,9 +65,9 @@ void main(void){
     ser_getch();        //Gets the low byte of the sensor packet
     lowByte = rxbyte;   //Puts the low byte into variable
     
-    dist = (4*highByte + lowByte);  //Converts 2 byte value into a single binary
+    distTrav = (4*highByte + lowByte);  //Converts 2 byte value into a single binary
     
-    lcdWriteToDigitBCD(dist); //Writes received packet value to LCD in millimeters.
+    lcdWriteToDigitBCD(distTrav); //Writes received packet value to LCD in millimeters.
     
     
    while(1){       
@@ -69,5 +75,29 @@ void main(void){
             RB0 = !RB0;
             FLAG_1000MS = 0;
         }
+        
+        //Rotates 360 and checks at each half step to see if the object the sensor
+        //is looking at is closer than the previous closest object.
+        if (PB8Counter >= 10 && PB8 == 0){
+            for (x=0; x==400; x++){
+                moveCW();
+                ADCMain();
+                if (adcRAW < adcClosest){
+                    adcClosest = adcRAW;
+                    stepClosest = stepCount;
+                }
+                
+            }
+            //Moves CCW until stepCount(initialy -400) matches the step of the closest object
+            for (x=stepCount; x=stepClosest; x++){
+                moveCCW();
+            }
+            
+        }
+        
+        
+        
+        
+        
     }
 }
