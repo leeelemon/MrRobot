@@ -1036,22 +1036,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 186: extern unsigned char __resetbits;
 [; ;pic.h: 187: extern __bit __powerdown;
 [; ;pic.h: 188: extern __bit __timeout;
-"6 ADC.h
-[v _adcRAW `Vui ~T0 @X0 1 e ]
-[i _adcRAW
--> -> 0 `i `ui
+"7 main.h
+[p x BOREN=OFF ]
+[p x CPD=OFF ]
+[p x WRT=OFF ]
+[p x FOSC=HS ]
+[p x WDTE=OFF ]
+[p x CP=OFF ]
+[p x LVP=OFF ]
+[p x PWRTE=OFF ]
+"24
+[v _rxbyte `uc ~T0 @X0 1 e ]
+[i _rxbyte
+-> -> 0 `i `uc
 ]
-[; ;ADC.h: 6: volatile unsigned int adcRAW = 0;
-"7
-[v _Distance `Vui ~T0 @X0 1 e ]
-[i _Distance
--> -> 0 `i `ui
-]
-[; ;ADC.h: 7: volatile unsigned int Distance = 0;
-[; ;ADC.h: 9: void ADCMain(void);
-[; ;ADC.h: 10: void setupADC(void);
-[; ;ADC.h: 11: unsigned int getADC(void);
-[; ;ADC.h: 12: unsigned int adcConvertMM(unsigned int);
+[; ;main.h: 24: unsigned char rxbyte = 0;
 "17 LCD.h
 [v _stepCountNeg `Vui ~T0 @X0 1 e ]
 [i _stepCountNeg
@@ -1071,6 +1070,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LCD.h: 33: void lcdWriteString(char * s);
 [; ;LCD.h: 36: void lcdWriteToDigitBCD(unsigned int data);
 [; ;LCD.h: 39: void setupLCD(void);
+<<<<<<< HEAD
+=======
 [; ;SPI.h: 7: void setupSPI(void);
 [; ;SPI.h: 8: unsigned char spi_transfer(unsigned char data);
 [; ;motor.h: 6: void moveCW(void);
@@ -1147,6 +1148,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;main.h: 38: unsigned char controlByte = 0;
+>>>>>>> refs/remotes/origin/Brendan
 "9 LCD.c
 [v _lcdWriteControl `(v ~T0 @X0 1 ef1`uc ]
 {

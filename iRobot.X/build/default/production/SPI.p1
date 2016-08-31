@@ -1036,67 +1036,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 186: extern unsigned char __resetbits;
 [; ;pic.h: 187: extern __bit __powerdown;
 [; ;pic.h: 188: extern __bit __timeout;
-"6 ADC.h
-[v _adcRAW `Vui ~T0 @X0 1 e ]
-[i _adcRAW
--> -> 0 `i `ui
-]
-[; ;ADC.h: 6: volatile unsigned int adcRAW = 0;
-"7
-[v _Distance `Vui ~T0 @X0 1 e ]
-[i _Distance
--> -> 0 `i `ui
-]
-[; ;ADC.h: 7: volatile unsigned int Distance = 0;
-[; ;ADC.h: 9: void ADCMain(void);
-[; ;ADC.h: 10: void setupADC(void);
-[; ;ADC.h: 11: unsigned int getADC(void);
-[; ;ADC.h: 12: unsigned int adcConvertMM(unsigned int);
-"17 LCD.h
-[v _stepCountNeg `Vui ~T0 @X0 1 e ]
-[i _stepCountNeg
--> -> 0 `i `ui
-]
-[; ;LCD.h: 17: volatile unsigned int stepCountNeg = 0;
-"18
-[v _degrees `Vui ~T0 @X0 1 e ]
-[i _degrees
--> -> 0 `i `ui
-]
-[; ;LCD.h: 18: volatile unsigned int degrees = 0;
-[; ;LCD.h: 21: void lcdWriteStepCount(unsigned int stepCount);
-[; ;LCD.h: 24: void lcdWriteControl(unsigned char databyte);
-[; ;LCD.h: 27: void lcdWriteData(unsigned char databyte);
-[; ;LCD.h: 30: void lcdSetCursor(unsigned char address);
-[; ;LCD.h: 33: void lcdWriteString(char * s);
-[; ;LCD.h: 36: void lcdWriteToDigitBCD(unsigned int data);
-[; ;LCD.h: 39: void setupLCD(void);
-[; ;SPI.h: 7: void setupSPI(void);
-[; ;SPI.h: 8: unsigned char spi_transfer(unsigned char data);
-[; ;motor.h: 6: void moveCW(void);
-[; ;motor.h: 7: void moveCCW(void);
-"9 motor.h
-[v _stepCount `c ~T0 @X0 1 e ]
-[i _stepCount
--> -> 0 `i `c
-]
-[; ;motor.h: 9: signed char stepCount = 0;
-"10
-[v _negativeFlag `uc ~T0 @X0 1 e ]
-[i _negativeFlag
--> -> 0 `i `uc
-]
-[; ;motor.h: 10: char negativeFlag = 0;
-"11
-[v _currentStep `uc ~T0 @X0 1 e ]
-[i _currentStep
--> -> 0 `i `uc
-]
-[; ;motor.h: 11: char currentStep = 0;
-[; ;ser.h: 7: void ser_init(void);
-[; ;ser.h: 10: void ser_putch(unsigned char c);
-[; ;ser.h: 13: unsigned char ser_getch();
-"13 main.h
+"7 main.h
 [p x BOREN=OFF ]
 [p x CPD=OFF ]
 [p x WRT=OFF ]
@@ -1105,11 +1045,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p x CP=OFF ]
 [p x LVP=OFF ]
 [p x PWRTE=OFF ]
+<<<<<<< HEAD
+"24
+=======
 "32
+>>>>>>> refs/remotes/origin/Brendan
 [v _rxbyte `uc ~T0 @X0 1 e ]
 [i _rxbyte
 -> -> 0 `i `uc
 ]
+<<<<<<< HEAD
+[; ;main.h: 24: unsigned char rxbyte = 0;
+[; ;SPI.h: 7: void setupSPI(void);
+[; ;SPI.h: 8: unsigned char spi_transfer(unsigned char data);
+=======
 [; ;main.h: 32: unsigned char rxbyte = 0;
 "33
 [v _stepClosest `i ~T0 @X0 1 e ]
@@ -1147,6 +1096,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;main.h: 38: unsigned char controlByte = 0;
+>>>>>>> refs/remotes/origin/Brendan
 "4 SPI.c
 [v _setupSPI `(v ~T0 @X0 1 ef ]
 {

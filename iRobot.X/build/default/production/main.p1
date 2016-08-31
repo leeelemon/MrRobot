@@ -27,12 +27,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ser_getch `(uc ~T0 @X0 0 ef ]
 "36 LCD.h
 [v _lcdWriteToDigitBCD `(v ~T0 @X0 0 ef1`ui ]
+<<<<<<< HEAD
+"2513 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
+[v _RB0 `Vb ~T0 @X0 0 e@48 ]
+=======
 "6 motor.h
 [v _moveCW `(v ~T0 @X0 0 ef ]
 "9 ADC.h
 [v _ADCMain `(v ~T0 @X0 0 ef ]
 "7 motor.h
 [v _moveCCW `(v ~T0 @X0 0 ef ]
+>>>>>>> refs/remotes/origin/Brendan
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -1050,22 +1055,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 186: extern unsigned char __resetbits;
 [; ;pic.h: 187: extern __bit __powerdown;
 [; ;pic.h: 188: extern __bit __timeout;
-"6 ADC.h
-[v _adcRAW `Vui ~T0 @X0 1 e ]
-[i _adcRAW
--> -> 0 `i `ui
+"7 main.h
+[p x BOREN=OFF ]
+[p x CPD=OFF ]
+[p x WRT=OFF ]
+[p x FOSC=HS ]
+[p x WDTE=OFF ]
+[p x CP=OFF ]
+[p x LVP=OFF ]
+[p x PWRTE=OFF ]
+"24
+[v _rxbyte `uc ~T0 @X0 1 e ]
+[i _rxbyte
+-> -> 0 `i `uc
 ]
-[; ;ADC.h: 6: volatile unsigned int adcRAW = 0;
-"7
-[v _Distance `Vui ~T0 @X0 1 e ]
-[i _Distance
--> -> 0 `i `ui
-]
-[; ;ADC.h: 7: volatile unsigned int Distance = 0;
-[; ;ADC.h: 9: void ADCMain(void);
-[; ;ADC.h: 10: void setupADC(void);
-[; ;ADC.h: 11: unsigned int getADC(void);
-[; ;ADC.h: 12: unsigned int adcConvertMM(unsigned int);
+[; ;main.h: 24: unsigned char rxbyte = 0;
 "17 LCD.h
 [v _stepCountNeg `Vui ~T0 @X0 1 e ]
 [i _stepCountNeg
@@ -1085,31 +1089,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LCD.h: 33: void lcdWriteString(char * s);
 [; ;LCD.h: 36: void lcdWriteToDigitBCD(unsigned int data);
 [; ;LCD.h: 39: void setupLCD(void);
-[; ;SPI.h: 7: void setupSPI(void);
-[; ;SPI.h: 8: unsigned char spi_transfer(unsigned char data);
-[; ;motor.h: 6: void moveCW(void);
-[; ;motor.h: 7: void moveCCW(void);
-"9 motor.h
-[v _stepCount `c ~T0 @X0 1 e ]
-[i _stepCount
--> -> 0 `i `c
-]
-[; ;motor.h: 9: signed char stepCount = 0;
-"10
-[v _negativeFlag `uc ~T0 @X0 1 e ]
-[i _negativeFlag
--> -> 0 `i `uc
-]
-[; ;motor.h: 10: char negativeFlag = 0;
-"11
-[v _currentStep `uc ~T0 @X0 1 e ]
-[i _currentStep
--> -> 0 `i `uc
-]
-[; ;motor.h: 11: char currentStep = 0;
 [; ;ser.h: 7: void ser_init(void);
 [; ;ser.h: 10: void ser_putch(unsigned char c);
 [; ;ser.h: 13: unsigned char ser_getch();
+<<<<<<< HEAD
+[; ;SPI.h: 7: void setupSPI(void);
+[; ;SPI.h: 8: unsigned char spi_transfer(unsigned char data);
+"7 main.c
+=======
 "13 main.h
 [p x BOREN=OFF ]
 [p x CPD=OFF ]
@@ -1162,10 +1149,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;main.h: 38: unsigned char controlByte = 0;
 "9 main.c
+>>>>>>> refs/remotes/origin/Brendan
 [v _time_count `Vui ~T0 @X0 1 e ]
 [; ;main.c: 9: volatile unsigned int time_count;
 "10
 [v _FLAG_1000MS `Vb ~T0 @X0 1 e ]
+<<<<<<< HEAD
+[; ;main.c: 8: volatile bit FLAG_1000MS;
+[v F1125 `(v ~T0 @X0 1 tf ]
+"12
+[v _isr `IF1125 ~T0 @X0 1 e ]
+=======
 [; ;main.c: 10: volatile bit FLAG_1000MS;
 "11
 [v _PB8Counter `uc ~T0 @X0 1 e ]
@@ -1182,6 +1176,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v F1150 `(v ~T0 @X0 1 tf ]
 "16
 [v _isr `IF1150 ~T0 @X0 1 e ]
+>>>>>>> refs/remotes/origin/Brendan
 {
 [; ;main.c: 16: void interrupt isr(void){
 [e :U _isr ]

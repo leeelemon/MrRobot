@@ -1434,51 +1434,12 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 6 "ADC.h"
-volatile unsigned int adcRAW = 0;
-volatile unsigned int Distance = 0;
 
-void ADCMain(void);
-void setupADC(void);
-unsigned int getADC(void);
-unsigned int adcConvertMM(unsigned int);
+# 7 "main.h"
+#pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
-# 17 "LCD.h"
-volatile unsigned int stepCountNeg = 0;
-volatile unsigned int degrees = 0;
-
-
-void lcdWriteStepCount(unsigned int stepCount);
-
-
-void lcdWriteControl(unsigned char databyte);
-
-
-void lcdWriteData(unsigned char databyte);
-
-
-void lcdSetCursor(unsigned char address);
-
-
-void lcdWriteString(char * s);
-
-
-void lcdWriteToDigitBCD(unsigned int data);
-
-
-void setupLCD(void);
-
-# 7 "SPI.h"
-void setupSPI(void);
-unsigned char spi_transfer(unsigned char data);
-
-# 6 "motor.h"
-void moveCW(void);
-void moveCCW(void);
-
-signed char stepCount = 0;
-char negativeFlag = 0;
-char currentStep = 0;
+# 24
+unsigned char rxbyte = 0;
 
 # 7 "ser.h"
 void ser_init(void);
@@ -1489,6 +1450,8 @@ void ser_putch(unsigned char c);
 
 unsigned char ser_getch();
 
+<<<<<<< HEAD
+=======
 
 # 13 "main.h"
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
@@ -1502,6 +1465,7 @@ signed int lowByte = 0;
 signed int distTrav = 0;
 unsigned char controlByte = 0;
 
+>>>>>>> refs/remotes/origin/Brendan
 # 4 "ser.c"
 void ser_init(void){
 

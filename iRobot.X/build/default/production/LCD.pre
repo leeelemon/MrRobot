@@ -1434,14 +1434,12 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 6 "ADC.h"
-volatile unsigned int adcRAW = 0;
-volatile unsigned int Distance = 0;
 
-void ADCMain(void);
-void setupADC(void);
-unsigned int getADC(void);
-unsigned int adcConvertMM(unsigned int);
+# 7 "main.h"
+#pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
+
+# 24
+unsigned char rxbyte = 0;
 
 # 17 "LCD.h"
 volatile unsigned int stepCountNeg = 0;
@@ -1468,6 +1466,8 @@ void lcdWriteToDigitBCD(unsigned int data);
 
 void setupLCD(void);
 
+<<<<<<< HEAD
+=======
 # 7 "SPI.h"
 void setupSPI(void);
 unsigned char spi_transfer(unsigned char data);
@@ -1502,6 +1502,7 @@ signed int lowByte = 0;
 signed int distTrav = 0;
 unsigned char controlByte = 0;
 
+>>>>>>> refs/remotes/origin/Brendan
 # 9 "LCD.c"
 void lcdWriteControl(unsigned char databyte){
 RE2 = 0;
