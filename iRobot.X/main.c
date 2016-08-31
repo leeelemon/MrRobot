@@ -75,6 +75,7 @@ void main(void){
     ser_putch(136);     //Demo mode
     ser_putch(4);       //Demo 4 - Figure 8
     
+    //This is just the testing bit, it wont be in the final code
     __delay_ms(10000);  //Waits 10 seconds before requesting the distance traveled
     ser_putch(142);     //Requests packet of sensor data
     ser_putch(19);      //Specifies distance packet for request
@@ -98,47 +99,25 @@ void main(void){
         //Rotates 360 and compares adcRAW at every half step.
         //If it detects a closer object than the previous closest then it stores 
         //the stepCount corresponding to that object.
-        
-        for (x = 0; x<400; x++){           
-            moveCW();
-            ADCMain();
-            if (adcRAW < adcClosest){
-                adcClosest = adcRAW;
-                stepClosest = stepCount;              
+        if (PB8Counter >= 10 && PB8 == 0){
+            for (x = 0; x<400; x++){           
+                moveCW();
+                ADCMain();
+                if (adcRAW < adcClosest){
+                    adcClosest = adcRAW;
+                    stepClosest = stepCount;              
+                }
             }
 
             //Moves CCW until stepCount(initialy -400) matches the step of the closest object
             for (x=stepCount; x=stepClosest; x++){
                 moveCCW();
             }            
-
-
         }
 
-        for (x=stepCount; x==stepClosest; x++){
-            moveCCW();            
-        }
-
-        //Rotates 360 and checks at each half step to see if the object the sensor
-        //is looking at is closer than the previous closest object.
-        if (PB8Counter >= 10 && PB8 == 0){
-            for (x=0; x==400; x++){
-                moveCW();
-                ADCMain();
-                if (adcRAW < adcClosest){
-                    adcClosest = adcRAW;
-                    stepClosest = stepCount;
-                }
-                
-            }
-            //Moves CCW until stepCount(initialy -400) matches the step of the closest object
-            for (x=stepCount; x=stepClosest; x++){
-                moveCCW();
-            }           
-        }
-        //This might make it drive 4m forward, 250mm/s and takes 16 seconds.
-        
-
+       
+        //This might make it drive 4m forward, 250mm/s and takes 16 seconds. 
+        //Or it might not.
         if (PB7Counter >= 10 && PB7 = 0){
             ser_putch(137);     //Drive command [Velocity high][Velocity low][Radius high][Radius low]
                 ser_putch(0x00);    //Velocity high byte in mm/s
