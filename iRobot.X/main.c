@@ -9,7 +9,14 @@
 volatile unsigned int time_count;
 volatile bit FLAG_1000MS;
 unsigned char PB8Counter = 0;
-unsigned int x = 0;
+unsigned char rxbyte = 0;
+signed int stepClosest = 0;
+signed int adcClosest = 1000;
+signed int highByte = 0;
+signed int lowByte = 0;
+signed int distTrav = 0;
+unsigned char controlByte = 0;
+signed int x = 0;
 
 
 // Interrupt service routine
@@ -36,12 +43,8 @@ void interrupt isr(void){
 }
 
 
-
-
 void main(void){
-
-    
-    
+  
 //Initialise and setup
     setupSPI();
     ser_init();
@@ -51,12 +54,14 @@ void main(void){
     unsigned char controlByte = 0b00001101;
     spi_transfer(controlByte);
 
+    
     ser_putch(128);     //Startup
     ser_putch(132);     //Full mode
 
     ser_putch(136);     //Demo mode
     ser_putch(4);       //Demo 4 - Figure 8
     
+    __delay_ms(10000);  //Waits 10 seconds before requesting the distance traveled
     ser_putch(142);     //Requests packet of sensor data
     ser_putch(19);      //Specifies distance packet for request
     

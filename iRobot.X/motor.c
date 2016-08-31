@@ -3,8 +3,9 @@
 
 
 void moveCW(void){
-
-    if (stepCount == 0) negativeFlag = 1;       //This run of the function will cause stepCount to be negative, so sets a flag
+    //This run of the function will cause stepCount to be negative, so sets a flag
+    //Only relevant for printing stepCount to LCD
+    if (stepCount == 0) negativeFlag = 1;       
 
     stepCount--;            //Decrement stepCount
     
