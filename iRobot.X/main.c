@@ -70,7 +70,7 @@ void main(void){
     ser_getch();        //Gets the low byte of the sensor packet
     lowByte = rxbyte;   //Puts the low byte into variable
     
-    distTrav = (4*highByte + lowByte);  //Converts 2 byte value into a single binary
+    distTrav = (256*highByte + lowByte);  //Converts 2 byte value into a single binary
     
     lcdWriteToDigitBCD(distTrav); //Writes received packet value to LCD in millimeters.
     
