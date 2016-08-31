@@ -4,29 +4,20 @@ Linker command line:
 
 --edf=C:\Program Files (x86)\Microchip\xc8\v1.38\dat\en_msgs.txt -cs \
   -h+dist/default/production\iRobot.X.production.sym \
-  --cmf=dist/default/production\iRobot.X.production.cmf -z -Q16F877A \
-<<<<<<< HEAD
-  -oC:\Users\Brendan\AppData\Local\Temp\sct0.2 \
-=======
-  -oC:\Users\Brendan\AppData\Local\Temp\s118.2 \
->>>>>>> refs/remotes/origin/Brendan
+  --cmf=dist/default/production\iRobot.X.production.cmf -z -w9 --norlf \
+  -Q16F877A -oC:\Users\Brendan\AppData\Local\Temp\sbfk.2 \
   -Mdist/default/production/iRobot.X.production.map -E1 -ver=XC8 \
-  -ASTACK=0110h-016fh -pstack=STACK -ACODE=00h-07FFhx4 -ASTRCODE=00h-01FFFh \
-  -ASTRING=00h-0FFhx32 -ACONST=00h-0FFhx32 -AENTRY=00h-0FFhx32 \
-  -ACOMMON=070h-07Fh -ABANK0=020h-06Fh -ABANK1=0A0h-0EFh \
-  -ABANK2=0110h-016Fh -ABANK3=0190h-01EFh \
-  -ARAM=020h-06Fh,0A0h-0EFh,0110h-016Fh,0190h-01EFh \
+  -ACODE=00h-07FFhx4 -ASTRCODE=00h-01FFFh -ASTRING=00h-0FFhx32 \
+  -ACONST=00h-0FFhx32 -AENTRY=00h-0FFhx32 -ACOMMON=070h-07Fh \
+  -ABANK0=020h-06Fh -ABANK1=0A0h-0EFh -ABANK2=0110h-016Fh \
+  -ABANK3=0190h-01EFh -ARAM=020h-06Fh,0A0h-0EFh,0110h-016Fh,0190h-01EFh \
   -AABS1=020h-07Fh,0A0h-0EFh,0110h-016Fh,0190h-01EFh -ASFR0=00h-01Fh \
   -ASFR1=080h-09Fh -ASFR2=0100h-010Fh -ASFR3=0180h-018Fh \
-  -preset_vec=00h,intentry=04h,init,end_init -ppowerup=CODE -pcinit=CODE \
+  -preset_vec=00h,intentry,init,end_init -ppowerup=CODE -pcinit=CODE \
   -pfunctab=CODE -ACONFIG=02007h-02007h -pconfig=CONFIG -DCONFIG=2 \
   -AIDLOC=02000h-02003h -pidloc=IDLOC -DIDLOC=2 -AEEDATA=00h-0FFh/02100h \
   -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 \
-<<<<<<< HEAD
-  -DENTRY=2 -k C:\Users\Brendan\AppData\Local\Temp\sct0.obj \
-=======
-  -DENTRY=2 -k C:\Users\Brendan\AppData\Local\Temp\s118.obj \
->>>>>>> refs/remotes/origin/Brendan
+  -DENTRY=2 -k C:\Users\Brendan\AppData\Local\Temp\sbfk.obj \
   dist/default/production\iRobot.X.production.obj 
 
 Object code version is 3.11
@@ -36,112 +27,51 @@ Machine type is 16F877A
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-<<<<<<< HEAD
-C:\Users\Brendan\AppData\Local\Temp\sct0.obj
-=======
-C:\Users\Brendan\AppData\Local\Temp\s118.obj
->>>>>>> refs/remotes/origin/Brendan
-                end_init                             12       12        3        8       0
-                reset_vec                             0        0        3        0       0
-                config                             2007     2007        1     400E       0
+C:\Users\Brendan\AppData\Local\Temp\sbfk.obj
+                end_init                              E        E        4        0       0
 dist/default/production\iRobot.X.production.obj
-<<<<<<< HEAD
-                cinit                                15       15        E        8       0
-                intentry                              4        4        E        8       0
-                text11                              140      140       32        8       0
-                text10                              172      172       31        8       0
-                text9                               1F8      1F8       13        8       0
-                text8                                23       23       97        8       0
-                text7                               235      235        9        8       0
-                text6                               21A      21A        F        8       0
-                text5                               229      229        C        8       0
-                text4                               1E4      1E4       14        8       0
-                text3                               1A3      1A3       29        8       0
-                text2                               1CC      1CC       18        8       0
-                text1                               20B      20B        F        8       0
-                maintext                             BA       BA       86        8       0
-                cstackBANK0                          20       20       18       20       1
-                cstackCOMMON                         70       70        A       70       1
-                bssBANK0                             38       38        5       20       1
-                bssCOMMON                            7A       7A        2       70       1
-                bitbssCOMMON                        3E0       7C        1       70       1     8
-=======
-                cinit                                15       15       1A        8       0
-                intentry                              4        4        E        8       0
-                text17                              2AD      2AD       32        8       0
-                text16                              274      274       39        8       0
-                text15                              22F      22F       45        8       0
-                text14                              34B      34B       14        8       0
-                text13                              3A5      3A5        9        8       0
-                text12                              35F      35F       13        8       0
-                text11                              105      105       97        8       0
-                text10                              336      336       15        8       0
-                text9                               1E7      1E7       48        8       0
-                text8                               19C      19C       4B        8       0
-                text7                               39C      39C        9        8       0
-                text6                               381      381        F        8       0
-                text5                               390      390        C        8       0
-                text4                               320      320       16        8       0
-                text3                               2DF      2DF       29        8       0
-                text2                               308      308       18        8       0
-                text1                               372      372        F        8       0
-                maintext                             2F       2F       D6        8       0
-                cstackBANK0                          38       38       12       20       1
+                cinit                               7E6      7E6       1A      FCC       0
+                intentry                              0        0        E        0       0
+                text11                              5B0      5B0       32      B60       0
+                text10                              5E2      5E2       3F      BC4       0
+                text9                               548      548       13      A90       0
+                text8                               621      621       97      C42       0
+                text7                               515      515        9      A2A       0
+                text6                               52A      52A        F      A54       0
+                text5                               51E      51E        C      A3C       0
+                text4                               55B      55B       14      AB6       0
+                text3                               587      587       29      B0E       0
+                text2                               56F      56F       18      ADE       0
+                text1                               539      539        F      A72       0
+                maintext                            6B8      6B8      12E      D70       0
+                cstackBANK0                          39       39       13       20       1
                 cstackCOMMON                         70       70        B       70       1
-                clrtext                             3AE      3AE        8        8       0
-                dataBANK0                            4A       4A        2       20       1
-                bssBANK0                             20       20       18       20       1
+                clrtext                             50D      50D        8      A1A       0
+                dataBANK0                            4C       4C        2       20       1
+                bssBANK0                             20       20       19       20       1
                 bssCOMMON                            7B       7B        2       70       1
                 bitbssCOMMON                        3E8       7D        1       70       1     8
-                idataBANK0                          3B6      3B6        2        8       0
->>>>>>> refs/remotes/origin/Brendan
+                idataBANK0                          50B      50B        2      A16       0
 
 TOTAL           Name                               Link     Load   Length     Space
-        CLASS   STACK          
-
         CLASS   CODE           
-                end_init                             12       12        3         0
-<<<<<<< HEAD
-                cinit                                15       15        E         0
-                intentry                              4        4        E         0
-                reset_vec                             0        0        3         0
-                text11                              140      140       32         0
-                text10                              172      172       31         0
-                text9                               1F8      1F8       13         0
-                text8                                23       23       97         0
-                text7                               235      235        9         0
-                text6                               21A      21A        F         0
-                text5                               229      229        C         0
-                text4                               1E4      1E4       14         0
-                text3                               1A3      1A3       29         0
-                text2                               1CC      1CC       18         0
-                text1                               20B      20B        F         0
-                maintext                             BA       BA       86         0
-=======
-                cinit                                15       15       1A         0
-                intentry                              4        4        E         0
-                reset_vec                             0        0        3         0
-                text17                              2AD      2AD       32         0
-                text16                              274      274       39         0
-                text15                              22F      22F       45         0
-                text14                              34B      34B       14         0
-                text13                              3A5      3A5        9         0
-                text12                              35F      35F       13         0
-                text11                              105      105       97         0
-                text10                              336      336       15         0
-                text9                               1E7      1E7       48         0
-                text8                               19C      19C       4B         0
-                text7                               39C      39C        9         0
-                text6                               381      381        F         0
-                text5                               390      390        C         0
-                text4                               320      320       16         0
-                text3                               2DF      2DF       29         0
-                text2                               308      308       18         0
-                text1                               372      372        F         0
-                maintext                             2F       2F       D6         0
-                clrtext                             3AE      3AE        8         0
-                idataBANK0                          3B6      3B6        2         0
->>>>>>> refs/remotes/origin/Brendan
+                end_init                              E        E        4         0
+                cinit                               7E6      7E6       1A         0
+                intentry                              0        0        E         0
+                text11                              5B0      5B0       32         0
+                text10                              5E2      5E2       3F         0
+                text9                               548      548       13         0
+                text8                               621      621       97         0
+                text7                               515      515        9         0
+                text6                               52A      52A        F         0
+                text5                               51E      51E        C         0
+                text4                               55B      55B       14         0
+                text3                               587      587       29         0
+                text2                               56F      56F       18         0
+                text1                               539      539        F         0
+                maintext                            6B8      6B8      12E         0
+                clrtext                             50D      50D        8         0
+                idataBANK0                          50B      50B        2         0
 
         CLASS   STRCODE        
 
@@ -152,24 +82,14 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   ENTRY          
 
         CLASS   COMMON         
-<<<<<<< HEAD
-                cstackCOMMON                         70       70        A         1
-                bssCOMMON                            7A       7A        2         1
-                bitbssCOMMON                        3E0       7C        1         1
-
-        CLASS   BANK0          
-                cstackBANK0                          20       20       18         1
-                bssBANK0                             38       38        5         1
-=======
                 cstackCOMMON                         70       70        B         1
                 bssCOMMON                            7B       7B        2         1
                 bitbssCOMMON                        3E8       7D        1         1
 
         CLASS   BANK0          
-                cstackBANK0                          38       38       12         1
-                dataBANK0                            4A       4A        2         1
-                bssBANK0                             20       20       18         1
->>>>>>> refs/remotes/origin/Brendan
+                cstackBANK0                          39       39       13         1
+                dataBANK0                            4C       4C        2         1
+                bssBANK0                             20       20       19         1
 
         CLASS   BANK1          
 
@@ -191,61 +111,54 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   SFR3           
 
         CLASS   CONFIG         
-                config                             2007     2007        1         0
 
         CLASS   IDLOC          
 
         CLASS   EEDATA         
 
+        CLASS   STACK          
+
 
 
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class     Delta
 
-                reset_vec                      000000  000003  000003         0       0  CODE        2
-<<<<<<< HEAD
-                intentry                       000004  00023A  00023E         8       0  CODE        2
-                cstackBANK0                    000020  00001D  00003D        20       1  BANK0       1
-                cstackCOMMON                   000070  00000D  00007D        70       1  COMMON      1
-=======
-                intentry                       000004  0003B4  0003B8         8       0  CODE        2
-                bssBANK0                       000020  00002C  00004C        20       1  BANK0       1
+                reset_vec                      000000  000012  000012         0       0  CODE        2
+                bssBANK0                       000020  00002E  00004E        20       1  BANK0       1
                 cstackCOMMON                   000070  00000E  00007E        70       1  COMMON      1
->>>>>>> refs/remotes/origin/Brendan
-                config                         002007  000001  002008      400E       0  CONFIG      2
+                idataBANK0                     00050B  000002  00050D       A16       0  CODE        2
+                clrtext                        00050D  000008  000515       A1A       0  CODE        2
+                text7                          000515  000009  00051E       A2A       0  CODE        2
+                text5                          00051E  00000C  00052A       A3C       0  CODE        2
+                text6                          00052A  00000F  000539       A54       0  CODE        2
+                text1                          000539  00000F  000548       A72       0  CODE        2
+                text9                          000548  000013  00055B       A90       0  CODE        2
+                text4                          00055B  000014  00056F       AB6       0  CODE        2
+                text2                          00056F  000018  000587       ADE       0  CODE        2
+                text3                          000587  000029  0005B0       B0E       0  CODE        2
+                text11                         0005B0  000032  0005E2       B60       0  CODE        2
+                text10                         0005E2  00003F  000621       BC4       0  CODE        2
+                text8                          000621  000097  0006B8       C42       0  CODE        2
+                maintext                       0006B8  00012E  0007E6       D70       0  CODE        2
+                cinit                          0007E6  00001A  000800       FCC       0  CODE        2
 
 
 UNUSED ADDRESS RANGES
 
         Name                Unused          Largest block    Delta
-<<<<<<< HEAD
-        BANK0            003D-006F             33           1
-=======
-        BANK0            004C-006F             24           1
->>>>>>> refs/remotes/origin/Brendan
+        BANK0            004E-006F             22           1
         BANK1            00A0-00EF             50           1
         BANK2            0110-016F             60           1
         BANK3            0190-01EF             60           1
-        CODE             0003-0003              1           2
-<<<<<<< HEAD
-                         023E-1FFF            800
-        COMMON           007D-007D              1           1
-        CONST            0003-0003              1           2
-                         023E-1FFF            100
+        CODE             0012-050A            4F9           2
+                         0800-1FFF            800
+        CONFIG           2007-2007              1           2
+        CONST            0012-050A            100           2
+                         0800-1FFF            100
         EEDATA           2100-21FF            100           2
-        ENTRY            0003-0003              1           2
-                         023E-1FFF            100
+        ENTRY            0012-050A            100           2
+                         0800-1FFF            100
         IDLOC            2000-2003              4           2
-        RAM              003D-006F             33           1
-=======
-                         03B8-1FFF            800
-        CONST            0003-0003              1           2
-                         03B8-1FFF            100
-        EEDATA           2100-21FF            100           2
-        ENTRY            0003-0003              1           2
-                         03B8-1FFF            100
-        IDLOC            2000-2003              4           2
-        RAM              004C-006F             24           1
->>>>>>> refs/remotes/origin/Brendan
+        RAM              004E-006F             22           1
                          00A0-00EF             50
                          0110-016F             60
                          0190-01EF             60
@@ -253,63 +166,14 @@ UNUSED ADDRESS RANGES
         SFR1             0080-009F             20           1
         SFR2             0100-010F             10           1
         SFR3             0180-018F             10           1
-        STACK            0110-016F             60           1
-        STRCODE          0003-0003              1           2
-<<<<<<< HEAD
-                         023E-1FFF           1DC2
-        STRING           0003-0003              1           2
-                         023E-1FFF            100
-=======
-                         03B8-1FFF           1C48
-        STRING           0003-0003              1           2
-                         03B8-1FFF            100
->>>>>>> refs/remotes/origin/Brendan
+        STRCODE          0012-050A            4F9           2
+                         0800-1FFF           1800
+        STRING           0012-050A            100           2
+                         0800-1FFF            100
 
                                   Symbol Table
 
-?___lwmod                       cstackCOMMON 0070
-<<<<<<< HEAD
-_ADCON1                         (abs)        009F
-_FLAG_1000MS                    bitbssCOMMON 03E0
-=======
-_ADCMain                        text10       0336
-_ADCON0                         (abs)        001F
-_ADCON1                         (abs)        009F
-_ADRESH                         (abs)        001E
-_ADRESL                         (abs)        009E
-_Distance                       bssBANK0     0020
-_FLAG_1000MS                    bitbssCOMMON 03E8
->>>>>>> refs/remotes/origin/Brendan
-_GIE                            (abs)        005F
-_OPTION_REG                     (abs)        0081
-_PB8Counter                     bssBANK0     0032
-_PEIE                           (abs)        005E
-_PORTC                          (abs)        0007
-_PORTD                          (abs)        0008
-_PORTE                          (abs)        0009
-_RB0                            (abs)        0030
-_RC2                            (abs)        003A
-_RCIF                           (abs)        0065
-_RCREG                          (abs)        001A
-_RCSTA                          (abs)        0018
-_RE0                            (abs)        0048
-_RE1                            (abs)        0049
-_RE2                            (abs)        004A
-_SPBRG                          (abs)        0099
-_SSPBUF                         (abs)        0013
-_SSPCON                         (abs)        0014
-_SSPIF                          (abs)        0063
-_SSPSTAT                        (abs)        0094
-_TMR0                           (abs)        0001
-_TMR0IE                         (abs)        005D
-_TMR0IF                         (abs)        005A
-_TRISB                          (abs)        0086
-_TRISC                          (abs)        0087
-_TRISD                          (abs)        0088
-_TRISE                          (abs)        0089
-_TRMT                           (abs)        04C1
-_TXREG                          (abs)        0019
-_TXSTA                          (abs)        0098
+_ADCMain                                         
 __CFG_BOREN$OFF                 (abs)        0000
 __CFG_CP$OFF                    (abs)        0000
 __CFG_CPD$OFF                   (abs)        0000
@@ -326,35 +190,25 @@ __Hbank3                        bank3        0000
 __HbitbssCOMMON                 bitbssCOMMON 0000
 __HbssBANK0                     bssBANK0     0000
 __HbssCOMMON                    bssCOMMON    0000
-<<<<<<< HEAD
-__Hcinit                        cinit        0023
-=======
-__Hcinit                        cinit        002F
->>>>>>> refs/remotes/origin/Brendan
 __Hclrtext                      clrtext      0000
 __Hcode                         code         0000
 __Hcommon                       common       0000
-__Hconfig                       config       2008
+__Hconfig                       config       0000
 __HcstackBANK0                  cstackBANK0  0000
 __HcstackCOMMON                 cstackCOMMON 0000
 __HdataBANK0                    dataBANK0    0000
 __Heeprom_data                  eeprom_data  0000
-__Hend_init                     end_init     0015
 __Hfunctab                      functab      0000
 __HidataBANK0                   idataBANK0   0000
 __Hidloc                        idloc        0000
-__Hinit                         init         0012
-__Hintentry                     intentry     0012
 __Hmaintext                     maintext     0000
 __Hpowerup                      powerup      0000
 __Hram                          ram          0000
-__Hreset_vec                    reset_vec    0003
+__Hreset_vec                    reset_vec    0000
 __Hsfr0                         sfr0         0000
 __Hsfr1                         sfr1         0000
 __Hsfr2                         sfr2         0000
 __Hsfr3                         sfr3         0000
-__Hspace_0                      (abs)        2008
-__Hspace_1                      (abs)        03E1
 __Hspace_2                      (abs)        0000
 __Hspace_3                      (abs)        0000
 __Hstack                        stack        0000
@@ -368,21 +222,18 @@ __Lbank3                        bank3        0000
 __LbitbssCOMMON                 bitbssCOMMON 0000
 __LbssBANK0                     bssBANK0     0000
 __LbssCOMMON                    bssCOMMON    0000
-__Lcinit                        cinit        0015
 __Lclrtext                      clrtext      0000
 __Lcode                         code         0000
 __Lcommon                       common       0000
-__Lconfig                       config       2007
+__Lconfig                       config       0000
 __LcstackBANK0                  cstackBANK0  0000
 __LcstackCOMMON                 cstackCOMMON 0000
 __LdataBANK0                    dataBANK0    0000
 __Leeprom_data                  eeprom_data  0000
-__Lend_init                     end_init     0012
 __Lfunctab                      functab      0000
 __LidataBANK0                   idataBANK0   0000
 __Lidloc                        idloc        0000
-__Linit                         init         0012
-__Lintentry                     intentry     0004
+__Lintentry                     intentry     0000
 __Lmaintext                     maintext     0000
 __Lpowerup                      powerup      0000
 __Lram                          ram          0000
@@ -398,867 +249,178 @@ __Lspace_3                      (abs)        0000
 __Lstack                        stack        0000
 __Lstrings                      strings      0000
 __Ltext                         text         0000
-__S0                            (abs)        2008
-__S1                            (abs)        007D
-__S2                            (abs)        0000
 __S3                            (abs)        0000
 ___int_sp                       stack        0000
-___latbits                      (abs)        0002
-<<<<<<< HEAD
-___lwmod                        text11       0140
-=======
-___lwmod                        text17       02AD
->>>>>>> refs/remotes/origin/Brendan
-___lwmod@counter                cstackCOMMON 0075
-___lwmod@dividend               cstackCOMMON 0072
-___lwmod@divisor                cstackCOMMON 0070
 ___sp                           stack        0000
-<<<<<<< HEAD
-__end_of___lwmod                text11       0172
-__end_of__initialization        cinit        001F
-__end_of_isr                    text10       01A3
-__end_of_lcdWriteControl        text4        01F8
-__end_of_lcdWriteData           text9        020B
-__end_of_lcdWriteToDigitBCD     text8        00BA
-__end_of_main                   maintext     0140
-__end_of_ser_getch              text7        023E
-__end_of_ser_init               text6        0229
-__end_of_ser_putch              text5        0235
-__end_of_setupLCD               text3        01CC
-__end_of_setupSPI               text2        01E4
-__end_of_spi_transfer           text1        021A
-__initialization                cinit        0015
-__pbitbssCOMMON                 bitbssCOMMON 03E0
-__pbssBANK0                     bssBANK0     0038
-__pbssCOMMON                    bssCOMMON    007A
-__pcstackBANK0                  cstackBANK0  0020
-=======
-__end_of_ADCMain                text10       034B
-__end_of___lwmod                text17       02DF
-__end_of__initialization        cinit        002B
-__end_of_getADC                 text15       0274
-__end_of_isr                    text16       02AD
-__end_of_lcdSetCursor           text13       03AE
-__end_of_lcdWriteControl        text14       035F
-__end_of_lcdWriteData           text12       0372
-__end_of_lcdWriteToDigitBCD     text11       019C
-__end_of_main                   maintext     0105
-__end_of_moveCCW                text9        022F
-__end_of_moveCW                 text8        01E7
-__end_of_ser_getch              text7        03A5
-__end_of_ser_init               text6        0390
-__end_of_ser_putch              text5        039C
-__end_of_setupADC               text4        0336
-__end_of_setupLCD               text3        0308
-__end_of_setupSPI               text2        0320
-__end_of_spi_transfer           text1        0381
-__initialization                cinit        0015
-__pbitbssCOMMON                 bitbssCOMMON 03E8
-__pbssBANK0                     bssBANK0     0020
-__pbssCOMMON                    bssCOMMON    007B
-__pcstackBANK0                  cstackBANK0  0038
->>>>>>> refs/remotes/origin/Brendan
-__pcstackCOMMON                 cstackCOMMON 0070
-__pdataBANK0                    dataBANK0    004A
-__pidataBANK0                   idataBANK0   03B6
-__pintentry                     intentry     0004
-<<<<<<< HEAD
-__pmaintext                     maintext     00BA
-__ptext1                        text1        020B
-__ptext10                       text10       0172
-__ptext11                       text11       0140
-__ptext2                        text2        01CC
-__ptext3                        text3        01A3
-__ptext4                        text4        01E4
-__ptext5                        text5        0229
-__ptext6                        text6        021A
-__ptext7                        text7        0235
-__ptext8                        text8        0023
-__ptext9                        text9        01F8
-=======
-__pmaintext                     maintext     002F
-__ptext1                        text1        0372
-__ptext10                       text10       0336
-__ptext11                       text11       0105
-__ptext12                       text12       035F
-__ptext13                       text13       03A5
-__ptext14                       text14       034B
-__ptext15                       text15       022F
-__ptext16                       text16       0274
-__ptext17                       text17       02AD
-__ptext2                        text2        0308
-__ptext3                        text3        02DF
-__ptext4                        text4        0320
-__ptext5                        text5        0390
-__ptext6                        text6        0381
-__ptext7                        text7        039C
-__ptext8                        text8        019C
-__ptext9                        text9        01E7
-__size_of_ADCMain               (abs)        0000
->>>>>>> refs/remotes/origin/Brendan
+__pintentry                     intentry     0000
 __size_of___lwmod               (abs)        0000
-__size_of_getADC                (abs)        0000
 __size_of_isr                   (abs)        0000
-__size_of_lcdSetCursor          (abs)        0000
 __size_of_lcdWriteControl       (abs)        0000
 __size_of_lcdWriteData          (abs)        0000
 __size_of_lcdWriteToDigitBCD    (abs)        0000
 __size_of_main                  (abs)        0000
-__size_of_moveCCW               (abs)        0000
-__size_of_moveCW                (abs)        0000
 __size_of_ser_getch             (abs)        0000
 __size_of_ser_init              (abs)        0000
 __size_of_ser_putch             (abs)        0000
-__size_of_setupADC              (abs)        0000
 __size_of_setupLCD              (abs)        0000
 __size_of_setupSPI              (abs)        0000
 __size_of_spi_transfer          (abs)        0000
-<<<<<<< HEAD
-_degrees                        bssBANK0     0038
-_isr                            text10       0172
-_lcdWriteControl                text4        01E4
-_lcdWriteData                   text9        01F8
-_lcdWriteToDigitBCD             text8        0023
-_main                           maintext     00BA
-_rxbyte                         bssBANK0     003C
-_ser_getch                      text7        0235
-_ser_init                       text6        021A
-_ser_putch                      text5        0229
-_setupLCD                       text3        01A3
-_setupSPI                       text2        01CC
-_spi_transfer                   text1        020B
-_stepCountNeg                   bssBANK0     003A
-_time_count                     bssCOMMON    007A
-btemp                           (abs)        007E
-end_of_initialization           cinit        001F
-=======
-_adcClosest                     dataBANK0    004A
-_adcRAW                         bssBANK0     0022
-_currentStep                    bssCOMMON    007B
-_degrees                        bssBANK0     0024
-_distTrav                       bssBANK0     0026
-_getADC                         text15       022F
-_highByte                       bssBANK0     0036
-_isr                            text16       0274
-_lcdSetCursor                   text13       03A5
-_lcdWriteControl                text14       034B
-_lcdWriteData                   text12       035F
-_lcdWriteToDigitBCD             text11       0105
-_lowByte                        bssBANK0     0028
-_main                           maintext     002F
-_moveCCW                        text9        01E7
-_moveCW                         text8        019C
-_negativeFlag                   bssCOMMON    007C
-_rxbyte                         bssBANK0     0034
-_ser_getch                      text7        039C
-_ser_init                       text6        0381
-_ser_putch                      text5        0390
-_setupADC                       text4        0320
-_setupLCD                       text3        02DF
-_setupSPI                       text2        0308
-_spi_transfer                   text1        0372
-_stepClosest                    bssBANK0     002A
-_stepCount                      bssBANK0     0035
-_stepCountNeg                   bssBANK0     002C
-_time_count                     bssBANK0     002E
-_x                              bssBANK0     0030
-btemp                           (abs)        007E
-clear_ram0                      clrtext      03AE
-end_of_initialization           cinit        002B
->>>>>>> refs/remotes/origin/Brendan
-interrupt_function              intentry     0004
+_moveCCW                                         
+_moveCW                                          
+_setupADC                                        
+interrupt_function              intentry     0000
 intlevel0                       functab      0000
 intlevel1                       functab      0000
 intlevel2                       functab      0000
 intlevel3                       functab      0000
 intlevel4                       functab      0000
 intlevel5                       functab      0000
-lcdSetCursor@address            cstackBANK0  003B
-lcdWriteControl@databyte        cstackBANK0  003A
-lcdWriteData@databyte           cstackBANK0  003A
-lcdWriteToDigitBCD@HunsDigit    cstackBANK0  003F
-lcdWriteToDigitBCD@OnesDigit    cstackBANK0  0045
-lcdWriteToDigitBCD@TenThouDigit cstackBANK0  0043
-lcdWriteToDigitBCD@TensDigit    cstackBANK0  003D
-lcdWriteToDigitBCD@ThouDigit    cstackBANK0  0041
-lcdWriteToDigitBCD@data         cstackBANK0  003B
-ltemp                           (abs)        007E
-ltemp0                          (abs)        007E
-ltemp1                          (abs)        0082
-ltemp2                          (abs)        0086
-ltemp3                          (abs)        0080
-main@controlByte                cstackBANK0  0049
 reset_vec                       reset_vec    0000
-saved_w                         (abs)        007E
-ser_getch@rxbyte                cstackBANK0  0039
-ser_putch@c                     cstackBANK0  0038
-spi_transfer@data               cstackBANK0  003A
-spi_transfer@temp               cstackBANK0  0039
 stackhi                         (abs)        0000
 stacklo                         (abs)        0000
-start                           init         0012
-start_initialization            cinit        0015
+_TMR0                           (abs)        0001
+___latbits                      (abs)        0002
+_PORTC                          (abs)        0007
+_PORTD                          (abs)        0008
+_PORTE                          (abs)        0009
+_SSPBUF                         (abs)        0013
+_SSPCON                         (abs)        0014
+_RCSTA                          (abs)        0018
+_TXREG                          (abs)        0019
+_RCREG                          (abs)        001A
+__Hinit                         init         000E
+__Hintentry                     intentry     000E
+__Lend_init                     end_init     000E
+__Linit                         init         000E
+start                           init         000E
+_Distance                       bssBANK0     0020
+__pbssBANK0                     bssBANK0     0020
+_adcRAW                         bssBANK0     0022
+__Hend_init                     end_init     0012
+_degrees                        bssBANK0     0024
+_distTrav                       bssBANK0     0026
+_lowByte                        bssBANK0     0028
+_stepClosest                    bssBANK0     002A
+_stepCountNeg                   bssBANK0     002C
+_time_count                     bssBANK0     002E
+_RB0                            (abs)        0030
+_x                              bssBANK0     0030
+_RB1                            (abs)        0031
+_PB7Counter                     bssBANK0     0032
+_PB8Counter                     bssBANK0     0033
+_rxbyte                         bssBANK0     0035
+_stepCount                      bssBANK0     0036
+_highByte                       bssBANK0     0037
+__pcstackBANK0                  cstackBANK0  0039
+_RC2                            (abs)        003A
+lcdWriteControl@databyte        cstackBANK0  003B
+lcdWriteData@databyte           cstackBANK0  003B
+lcdWriteToDigitBCD@data         cstackBANK0  003C
+lcdWriteToDigitBCD@TensDigit    cstackBANK0  003E
+lcdWriteToDigitBCD@HunsDigit    cstackBANK0  0040
+lcdWriteToDigitBCD@ThouDigit    cstackBANK0  0042
+lcdWriteToDigitBCD@TenThouDigit cstackBANK0  0044
+lcdWriteToDigitBCD@OnesDigit    cstackBANK0  0046
+_RE0                            (abs)        0048
+_RE1                            (abs)        0049
+_RE2                            (abs)        004A
+main@controlByte                cstackBANK0  004B
+__pdataBANK0                    dataBANK0    004C
+_adcClosest                     dataBANK0    004C
+_TMR0IF                         (abs)        005A
+_TMR0IE                         (abs)        005D
+_PEIE                           (abs)        005E
+_GIE                            (abs)        005F
+_SSPIF                          (abs)        0063
+_RCIF                           (abs)        0065
+?___lwmod                       cstackCOMMON 0070
+___lwmod@divisor                cstackCOMMON 0070
+__pcstackCOMMON                 cstackCOMMON 0070
+___lwmod@dividend               cstackCOMMON 0072
+___lwmod@counter                cstackCOMMON 0075
+__pbssCOMMON                    bssCOMMON    007B
+__S1                            (abs)        007E
+btemp                           (abs)        007E
+ltemp                           (abs)        007E
+ltemp0                          (abs)        007E
+ltemp3                          (abs)        0080
+_OPTION_REG                     (abs)        0081
+ltemp1                          (abs)        0082
+_TRISB                          (abs)        0086
+ltemp2                          (abs)        0086
+_TRISC                          (abs)        0087
+_TRISD                          (abs)        0088
+_TRISE                          (abs)        0089
+_SSPSTAT                        (abs)        0094
+_TXSTA                          (abs)        0098
+_SPBRG                          (abs)        0099
+_ADCON1                         (abs)        009F
+_FLAG_1000MS                    bitbssCOMMON 03E8
+__pbitbssCOMMON                 bitbssCOMMON 03E8
+__Hspace_1                      (abs)        03E9
+_TRMT                           (abs)        04C1
+__Hspace_0                      (abs)        0800
+__S0                            (abs)        0800
+__pidataBANK0                   idataBANK0   050B
+clear_ram0                      clrtext      050D
+__ptext7                        text7        0515
+_ser_getch                      text7        0515
+__end_of_ser_getch              text7        051E
+__ptext5                        text5        051E
+_ser_putch                      text5        051E
+__end_of_ser_putch              text5        052A
+__ptext6                        text6        052A
+_ser_init                       text6        052A
+__end_of_ser_init               text6        0539
+__ptext1                        text1        0539
+_spi_transfer                   text1        0539
+__end_of_spi_transfer           text1        0548
+__ptext9                        text9        0548
+_lcdWriteData                   text9        0548
+__end_of_lcdWriteData           text9        055B
+__ptext4                        text4        055B
+_lcdWriteControl                text4        055B
+__end_of_lcdWriteControl        text4        056F
+__ptext2                        text2        056F
+_setupSPI                       text2        056F
+__end_of_setupSPI               text2        0587
+__ptext3                        text3        0587
+_setupLCD                       text3        0587
+___lwmod                        text11       05B0
+__end_of_setupLCD               text3        05B0
+__ptext11                       text11       05B0
+__end_of___lwmod                text11       05E2
+__ptext10                       text10       05E2
+_isr                            text10       05E2
+__end_of_isr                    text10       0621
+__ptext8                        text8        0621
+_lcdWriteToDigitBCD             text8        0621
+__end_of_lcdWriteToDigitBCD     text8        06B8
+__pmaintext                     maintext     06B8
+_main                           maintext     06B8
+__Lcinit                        cinit        07E6
+__end_of_main                   maintext     07E6
+__initialization                cinit        07E6
+__end_of__initialization        cinit        07FC
+end_of_initialization           cinit        07FC
+__Hcinit                        cinit        0800
+ser_putch@c                     cstackBANK0  0039
+ser_getch@rxbyte                cstackBANK0  003A
+saved_w                         (abs)        007E
+spi_transfer@temp               cstackBANK0  003A
+spi_transfer@data               cstackBANK0  003B
 ttemp                           (abs)        007E
 ttemp0                          (abs)        007E
-ttemp1                          (abs)        0081
-ttemp2                          (abs)        0084
-ttemp3                          (abs)        0087
-ttemp4                          (abs)        007F
 wtemp                           (abs)        007E
 wtemp0                          (abs)        007E
+ttemp4                          (abs)        007F
+wtemp6                          (abs)        007F
 wtemp1                          (abs)        0080
+ttemp1                          (abs)        0081
 wtemp2                          (abs)        0082
+ttemp2                          (abs)        0084
 wtemp3                          (abs)        0084
 wtemp4                          (abs)        0086
+ttemp3                          (abs)        0087
 wtemp5                          (abs)        0088
-wtemp6                          (abs)        007F
-
-
-FUNCTION INFORMATION:
-
- *************** function _main *****************
- Defined at:
-		line 41 in file "main.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-  controlByte     1   17[BANK0 ] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       1       0       0       0
-      Temps:          0       2       0       0       0
-      Totals:         0       3       0       0       0
-Total ram usage:        3 bytes
- Hardware stack levels required when called:    5
- This function calls:
-		_ADCMain
-		_lcdWriteToDigitBCD
-		_moveCCW
-		_moveCW
-		_ser_getch
-		_ser_init
-		_ser_putch
-		_setupADC
-		_setupLCD
-		_setupSPI
-		_spi_transfer
- This function is called by:
-		Startup code after reset
- This function uses a non-reentrant model
-
-
- *************** function _spi_transfer *****************
- Defined at:
-		line 23 in file "SPI.c"
- Parameters:    Size  Location     Type
-  data            1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  data            1    2[BANK0 ] unsigned char 
-  temp            1    1[BANK0 ] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       2       0       0       0
-      Temps:          0       1       0       0       0
-      Totals:         0       3       0       0       0
-Total ram usage:        3 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _setupSPI *****************
- Defined at:
-		line 4 in file "SPI.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       0       0       0       0
-      Temps:          0       0       0       0       0
-      Totals:         0       0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _setupLCD *****************
- Defined at:
-		line 86 in file "LCD.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       0       0       0       0
-      Temps:          0       0       0       0       0
-      Totals:         0       0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    3
- This function calls:
-		_lcdWriteControl
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _setupADC *****************
- Defined at:
-		line 8 in file "ADC.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       0       0       0       0
-      Temps:          0       1       0       0       0
-      Totals:         0       1       0       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _ser_putch *****************
- Defined at:
-		line 28 in file "ser.c"
- Parameters:    Size  Location     Type
-  c               1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  c               1    0[BANK0 ] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       1       0       0       0
-      Temps:          0       0       0       0       0
-      Totals:         0       1       0       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _ser_init *****************
- Defined at:
-		line 4 in file "ser.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       0       0       0       0
-      Temps:          0       0       0       0       0
-      Totals:         0       0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _ser_getch *****************
- Defined at:
-		line 33 in file "ser.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-  rxbyte          1    1[BANK0 ] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       1       0       0       0
-      Temps:          0       1       0       0       0
-      Totals:         0       2       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _moveCW *****************
- Defined at:
-		line 5 in file "motor.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr0l, fsr0h, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       0       0       0       0
-      Temps:          0       2       0       0       0
-      Totals:         0       2       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _moveCCW *****************
- Defined at:
-		line 54 in file "motor.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr0l, fsr0h, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       0       0       0       0
-      Temps:          0       2       0       0       0
-      Totals:         0       2       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _ADCMain *****************
- Defined at:
-		line 19 in file "ADC.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       0       0       0       0
-      Temps:          0       0       0       0       0
-      Totals:         0       0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    4
- This function calls:
-		_getADC
-		_lcdSetCursor
-		_lcdWriteToDigitBCD
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _lcdWriteToDigitBCD *****************
- Defined at:
-		line 42 in file "LCD.c"
- Parameters:    Size  Location     Type
-  data            2    3[BANK0 ] unsigned int 
- Auto vars:     Size  Location     Type
-  OnesDigit       2   13[BANK0 ] unsigned int 
-  TenThouDigit    2   11[BANK0 ] unsigned int 
-  ThouDigit       2    9[BANK0 ] unsigned int 
-  HunsDigit       2    7[BANK0 ] unsigned int 
-  TensDigit       2    5[BANK0 ] unsigned int 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       2       0       0       0
-      Locals:         0      10       0       0       0
-      Temps:          0       0       0       0       0
-      Totals:         0      12       0       0       0
-Total ram usage:       12 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    3
- This function calls:
-		_lcdWriteData
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _lcdWriteData *****************
- Defined at:
-		line 20 in file "LCD.c"
- Parameters:    Size  Location     Type
-  databyte        1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  databyte        1    2[BANK0 ] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       1       0       0       0
-      Temps:          0       2       0       0       0
-      Totals:         0       3       0       0       0
-Total ram usage:        3 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_lcdWriteToDigitBCD
-		_lcdWriteString
- This function uses a non-reentrant model
-
-
- *************** function _lcdSetCursor *****************
- Defined at:
-		line 31 in file "LCD.c"
- Parameters:    Size  Location     Type
-  address         1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  address         1    3[BANK0 ] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       1       0       0       0
-      Temps:          0       0       0       0       0
-      Totals:         0       1       0       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    3
- This function calls:
-		_lcdWriteControl
- This function is called by:
-		_ADCMain
- This function uses a non-reentrant model
-
-
- *************** function _lcdWriteControl *****************
- Defined at:
-		line 9 in file "LCD.c"
- Parameters:    Size  Location     Type
-  databyte        1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  databyte        1    2[BANK0 ] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       1       0       0       0
-      Temps:          0       2       0       0       0
-      Totals:         0       3       0       0       0
-Total ram usage:        3 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_lcdSetCursor
-		_setupLCD
- This function uses a non-reentrant model
-
-
- *************** function _getADC *****************
- Defined at:
-		line 29 in file "ADC.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  2  300[None  ] unsigned int 
- Registers used:
-		wreg, fsr0l, fsr0h, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       0       0       0       0
-      Temps:          0       2       0       0       0
-      Totals:         0       2       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		Nothing
- This function is called by:
-		_ADCMain
- This function uses a non-reentrant model
-
-
- *************** function _isr *****************
- Defined at:
-		line 16 in file "main.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2, status,0, pclath, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         0       0       0       0       0
-      Locals:         0       0       0       0       0
-      Temps:          5       0       0       0       0
-      Totals:         5       0       0       0       0
-Total ram usage:        5 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    1
- This function calls:
-		___lwmod
- This function is called by:
-		Interrupt level 1
- This function uses a non-reentrant model
-
-
- *************** function ___lwmod *****************
- Defined at:
-		line 6 in file "C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwmod.c"
- Parameters:    Size  Location     Type
-  divisor         2    0[COMMON] unsigned int 
-  dividend        2    2[COMMON] unsigned int 
- Auto vars:     Size  Location     Type
-  counter         1    5[COMMON] unsigned char 
- Return value:  Size  Location     Type
-                  2    0[COMMON] unsigned int 
- Registers used:
-		wreg, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-      Params:         4       0       0       0       0
-      Locals:         1       0       0       0       0
-      Temps:          1       0       0       0       0
-      Totals:         6       0       0       0       0
-Total ram usage:        6 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_isr
- This function uses a non-reentrant model
-
-
-
-MODULE INFORMATION
-
-Module		Function		Class		Link	Load	Size
-C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwmod.c
-<<<<<<< HEAD
-		___lwmod       		CODE           	0140	0000	51
-=======
-		___lwmod       		CODE           	02AD	0000	51
->>>>>>> refs/remotes/origin/Brendan
-
-C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwmod.c estimated size: 51
-
-ser.c
-<<<<<<< HEAD
-		_ser_init      		CODE           	021A	0000	16
-		_ser_getch     		CODE           	0235	0000	10
-		_ser_putch     		CODE           	0229	0000	13
-=======
-		_ser_init      		CODE           	0381	0000	16
-		_ser_getch     		CODE           	039C	0000	10
-		_ser_putch     		CODE           	0390	0000	13
->>>>>>> refs/remotes/origin/Brendan
-
-ser.c estimated size: 39
-
-motor.c
-		_moveCCW       		CODE           	01E7	0000	73
-		_moveCW        		CODE           	019C	0000	76
-
-motor.c estimated size: 149
-
-shared
-<<<<<<< HEAD
-		__initialization		CODE           	0015	0000	11
-
-shared estimated size: 11
-
-SPI.c
-		_spi_transfer  		CODE           	020B	0000	16
-		_setupSPI      		CODE           	01CC	0000	25
-=======
-		__initialization		CODE           	0015	0000	23
-
-shared estimated size: 23
-
-ADC.c
-		_ADCMain       		CODE           	0336	0000	22
-		_getADC        		CODE           	022F	0000	70
-		_setupADC      		CODE           	0320	0000	23
-
-ADC.c estimated size: 115
-
-SPI.c
-		_spi_transfer  		CODE           	0372	0000	16
-		_setupSPI      		CODE           	0308	0000	25
->>>>>>> refs/remotes/origin/Brendan
-
-SPI.c estimated size: 41
-
-main.c
-<<<<<<< HEAD
-		_main          		CODE           	00BA	0000	135
-		_isr           		CODE           	0172	0000	50
-
-main.c estimated size: 185
-
-LCD.c
-		_setupLCD      		CODE           	01A3	0000	42
-		_lcdWriteControl		CODE           	01E4	0000	21
-		_lcdWriteData  		CODE           	01F8	0000	20
-		_lcdWriteToDigitBCD		CODE           	0023	0000	152
-=======
-		_main          		CODE           	002F	0000	215
-		_isr           		CODE           	0274	0000	58
-
-main.c estimated size: 273
-
-LCD.c
-		_setupLCD      		CODE           	02DF	0000	42
-		_lcdSetCursor  		CODE           	03A5	0000	10
-		_lcdWriteControl		CODE           	034B	0000	21
-		_lcdWriteData  		CODE           	035F	0000	20
-		_lcdWriteToDigitBCD		CODE           	0105	0000	152
->>>>>>> refs/remotes/origin/Brendan
-
-LCD.c estimated size: 245
-
+start_initialization            cinit        07E6

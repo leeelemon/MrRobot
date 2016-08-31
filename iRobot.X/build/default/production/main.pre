@@ -1438,9 +1438,6 @@ extern __bit __timeout;
 # 7 "main.h"
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
-# 24
-unsigned char rxbyte = 0;
-
 # 17 "LCD.h"
 volatile unsigned int stepCountNeg = 0;
 volatile unsigned int degrees = 0;
@@ -1475,16 +1472,31 @@ void ser_putch(unsigned char c);
 
 unsigned char ser_getch();
 
-<<<<<<< HEAD
 # 7 "SPI.h"
 void setupSPI(void);
 unsigned char spi_transfer(unsigned char data);
-=======
 
-# 13 "main.h"
-#pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
+# 6 "ADC.h"
+volatile unsigned int adcRAW = 0;
+volatile unsigned int Distance = 0;
 
-# 32
+void ADCMain(void);
+void setupADC(void);
+unsigned int getADC(void);
+unsigned int adcConvertMM(unsigned int);
+
+# 6 "motor.h"
+void moveCW(void);
+void moveCCW(void);
+
+signed char stepCount = 0;
+char negativeFlag = 0;
+char currentStep = 0;
+
+# 9 "main.c"
+volatile unsigned int time_count;
+volatile bit FLAG_1000MS;
+
 unsigned char rxbyte = 0;
 signed int stepClosest = 0;
 signed int adcClosest = 1000;
@@ -1492,16 +1504,13 @@ signed int highByte = 0;
 signed int lowByte = 0;
 signed int distTrav = 0;
 unsigned char controlByte = 0;
->>>>>>> refs/remotes/origin/Brendan
+signed int x = 0;
 
-# 9 "main.c"
-volatile unsigned int time_count;
-volatile bit FLAG_1000MS;
+
+unsigned char PB7Counter = 0;
 unsigned char PB8Counter = 0;
-unsigned int x = 0;
 
-
-
+# 29
 void interrupt isr(void){
 
 if(TMR0IF){
@@ -1520,16 +1529,14 @@ time_count = 0;
 }
 if (!RB0 == 1)
 PB8Counter++;
+if (!RB1 == 1)
+PB7Counter++;
 
 }
 }
-
-
 
 
 void main(void){
-
-
 
 
 setupSPI();
@@ -1540,12 +1547,15 @@ setupADC();
 unsigned char controlByte = 0b00001101;
 spi_transfer(controlByte);
 
+
 ser_putch(128);
 ser_putch(132);
 
 ser_putch(136);
 ser_putch(4);
 
+
+_delay((unsigned long)((10000)*(20000000/4000.0)));
 ser_putch(142);
 ser_putch(19);
 
@@ -1554,7 +1564,7 @@ highByte = rxbyte;
 ser_getch();
 lowByte = rxbyte;
 
-distTrav = (4*highByte + lowByte);
+distTrav = (256*highByte + lowByte);
 
 lcdWriteToDigitBCD(distTrav);
 
@@ -1567,23 +1577,43 @@ FLAG_1000MS = 0;
 
 
 
+
 if (PB8Counter >= 10 && !RB0 == 0){
-for (x=0; x==400; x++){
+for (x = 0; x<400; x++){
 moveCW();
 ADCMain();
 if (adcRAW < adcClosest){
 adcClosest = adcRAW;
 stepClosest = stepCount;
 }
-
 }
+
 
 for (x=stepCount; x=stepClosest; x++){
 moveCCW();
 }
+}
+
+
+
+
+if (PB7Counter >= 10 && !RB1 == 0){
+ser_putch(137);
+ser_putch(0x00);
+ser_putch(0b11111010);
+ser_putch(0xFF);
+ser_putch(0xFF);
+
+
+
+ser_putch(137);
+ser_putch(0x00);
+ser_putch(0x00);
+ser_putch(0xFF);
+ser_putch(0xFF);
 
 }
 
-# 102
+
 }
 }

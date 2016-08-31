@@ -8,12 +8,6 @@
 
 volatile unsigned int time_count;
 volatile bit FLAG_1000MS;
-signed int highByte = 0;
-signed int lowByte = 0;
-signed int dist = 0;
-unsigned int x = 0;
-
-unsigned char PB8Counter = 0;
 
 unsigned char rxbyte = 0;
 signed int stepClosest = 0;
@@ -22,7 +16,7 @@ signed int highByte = 0;
 signed int lowByte = 0;
 signed int distTrav = 0;
 unsigned char controlByte = 0;
-signed int x = 0;
+signed int loop = 0;
 
 
 unsigned char PB7Counter = 0;
@@ -100,17 +94,17 @@ void main(void){
         //If it detects a closer object than the previous closest then it stores 
         //the stepCount corresponding to that object.
         if (PB8Counter >= 10 && PB8 == 0){
-            for (x = 0; x<400; x++){           
+            for (loop = 0; loop < 400; loop++){           
                 moveCW();
                 ADCMain();
-                if (adcRAW < adcClosest){
+                if (adcRAW > adcClosest){
                     adcClosest = adcRAW;
                     stepClosest = stepCount;              
                 }
             }
-
-            //Moves CCW until stepCount(initialy -400) matches the step of the closest object
-            for (x=stepCount; x=stepClosest; x++){
+            loop = 0;
+            //Moves CCW until stepCount(initial -400) matches the step of the closest object
+            for (loop = stepCount; loop != stepClosest; loop++){
                 moveCCW();
             }            
         }
@@ -118,14 +112,14 @@ void main(void){
        
         //This might make it drive 4m forward, 250mm/s and takes 16 seconds. 
         //Or it might not.
-        if (PB7Counter >= 10 && PB7 = 0){
+        if (PB7Counter >= 10 && PB7 == 0){
             ser_putch(137);     //Drive command [Velocity high][Velocity low][Radius high][Radius low]
                 ser_putch(0x00);    //Velocity high byte in mm/s
                 ser_putch(0b11111010);    //Velocity low byte in mm/s
                 ser_putch(0xFF);  //Radius high byte, higher value means straighter path
                 ser_putch(0xFF);  //Radius low byte, negative value means turn right
                 
-            __delay_ms(16000);    //Delay long enough to move 4m
+//            __delay_ms(16000);    //Delay long enough to move 4m
             
             ser_putch(137);     //Drive command [Velocity high][Velocity low][Radius high][Radius low]
                 ser_putch(0x00);    //Set velocity to 0 mm/s to stop.
