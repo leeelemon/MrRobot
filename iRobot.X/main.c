@@ -12,7 +12,9 @@ signed int highByte = 0;
 signed int lowByte = 0;
 signed int dist = 0;
 unsigned int x = 0;
+
 unsigned char PB8Counter = 0;
+
 unsigned char rxbyte = 0;
 signed int stepClosest = 0;
 signed int adcClosest = 1000;
@@ -21,6 +23,11 @@ signed int lowByte = 0;
 signed int distTrav = 0;
 unsigned char controlByte = 0;
 signed int x = 0;
+
+
+unsigned char PB7Counter = 0;
+unsigned char PB8Counter = 0;
+
 
 
 
@@ -43,6 +50,8 @@ void interrupt isr(void){
         }
         if (PB8 == 1)
             PB8Counter++;
+        if (PB7 == 1)
+            PB7Counter++;
         
     }
 }
@@ -110,7 +119,6 @@ void main(void){
             moveCCW();            
         }
 
-
         //Rotates 360 and checks at each half step to see if the object the sensor
         //is looking at is closer than the previous closest object.
         if (PB8Counter >= 10 && PB8 == 0){
@@ -126,13 +134,28 @@ void main(void){
             //Moves CCW until stepCount(initialy -400) matches the step of the closest object
             for (x=stepCount; x=stepClosest; x++){
                 moveCCW();
-            }
+            }           
+        }
+        //This might make it drive 4m forward, 250mm/s and takes 16 seconds.
+        
+
+        if (PB7Counter >= 10 && PB7 = 0){
+            ser_putch(137);     //Drive command [Velocity high][Velocity low][Radius high][Radius low]
+                ser_putch(0x00);    //Velocity high byte in mm/s
+                ser_putch(0b11111010);    //Velocity low byte in mm/s
+                ser_putch(0xFF);  //Radius high byte, higher value means straighter path
+                ser_putch(0xFF);  //Radius low byte, negative value means turn right
+                
+            __delay_ms(16000);    //Delay long enough to move 4m
+            
+            ser_putch(137);     //Drive command [Velocity high][Velocity low][Radius high][Radius low]
+                ser_putch(0x00);    //Set velocity to 0 mm/s to stop.
+                ser_putch(0x00);    
+                ser_putch(0xFF);    
+                ser_putch(0xFF);    
             
         }
-        
-        
-        
-        
-       
+
+
     }
 }
