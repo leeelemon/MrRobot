@@ -4,14 +4,24 @@
     <memory name="program">
       <units>words</units>
       <length>8192</length>
+<<<<<<< HEAD
       <used>570</used>
       <free>7622</free>
+=======
+      <used>948</used>
+      <free>7244</free>
+>>>>>>> refs/remotes/origin/Brendan
     </memory>
     <memory name="data">
       <units>bytes</units>
       <length>368</length>
+<<<<<<< HEAD
       <used>44</used>
       <free>324</free>
+=======
+      <used>60</used>
+      <free>308</free>
+>>>>>>> refs/remotes/origin/Brendan
     </memory>
   </executable>
 </project>

@@ -1070,6 +1070,85 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LCD.h: 33: void lcdWriteString(char * s);
 [; ;LCD.h: 36: void lcdWriteToDigitBCD(unsigned int data);
 [; ;LCD.h: 39: void setupLCD(void);
+<<<<<<< HEAD
+=======
+[; ;SPI.h: 7: void setupSPI(void);
+[; ;SPI.h: 8: unsigned char spi_transfer(unsigned char data);
+[; ;motor.h: 6: void moveCW(void);
+[; ;motor.h: 7: void moveCCW(void);
+"9 motor.h
+[v _stepCount `c ~T0 @X0 1 e ]
+[i _stepCount
+-> -> 0 `i `c
+]
+[; ;motor.h: 9: signed char stepCount = 0;
+"10
+[v _negativeFlag `uc ~T0 @X0 1 e ]
+[i _negativeFlag
+-> -> 0 `i `uc
+]
+[; ;motor.h: 10: char negativeFlag = 0;
+"11
+[v _currentStep `uc ~T0 @X0 1 e ]
+[i _currentStep
+-> -> 0 `i `uc
+]
+[; ;motor.h: 11: char currentStep = 0;
+[; ;ser.h: 7: void ser_init(void);
+[; ;ser.h: 10: void ser_putch(unsigned char c);
+[; ;ser.h: 13: unsigned char ser_getch();
+"13 main.h
+[p x BOREN=OFF ]
+[p x CPD=OFF ]
+[p x WRT=OFF ]
+[p x FOSC=HS ]
+[p x WDTE=OFF ]
+[p x CP=OFF ]
+[p x LVP=OFF ]
+[p x PWRTE=OFF ]
+"32
+[v _rxbyte `uc ~T0 @X0 1 e ]
+[i _rxbyte
+-> -> 0 `i `uc
+]
+[; ;main.h: 32: unsigned char rxbyte = 0;
+"33
+[v _stepClosest `i ~T0 @X0 1 e ]
+[i _stepClosest
+-> 0 `i
+]
+[; ;main.h: 33: signed int stepClosest = 0;
+"34
+[v _adcClosest `i ~T0 @X0 1 e ]
+[i _adcClosest
+-> 1000 `i
+]
+[; ;main.h: 34: signed int adcClosest = 1000;
+"35
+[v _highByte `i ~T0 @X0 1 e ]
+[i _highByte
+-> 0 `i
+]
+[; ;main.h: 35: signed int highByte = 0;
+"36
+[v _lowByte `i ~T0 @X0 1 e ]
+[i _lowByte
+-> 0 `i
+]
+[; ;main.h: 36: signed int lowByte = 0;
+"37
+[v _distTrav `i ~T0 @X0 1 e ]
+[i _distTrav
+-> 0 `i
+]
+[; ;main.h: 37: signed int distTrav = 0;
+"38
+[v _controlByte `uc ~T0 @X0 1 e ]
+[i _controlByte
+-> -> 0 `i `uc
+]
+[; ;main.h: 38: unsigned char controlByte = 0;
+>>>>>>> refs/remotes/origin/Brendan
 "9 LCD.c
 [v _lcdWriteControl `(v ~T0 @X0 1 ef1`uc ]
 {

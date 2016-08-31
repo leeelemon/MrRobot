@@ -1445,6 +1445,39 @@ unsigned char rxbyte = 0;
 void setupSPI(void);
 unsigned char spi_transfer(unsigned char data);
 
+<<<<<<< HEAD
+=======
+# 6 "motor.h"
+void moveCW(void);
+void moveCCW(void);
+
+signed char stepCount = 0;
+char negativeFlag = 0;
+char currentStep = 0;
+
+# 7 "ser.h"
+void ser_init(void);
+
+
+void ser_putch(unsigned char c);
+
+
+unsigned char ser_getch();
+
+
+# 13 "main.h"
+#pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
+
+# 32
+unsigned char rxbyte = 0;
+signed int stepClosest = 0;
+signed int adcClosest = 1000;
+signed int highByte = 0;
+signed int lowByte = 0;
+signed int distTrav = 0;
+unsigned char controlByte = 0;
+
+>>>>>>> refs/remotes/origin/Brendan
 # 4 "SPI.c"
 void setupSPI(void){
 

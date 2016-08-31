@@ -1475,13 +1475,30 @@ void ser_putch(unsigned char c);
 
 unsigned char ser_getch();
 
+<<<<<<< HEAD
 # 7 "SPI.h"
 void setupSPI(void);
 unsigned char spi_transfer(unsigned char data);
+=======
 
-# 7 "main.c"
+# 13 "main.h"
+#pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
+
+# 32
+unsigned char rxbyte = 0;
+signed int stepClosest = 0;
+signed int adcClosest = 1000;
+signed int highByte = 0;
+signed int lowByte = 0;
+signed int distTrav = 0;
+unsigned char controlByte = 0;
+>>>>>>> refs/remotes/origin/Brendan
+
+# 9 "main.c"
 volatile unsigned int time_count;
 volatile bit FLAG_1000MS;
+unsigned char PB8Counter = 0;
+unsigned int x = 0;
 
 
 
@@ -1500,9 +1517,10 @@ RC2 = 1; __nop(); RC2 = 0;;
 if(time_count % 1000 == 0){
 FLAG_1000MS = 1;
 time_count = 0;
-
-
 }
+if (!RB0 == 1)
+PB8Counter++;
+
 }
 }
 
@@ -1510,14 +1528,15 @@ time_count = 0;
 
 
 void main(void){
-signed int highByte = 0;
-signed int lowByte = 0;
-signed int dist = 0;
+
+
 
 
 setupSPI();
 ser_init();
 setupLCD();
+setupADC();
+
 unsigned char controlByte = 0b00001101;
 spi_transfer(controlByte);
 
@@ -1535,9 +1554,9 @@ highByte = rxbyte;
 ser_getch();
 lowByte = rxbyte;
 
-dist = (4*highByte + lowByte);
+distTrav = (4*highByte + lowByte);
 
-lcdWriteToDigitBCD(dist);
+lcdWriteToDigitBCD(distTrav);
 
 
 while(1){
@@ -1545,5 +1564,26 @@ if(FLAG_1000MS){
 RB0 = !RB0;
 FLAG_1000MS = 0;
 }
+
+
+
+if (PB8Counter >= 10 && !RB0 == 0){
+for (x=0; x==400; x++){
+moveCW();
+ADCMain();
+if (adcRAW < adcClosest){
+adcClosest = adcRAW;
+stepClosest = stepCount;
+}
+
+}
+
+for (x=stepCount; x=stepClosest; x++){
+moveCCW();
+}
+
+}
+
+# 102
 }
 }

@@ -8,10 +8,22 @@
 
 volatile unsigned int time_count;
 volatile bit FLAG_1000MS;
+<<<<<<< HEAD
 signed int highByte = 0;
 signed int lowByte = 0;
 signed int dist = 0;
 unsigned int x = 0;
+=======
+unsigned char PB8Counter = 0;
+unsigned char rxbyte = 0;
+signed int stepClosest = 0;
+signed int adcClosest = 1000;
+signed int highByte = 0;
+signed int lowByte = 0;
+signed int distTrav = 0;
+unsigned char controlByte = 0;
+signed int x = 0;
+>>>>>>> refs/remotes/origin/Brendan
 
 
 // Interrupt service routine
@@ -29,32 +41,39 @@ void interrupt isr(void){
 
         if(time_count % 1000 == 0){
             FLAG_1000MS = 1;	// Raise flag for 500ms
-            time_count = 0;	// Clear time_count
-        
-        
+            time_count = 0;	// Clear time_count        
         }
+        if (PB8 == 1)
+            PB8Counter++;
+        
     }
 }
 
 
-
-
 void main(void){
+<<<<<<< HEAD
 
     
+=======
+  
+>>>>>>> refs/remotes/origin/Brendan
 //Initialise and setup
     setupSPI();
     ser_init();
-    setupLCD();   
+    setupLCD();
+    setupADC();
+    
     unsigned char controlByte = 0b00001101;
     spi_transfer(controlByte);
 
+    
     ser_putch(128);     //Startup
     ser_putch(132);     //Full mode
 
     ser_putch(136);     //Demo mode
     ser_putch(4);       //Demo 4 - Figure 8
     
+    __delay_ms(10000);  //Waits 10 seconds before requesting the distance traveled
     ser_putch(142);     //Requests packet of sensor data
     ser_putch(19);      //Specifies distance packet for request
     
@@ -63,9 +82,9 @@ void main(void){
     ser_getch();        //Gets the low byte of the sensor packet
     lowByte = rxbyte;   //Puts the low byte into variable
     
-    dist = (4*highByte + lowByte);  //Converts 2 byte value into a single binary
+    distTrav = (256*highByte + lowByte);  //Converts 2 byte value into a single binary
     
-    lcdWriteToDigitBCD(dist); //Writes received packet value to LCD in millimeters.
+    lcdWriteToDigitBCD(distTrav); //Writes received packet value to LCD in millimeters.
     
     
    while(1){       
@@ -74,6 +93,7 @@ void main(void){
             FLAG_1000MS = 0;
         }
         
+<<<<<<< HEAD
         //Rotates 360 and compares adcRAW at every half step.
         //If it detects a closer object than the previous closest then it stores 
         //the stepCount corresponding to that object.
@@ -98,5 +118,30 @@ void main(void){
             moveCCW();            
         }
 
+=======
+        //Rotates 360 and checks at each half step to see if the object the sensor
+        //is looking at is closer than the previous closest object.
+        if (PB8Counter >= 10 && PB8 == 0){
+            for (x=0; x==400; x++){
+                moveCW();
+                ADCMain();
+                if (adcRAW < adcClosest){
+                    adcClosest = adcRAW;
+                    stepClosest = stepCount;
+                }
+                
+            }
+            //Moves CCW until stepCount(initialy -400) matches the step of the closest object
+            for (x=stepCount; x=stepClosest; x++){
+                moveCCW();
+            }
+            
+        }
+        
+        
+        
+        
+        
+>>>>>>> refs/remotes/origin/Brendan
     }
 }

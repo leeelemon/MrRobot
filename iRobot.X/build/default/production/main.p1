@@ -8,6 +8,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "28 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic.h
 [v ___nop `(v ~T0 @X0 0 ef ]
 [p i ___nop ]
+"2513 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
+[v _RB0 `Vb ~T0 @X0 0 e@48 ]
 [p mainexit ]
 "7 SPI.h
 [v _setupSPI `(v ~T0 @X0 0 ef ]
@@ -15,6 +17,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ser_init `(v ~T0 @X0 0 ef ]
 "39 LCD.h
 [v _setupLCD `(v ~T0 @X0 0 ef ]
+"10 ADC.h
+[v _setupADC `(v ~T0 @X0 0 ef ]
 "8 SPI.h
 [v _spi_transfer `(uc ~T0 @X0 0 ef1`uc ]
 "10 ser.h
@@ -23,8 +27,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ser_getch `(uc ~T0 @X0 0 ef ]
 "36 LCD.h
 [v _lcdWriteToDigitBCD `(v ~T0 @X0 0 ef1`ui ]
+<<<<<<< HEAD
 "2513 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
 [v _RB0 `Vb ~T0 @X0 0 e@48 ]
+=======
+"6 motor.h
+[v _moveCW `(v ~T0 @X0 0 ef ]
+"9 ADC.h
+[v _ADCMain `(v ~T0 @X0 0 ef ]
+"7 motor.h
+[v _moveCCW `(v ~T0 @X0 0 ef ]
+>>>>>>> refs/remotes/origin/Brendan
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -1079,165 +1092,302 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ser.h: 7: void ser_init(void);
 [; ;ser.h: 10: void ser_putch(unsigned char c);
 [; ;ser.h: 13: unsigned char ser_getch();
+<<<<<<< HEAD
 [; ;SPI.h: 7: void setupSPI(void);
 [; ;SPI.h: 8: unsigned char spi_transfer(unsigned char data);
 "7 main.c
+=======
+"13 main.h
+[p x BOREN=OFF ]
+[p x CPD=OFF ]
+[p x WRT=OFF ]
+[p x FOSC=HS ]
+[p x WDTE=OFF ]
+[p x CP=OFF ]
+[p x LVP=OFF ]
+[p x PWRTE=OFF ]
+"32
+[v _rxbyte `uc ~T0 @X0 1 e ]
+[i _rxbyte
+-> -> 0 `i `uc
+]
+[; ;main.h: 32: unsigned char rxbyte = 0;
+"33
+[v _stepClosest `i ~T0 @X0 1 e ]
+[i _stepClosest
+-> 0 `i
+]
+[; ;main.h: 33: signed int stepClosest = 0;
+"34
+[v _adcClosest `i ~T0 @X0 1 e ]
+[i _adcClosest
+-> 1000 `i
+]
+[; ;main.h: 34: signed int adcClosest = 1000;
+"35
+[v _highByte `i ~T0 @X0 1 e ]
+[i _highByte
+-> 0 `i
+]
+[; ;main.h: 35: signed int highByte = 0;
+"36
+[v _lowByte `i ~T0 @X0 1 e ]
+[i _lowByte
+-> 0 `i
+]
+[; ;main.h: 36: signed int lowByte = 0;
+"37
+[v _distTrav `i ~T0 @X0 1 e ]
+[i _distTrav
+-> 0 `i
+]
+[; ;main.h: 37: signed int distTrav = 0;
+"38
+[v _controlByte `uc ~T0 @X0 1 e ]
+[i _controlByte
+-> -> 0 `i `uc
+]
+[; ;main.h: 38: unsigned char controlByte = 0;
+"9 main.c
+>>>>>>> refs/remotes/origin/Brendan
 [v _time_count `Vui ~T0 @X0 1 e ]
-[; ;main.c: 7: volatile unsigned int time_count;
-"8
+[; ;main.c: 9: volatile unsigned int time_count;
+"10
 [v _FLAG_1000MS `Vb ~T0 @X0 1 e ]
+<<<<<<< HEAD
 [; ;main.c: 8: volatile bit FLAG_1000MS;
 [v F1125 `(v ~T0 @X0 1 tf ]
 "12
 [v _isr `IF1125 ~T0 @X0 1 e ]
+=======
+[; ;main.c: 10: volatile bit FLAG_1000MS;
+"11
+[v _PB8Counter `uc ~T0 @X0 1 e ]
+[i _PB8Counter
+-> -> 0 `i `uc
+]
+[; ;main.c: 11: unsigned char PB8Counter = 0;
+"12
+[v _x `ui ~T0 @X0 1 e ]
+[i _x
+-> -> 0 `i `ui
+]
+[; ;main.c: 12: unsigned int x = 0;
+[v F1150 `(v ~T0 @X0 1 tf ]
+"16
+[v _isr `IF1150 ~T0 @X0 1 e ]
+>>>>>>> refs/remotes/origin/Brendan
 {
-[; ;main.c: 12: void interrupt isr(void){
+[; ;main.c: 16: void interrupt isr(void){
 [e :U _isr ]
 [f ]
-[; ;main.c: 14: if(TMR0IF){
-"14
+[; ;main.c: 18: if(TMR0IF){
+"18
 [e $ ! _TMR0IF 97  ]
 {
-[; ;main.c: 15: TMR0IF = 0;
-"15
-[e = _TMR0IF -> -> 0 `i `b ]
-[; ;main.c: 16: TMR0 = 100;
-"16
-[e = _TMR0 -> -> 100 `i `uc ]
-[; ;main.c: 17: time_count++;
-"17
-[e ++ _time_count -> -> 1 `i `ui ]
-[; ;main.c: 19: if(time_count % 1 == 0) {
+[; ;main.c: 19: TMR0IF = 0;
 "19
+[e = _TMR0IF -> -> 0 `i `b ]
+[; ;main.c: 20: TMR0 = 100;
+"20
+[e = _TMR0 -> -> 100 `i `uc ]
+[; ;main.c: 21: time_count++;
+"21
+[e ++ _time_count -> -> 1 `i `ui ]
+[; ;main.c: 23: if(time_count % 1 == 0) {
+"23
 [e $ ! == % _time_count -> -> 1 `i `ui -> -> 0 `i `ui 98  ]
 {
-[; ;main.c: 21: RC2 = 1; __nop(); RC2 = 0;;
-"21
+[; ;main.c: 25: RC2 = 1; __nop(); RC2 = 0;;
+"25
 [e = _RC2 -> -> 1 `i `b ]
 [e ( ___nop ..  ]
 [e = _RC2 -> -> 0 `i `b ]
-"22
+"26
 }
 [e :U 98 ]
-[; ;main.c: 22: }
-[; ;main.c: 24: if(time_count % 1000 == 0){
-"24
+[; ;main.c: 26: }
+[; ;main.c: 28: if(time_count % 1000 == 0){
+"28
 [e $ ! == % _time_count -> -> 1000 `i `ui -> -> 0 `i `ui 99  ]
 {
-[; ;main.c: 25: FLAG_1000MS = 1;
-"25
-[e = _FLAG_1000MS -> -> 1 `i `b ]
-[; ;main.c: 26: time_count = 0;
-"26
-[e = _time_count -> -> 0 `i `ui ]
+[; ;main.c: 29: FLAG_1000MS = 1;
 "29
+[e = _FLAG_1000MS -> -> 1 `i `b ]
+[; ;main.c: 30: time_count = 0;
+"30
+[e = _time_count -> -> 0 `i `ui ]
+"31
 }
 [e :U 99 ]
-"30
+[; ;main.c: 31: }
+[; ;main.c: 32: if (!RB0 == 1)
+"32
+[e $ ! == -> ! _RB0 `i -> 1 `i 100  ]
+[; ;main.c: 33: PB8Counter++;
+"33
+[e ++ _PB8Counter -> -> 1 `i `uc ]
+[e :U 100 ]
+"35
 }
 [e :U 97 ]
-[; ;main.c: 29: }
-[; ;main.c: 30: }
-[; ;main.c: 31: }
-"31
+[; ;main.c: 35: }
+[; ;main.c: 36: }
+"36
 [e :UE 96 ]
 }
-"36
+"41
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 36: void main(void){
+[; ;main.c: 41: void main(void){
 [e :U _main ]
 [f ]
-"37
-[v _highByte `i ~T0 @X0 1 a ]
-[; ;main.c: 37: signed int highByte = 0;
-[e = _highByte -> 0 `i ]
-"38
-[v _lowByte `i ~T0 @X0 1 a ]
-[; ;main.c: 38: signed int lowByte = 0;
-[e = _lowByte -> 0 `i ]
-"39
-[v _dist `i ~T0 @X0 1 a ]
-[; ;main.c: 39: signed int dist = 0;
-[e = _dist -> 0 `i ]
-[; ;main.c: 42: setupSPI();
-"42
-[e ( _setupSPI ..  ]
-[; ;main.c: 43: ser_init();
-"43
-[e ( _ser_init ..  ]
-[; ;main.c: 44: setupLCD();
-"44
-[e ( _setupLCD ..  ]
-"45
-[v _controlByte `uc ~T0 @X0 1 a ]
-[; ;main.c: 45: unsigned char controlByte = 0b00001101;
-[e = _controlByte -> -> 13 `i `uc ]
-[; ;main.c: 46: spi_transfer(controlByte);
+[; ;main.c: 46: setupSPI();
 "46
-[e ( _spi_transfer (1 _controlByte ]
-[; ;main.c: 48: ser_putch(128);
+[e ( _setupSPI ..  ]
+[; ;main.c: 47: ser_init();
+"47
+[e ( _ser_init ..  ]
+[; ;main.c: 48: setupLCD();
 "48
-[e ( _ser_putch (1 -> -> 128 `i `uc ]
-[; ;main.c: 49: ser_putch(132);
+[e ( _setupLCD ..  ]
+[; ;main.c: 49: setupADC();
 "49
-[e ( _ser_putch (1 -> -> 132 `i `uc ]
-[; ;main.c: 51: ser_putch(136);
+[e ( _setupADC ..  ]
+[v _controlByte `uc ~T0 @X0 1 a ]
+[; ;main.c: 51: unsigned char controlByte = 0b00001101;
 "51
-[e ( _ser_putch (1 -> -> 136 `i `uc ]
-[; ;main.c: 52: ser_putch(4);
+[e = _controlByte -> -> 13 `i `uc ]
+[; ;main.c: 52: spi_transfer(controlByte);
 "52
-[e ( _ser_putch (1 -> -> 4 `i `uc ]
-[; ;main.c: 54: ser_putch(142);
+[e ( _spi_transfer (1 _controlByte ]
+[; ;main.c: 54: ser_putch(128);
 "54
-[e ( _ser_putch (1 -> -> 142 `i `uc ]
-[; ;main.c: 55: ser_putch(19);
+[e ( _ser_putch (1 -> -> 128 `i `uc ]
+[; ;main.c: 55: ser_putch(132);
 "55
-[e ( _ser_putch (1 -> -> 19 `i `uc ]
-[; ;main.c: 57: ser_getch();
+[e ( _ser_putch (1 -> -> 132 `i `uc ]
+[; ;main.c: 57: ser_putch(136);
 "57
-[e ( _ser_getch ..  ]
-[; ;main.c: 58: highByte = rxbyte;
+[e ( _ser_putch (1 -> -> 136 `i `uc ]
+[; ;main.c: 58: ser_putch(4);
 "58
-[e = _highByte -> _rxbyte `i ]
-[; ;main.c: 59: ser_getch();
-"59
-[e ( _ser_getch ..  ]
-[; ;main.c: 60: lowByte = rxbyte;
+[e ( _ser_putch (1 -> -> 4 `i `uc ]
+[; ;main.c: 60: ser_putch(142);
 "60
-[e = _lowByte -> _rxbyte `i ]
-[; ;main.c: 62: dist = (4*highByte + lowByte);
-"62
-[e = _dist + * -> 4 `i _highByte _lowByte ]
-[; ;main.c: 64: lcdWriteToDigitBCD(dist);
+[e ( _ser_putch (1 -> -> 142 `i `uc ]
+[; ;main.c: 61: ser_putch(19);
+"61
+[e ( _ser_putch (1 -> -> 19 `i `uc ]
+[; ;main.c: 63: ser_getch();
+"63
+[e ( _ser_getch ..  ]
+[; ;main.c: 64: highByte = rxbyte;
 "64
-[e ( _lcdWriteToDigitBCD (1 -> _dist `ui ]
-[; ;main.c: 67: while(1){
-"67
-[e :U 102 ]
-{
-[; ;main.c: 68: if(FLAG_1000MS){
+[e = _highByte -> _rxbyte `i ]
+[; ;main.c: 65: ser_getch();
+"65
+[e ( _ser_getch ..  ]
+[; ;main.c: 66: lowByte = rxbyte;
+"66
+[e = _lowByte -> _rxbyte `i ]
+[; ;main.c: 68: distTrav = (4*highByte + lowByte);
 "68
-[e $ ! _FLAG_1000MS 104  ]
-{
-[; ;main.c: 69: RB0 = !RB0;
-"69
-[e = _RB0 ! _RB0 ]
-[; ;main.c: 70: FLAG_1000MS = 0;
+[e = _distTrav + * -> 4 `i _highByte _lowByte ]
+[; ;main.c: 70: lcdWriteToDigitBCD(distTrav);
 "70
-[e = _FLAG_1000MS -> -> 0 `i `b ]
-"71
-}
-[e :U 104 ]
-"72
-}
-[e :U 101 ]
-"67
-[e $U 102  ]
-[e :U 103 ]
-[; ;main.c: 71: }
-[; ;main.c: 72: }
-[; ;main.c: 73: }
+[e ( _lcdWriteToDigitBCD (1 -> _distTrav `ui ]
+[; ;main.c: 73: while(1){
 "73
-[e :UE 100 ]
+[e :U 103 ]
+{
+[; ;main.c: 74: if(FLAG_1000MS){
+"74
+[e $ ! _FLAG_1000MS 105  ]
+{
+[; ;main.c: 75: RB0 = !RB0;
+"75
+[e = _RB0 ! _RB0 ]
+[; ;main.c: 76: FLAG_1000MS = 0;
+"76
+[e = _FLAG_1000MS -> -> 0 `i `b ]
+"77
+}
+[e :U 105 ]
+[; ;main.c: 77: }
+[; ;main.c: 81: if (PB8Counter >= 10 && !RB0 == 0){
+"81
+[e $ ! && >= -> _PB8Counter `i -> 10 `i == -> ! _RB0 `i -> 0 `i 106  ]
+{
+[; ;main.c: 82: for (x=0; x==400; x++){
+"82
+{
+[e = _x -> -> 0 `i `ui ]
+[e $ == _x -> -> 400 `i `ui 107  ]
+[e $U 108  ]
+[e :U 107 ]
+{
+[; ;main.c: 83: moveCW();
+"83
+[e ( _moveCW ..  ]
+[; ;main.c: 84: ADCMain();
+"84
+[e ( _ADCMain ..  ]
+[; ;main.c: 85: if (adcRAW < adcClosest){
+"85
+[e $ ! < _adcRAW -> _adcClosest `ui 110  ]
+{
+[; ;main.c: 86: adcClosest = adcRAW;
+"86
+[e = _adcClosest -> _adcRAW `i ]
+[; ;main.c: 87: stepClosest = stepCount;
+"87
+[e = _stepClosest -> _stepCount `i ]
+"88
+}
+[e :U 110 ]
+"90
+}
+"82
+[e ++ _x -> -> 1 `i `ui ]
+[e $ == _x -> -> 400 `i `ui 107  ]
+[e :U 108 ]
+"90
+}
+[; ;main.c: 88: }
+[; ;main.c: 90: }
+[; ;main.c: 92: for (x=stepCount; x=stepClosest; x++){
+"92
+{
+[e = _x -> -> _stepCount `i `ui ]
+[e $U 114  ]
+[e :U 111 ]
+{
+[; ;main.c: 93: moveCCW();
+"93
+[e ( _moveCCW ..  ]
+"94
+}
+"92
+[e ++ _x -> -> 1 `i `ui ]
+[e :U 114 ]
+[e $ != = _x -> _stepClosest `ui -> -> 0 `i `ui 111  ]
+[e :U 112 ]
+"94
+}
+"96
+}
+[e :U 106 ]
+"102
+}
+[e :U 102 ]
+"73
+[e $U 103  ]
+[e :U 104 ]
+[; ;main.c: 94: }
+[; ;main.c: 96: }
+[; ;main.c: 102: }
+[; ;main.c: 103: }
+"103
+[e :UE 101 ]
 }
