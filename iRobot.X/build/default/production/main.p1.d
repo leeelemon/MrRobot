@@ -4,6 +4,4 @@
 main.h  \
 SPI.h  \
 LCD.h  \
-ADC.h  \
-motor.h  \
 ser.h 

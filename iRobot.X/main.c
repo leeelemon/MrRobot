@@ -3,9 +3,15 @@
 #include "LCD.h"
 #include "ser.h"
 #include "SPI.h"
+#include "ADC.h"
+#include "motor.h"
 
 volatile unsigned int time_count;
 volatile bit FLAG_1000MS;
+signed int highByte = 0;
+signed int lowByte = 0;
+signed int dist = 0;
+unsigned int x = 0;
 
 
 // Interrupt service routine
@@ -34,9 +40,7 @@ void interrupt isr(void){
 
 
 void main(void){
-    signed int highByte = 0;
-    signed int lowByte = 0;
-    signed int dist = 0;
+
     
 //Initialise and setup
     setupSPI();
@@ -69,5 +73,30 @@ void main(void){
             RB0 = !RB0;
             FLAG_1000MS = 0;
         }
+        
+        //Rotates 360 and compares adcRAW at every half step.
+        //If it detects a closer object than the previous closest then it stores 
+        //the stepCount corresponding to that object.
+        
+        for (x = 0; x<400; x++){           
+            moveCW();
+            ADCMain();
+            if (adcRAW < adcClosest){
+                adcClosest = adcRAW;
+                stepClosest = stepCount;              
+            }
+
+            //Moves CCW until stepCount(initialy -400) matches the step of the closest object
+            for (x=stepCount; x=stepClosest; x++){
+                moveCCW();
+            }            
+
+
+        }
+
+        for (x=stepCount; x==stepClosest; x++){
+            moveCCW();            
+        }
+
     }
 }
