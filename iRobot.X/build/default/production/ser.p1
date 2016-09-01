@@ -17,6 +17,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RCIF `Vb ~T0 @X0 0 e@101 ]
 "1037
 [v _RCREG `Vuc ~T0 @X0 0 e@26 ]
+"30 lcd.h
+[v _lcdSetCursor `(v ~T0 @X0 0 ef1`uc ]
+"36
+[v _lcdWriteToDigitBCD `(v ~T0 @X0 0 ef1`ui ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -1043,77 +1047,234 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p x CP=OFF ]
 [p x LVP=OFF ]
 [p x PWRTE=OFF ]
-[; ;ser.h: 7: void ser_init(void);
-[; ;ser.h: 10: void ser_putch(unsigned char c);
-[; ;ser.h: 13: unsigned char ser_getch();
-"4 ser.c
+[; ;main.h: 28: void getDistTrav(void);
+"30
+[v _rxbyte `uc ~T0 @X0 1 e ]
+[i _rxbyte
+-> -> 0 `i `uc
+]
+[; ;main.h: 30: unsigned char rxbyte = 0;
+"31
+[v _stepClosest `i ~T0 @X0 1 e ]
+[i _stepClosest
+-> 0 `i
+]
+[; ;main.h: 31: signed int stepClosest = 0;
+"32
+[v _adcClosest `i ~T0 @X0 1 e ]
+[i _adcClosest
+-> 1000 `i
+]
+[; ;main.h: 32: signed int adcClosest = 1000;
+"33
+[v _highByte `i ~T0 @X0 1 e ]
+[i _highByte
+-> 0 `i
+]
+[; ;main.h: 33: signed int highByte = 0;
+"34
+[v _lowByte `i ~T0 @X0 1 e ]
+[i _lowByte
+-> 0 `i
+]
+[; ;main.h: 34: signed int lowByte = 0;
+"35
+[v _distTrav `i ~T0 @X0 1 e ]
+[i _distTrav
+-> 0 `i
+]
+[; ;main.h: 35: signed int distTrav = 0;
+"36
+[v _totalDistTrav `i ~T0 @X0 1 e ]
+[i _totalDistTrav
+-> 0 `i
+]
+[; ;main.h: 36: signed int totalDistTrav = 0;
+"6 ser.h
+[v _speedH `i ~T0 @X0 1 e ]
+[i _speedH
+-> 0 `i
+]
+[; ;ser.h: 6: signed int speedH = 0;
+"7
+[v _speedL `i ~T0 @X0 1 e ]
+[i _speedL
+-> 0 `i
+]
+[; ;ser.h: 7: signed int speedL = 0;
+"8
+[v _radH `i ~T0 @X0 1 e ]
+[i _radH
+-> 0 `i
+]
+[; ;ser.h: 8: signed int radH = 0;
+"9
+[v _radL `i ~T0 @X0 1 e ]
+[i _radL
+-> 0 `i
+]
+[; ;ser.h: 9: signed int radL = 0;
+[; ;ser.h: 12: void ser_init(void);
+[; ;ser.h: 15: void ser_putch(unsigned char c);
+[; ;ser.h: 18: unsigned char ser_getch();
+[; ;ser.h: 21: void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
+[; ;ser.h: 24: void getDistTrav(void);
+"17 lcd.h
+[v _stepCountNeg `Vui ~T0 @X0 1 e ]
+[i _stepCountNeg
+-> -> 0 `i `ui
+]
+[; ;lcd.h: 17: volatile unsigned int stepCountNeg = 0;
+"18
+[v _degrees `Vui ~T0 @X0 1 e ]
+[i _degrees
+-> -> 0 `i `ui
+]
+[; ;lcd.h: 18: volatile unsigned int degrees = 0;
+[; ;lcd.h: 21: void lcdWriteStepCount(unsigned int stepCount);
+[; ;lcd.h: 24: void lcdWriteControl(unsigned char databyte);
+[; ;lcd.h: 27: void lcdWriteData(unsigned char databyte);
+[; ;lcd.h: 30: void lcdSetCursor(unsigned char address);
+[; ;lcd.h: 33: void lcdWriteString(char * s);
+[; ;lcd.h: 36: void lcdWriteToDigitBCD(unsigned int data);
+[; ;lcd.h: 39: void setupLCD(void);
+"5 ser.c
 [v _ser_init `(v ~T0 @X0 1 ef ]
 {
-[; ;ser.c: 4: void ser_init(void){
+[; ;ser.c: 5: void ser_init(void){
 [e :U _ser_init ]
 [f ]
-[; ;ser.c: 6: TXSTA = 0b00100100;
-"6
-[e = _TXSTA -> -> 36 `i `uc ]
-[; ;ser.c: 7: RCSTA = 0b10011000;
+[; ;ser.c: 7: TXSTA = 0b00100100;
 "7
+[e = _TXSTA -> -> 36 `i `uc ]
+[; ;ser.c: 8: RCSTA = 0b10011000;
+"8
 [e = _RCSTA -> -> 152 `i `uc ]
-[; ;ser.c: 22: SPBRG = 20;
-"22
+[; ;ser.c: 23: SPBRG = 20;
+"23
 [e = _SPBRG -> -> 20 `i `uc ]
-[; ;ser.c: 24: PEIE = 1;
-"24
-[e = _PEIE -> -> 1 `i `b ]
-[; ;ser.c: 25: (GIE = 1);
+[; ;ser.c: 25: PEIE = 1;
 "25
-[e = _GIE -> -> 1 `i `b ]
-[; ;ser.c: 26: }
+[e = _PEIE -> -> 1 `i `b ]
+[; ;ser.c: 26: (GIE = 1);
 "26
+[e = _GIE -> -> 1 `i `b ]
+[; ;ser.c: 27: }
+"27
 [e :UE 96 ]
 }
-"28
+"29
 [v _ser_putch `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;ser.c: 28: void ser_putch(unsigned char c){
+[; ;ser.c: 29: void ser_putch(unsigned char c){
 [e :U _ser_putch ]
 [v _c `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;ser.c: 29: while(!TRMT);
-"29
+[; ;ser.c: 30: while(!TRMT);
+"30
 [e $U 98  ]
 [e :U 99 ]
 [e :U 98 ]
 [e $ ! _TRMT 99  ]
 [e :U 100 ]
-[; ;ser.c: 30: TXREG=c;
-"30
-[e = _TXREG _c ]
-[; ;ser.c: 31: }
+[; ;ser.c: 31: TXREG=c;
 "31
+[e = _TXREG _c ]
+[; ;ser.c: 32: }
+"32
 [e :UE 97 ]
 }
-"33
+"34
 [v _ser_getch `(uc ~T0 @X0 1 ef ]
 {
-[; ;ser.c: 33: unsigned char ser_getch(){
+[; ;ser.c: 34: unsigned char ser_getch(){
 [e :U _ser_getch ]
 [f ]
-[; ;ser.c: 34: while(!RCIF);
-"34
+[; ;ser.c: 35: while(!RCIF);
+"35
 [e $U 102  ]
 [e :U 103 ]
 [e :U 102 ]
 [e $ ! _RCIF 103  ]
 [e :U 104 ]
-"35
 [v _rxbyte `uc ~T0 @X0 1 a ]
-[; ;ser.c: 35: unsigned char rxbyte = RCREG;
-[e = _rxbyte _RCREG ]
-[; ;ser.c: 36: return rxbyte;
+[; ;ser.c: 36: unsigned char rxbyte = RCREG;
 "36
+[e = _rxbyte _RCREG ]
+[; ;ser.c: 37: return rxbyte;
+"37
 [e ) _rxbyte ]
 [e $UE 101  ]
-[; ;ser.c: 37: }
-"37
+[; ;ser.c: 38: }
+"38
 [e :UE 101 ]
+}
+"43
+[v _Drive `(v ~T0 @X0 1 ef4`i`i`i`i ]
+{
+[; ;ser.c: 43: void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL){
+[e :U _Drive ]
+[v _speedH `i ~T0 @X0 1 r1 ]
+[v _speedL `i ~T0 @X0 1 r2 ]
+[v _radH `i ~T0 @X0 1 r3 ]
+[v _radL `i ~T0 @X0 1 r4 ]
+[f ]
+[; ;ser.c: 44: ser_putch(137);
+"44
+[e ( _ser_putch (1 -> -> 137 `i `uc ]
+[; ;ser.c: 45: ser_putch(speedH);
+"45
+[e ( _ser_putch (1 -> _speedH `uc ]
+[; ;ser.c: 46: ser_putch(speedL);
+"46
+[e ( _ser_putch (1 -> _speedL `uc ]
+[; ;ser.c: 47: ser_putch(radH);
+"47
+[e ( _ser_putch (1 -> _radH `uc ]
+[; ;ser.c: 48: ser_putch(radL);
+"48
+[e ( _ser_putch (1 -> _radL `uc ]
+[; ;ser.c: 49: }
+"49
+[e :UE 105 ]
+}
+"51
+[v _getDistTrav `(v ~T0 @X0 1 ef ]
+{
+[; ;ser.c: 51: void getDistTrav(void){
+[e :U _getDistTrav ]
+[f ]
+[; ;ser.c: 52: ser_putch(142);
+"52
+[e ( _ser_putch (1 -> -> 142 `i `uc ]
+[; ;ser.c: 53: ser_putch(19);
+"53
+[e ( _ser_putch (1 -> -> 19 `i `uc ]
+[; ;ser.c: 55: ser_getch();
+"55
+[e ( _ser_getch ..  ]
+[; ;ser.c: 56: highByte = rxbyte;
+"56
+[e = _highByte -> _rxbyte `i ]
+[; ;ser.c: 57: ser_getch();
+"57
+[e ( _ser_getch ..  ]
+[; ;ser.c: 58: lowByte = rxbyte;
+"58
+[e = _lowByte -> _rxbyte `i ]
+[; ;ser.c: 60: distTrav = (256*highByte + lowByte);
+"60
+[e = _distTrav + * -> 256 `i _highByte _lowByte ]
+[; ;ser.c: 61: totalDistTrav = ((totalDistTrav + distTrav)/10);
+"61
+[e = _totalDistTrav / + _totalDistTrav _distTrav -> 10 `i ]
+[; ;ser.c: 63: lcdSetCursor(0b11000000);
+"63
+[e ( _lcdSetCursor (1 -> -> 192 `i `uc ]
+[; ;ser.c: 64: lcdWriteToDigitBCD(totalDistTrav);
+"64
+[e ( _lcdWriteToDigitBCD (1 -> _totalDistTrav `ui ]
+[; ;ser.c: 65: }
+"65
+[e :UE 106 ]
 }

@@ -1438,6 +1438,17 @@ extern __bit __timeout;
 # 7 "main.h"
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
+# 28
+void getDistTrav(void);
+
+unsigned char rxbyte = 0;
+signed int stepClosest = 0;
+signed int adcClosest = 1000;
+signed int highByte = 0;
+signed int lowByte = 0;
+signed int distTrav = 0;
+signed int totalDistTrav = 0;
+
 # 17 "LCD.h"
 volatile unsigned int stepCountNeg = 0;
 volatile unsigned int degrees = 0;

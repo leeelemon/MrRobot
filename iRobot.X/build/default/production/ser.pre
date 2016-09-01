@@ -1438,7 +1438,24 @@ extern __bit __timeout;
 # 7 "main.h"
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
-# 7 "ser.h"
+# 28
+void getDistTrav(void);
+
+unsigned char rxbyte = 0;
+signed int stepClosest = 0;
+signed int adcClosest = 1000;
+signed int highByte = 0;
+signed int lowByte = 0;
+signed int distTrav = 0;
+signed int totalDistTrav = 0;
+
+# 6 "ser.h"
+signed int speedH = 0;
+signed int speedL = 0;
+signed int radH = 0;
+signed int radL = 0;
+
+
 void ser_init(void);
 
 
@@ -1447,13 +1464,44 @@ void ser_putch(unsigned char c);
 
 unsigned char ser_getch();
 
-# 4 "ser.c"
+
+void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
+
+
+void getDistTrav(void);
+
+# 17 "lcd.h"
+volatile unsigned int stepCountNeg = 0;
+volatile unsigned int degrees = 0;
+
+
+void lcdWriteStepCount(unsigned int stepCount);
+
+
+void lcdWriteControl(unsigned char databyte);
+
+
+void lcdWriteData(unsigned char databyte);
+
+
+void lcdSetCursor(unsigned char address);
+
+
+void lcdWriteString(char * s);
+
+
+void lcdWriteToDigitBCD(unsigned int data);
+
+
+void setupLCD(void);
+
+# 5 "ser.c"
 void ser_init(void){
 
 TXSTA = 0b00100100;
 RCSTA = 0b10011000;
 
-# 22
+# 23
 SPBRG = 20;
 
 PEIE = 1;
@@ -1469,4 +1517,31 @@ unsigned char ser_getch(){
 while(!RCIF);
 unsigned char rxbyte = RCREG;
 return rxbyte;
+}
+
+
+
+
+void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL){
+ser_putch(137);
+ser_putch(speedH);
+ser_putch(speedL);
+ser_putch(radH);
+ser_putch(radL);
+}
+
+void getDistTrav(void){
+ser_putch(142);
+ser_putch(19);
+
+ser_getch();
+highByte = rxbyte;
+ser_getch();
+lowByte = rxbyte;
+
+distTrav = (256*highByte + lowByte);
+totalDistTrav = ((totalDistTrav + distTrav)/10);
+
+lcdSetCursor(0b11000000);
+lcdWriteToDigitBCD(totalDistTrav);
 }
