@@ -21,8 +21,11 @@
 #define     SELECT_SM()		RC0 = 1; RC1 = 1;
 #define     SM_STEP()		RC2 = 1; NOP(); RC2 = 0;
 
+#define PB6 !RB2
 #define PB7 !RB1
 #define PB8 !RB0
+
+void getDistTrav(void);
 
 
 

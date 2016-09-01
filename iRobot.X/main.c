@@ -18,8 +18,9 @@ signed int distTrav = 0;
 signed int totalDistTrav = 0;
 unsigned char controlByte = 0;
 signed int loop = 0;
+signed int loop2 = 0;
 
-
+unsigned char PB6Counter = 0;
 unsigned char PB7Counter = 0;
 unsigned char PB8Counter = 0;
 
@@ -48,8 +49,26 @@ void interrupt isr(void){
             PB8Counter++;
         if (PB7 == 1)
             PB7Counter++;
+        if (PB6 == 1)
+            PB6Counter++;
         
     }
+}
+
+void getDistTrav(void){
+    ser_putch(142);     //Requests packet of sensor data
+    ser_putch(19);      //Specifies distance packet for request
+    
+    ser_getch();        //Gets the distance value returned as 2 bytes, high byte first.
+    highByte = rxbyte;  //Puts the high byte into variable
+    ser_getch();        //Gets the low byte of the sensor packet
+    lowByte = rxbyte;   //Puts the low byte into variable
+                
+    distTrav = (256*highByte + lowByte);    //Distance traveled since data was last requested
+    totalDistTrav = ((totalDistTrav + distTrav)/10);  //Total distance traveled since button push in CM
+                
+    lcdSetCursor(0b11000000);   //Second row, first position
+    lcdWriteToDigitBCD(totalDistTrav);  //Print the total distance to LCD
 }
 
 
@@ -85,7 +104,7 @@ void main(void){
                     stepClosest = stepCount;              
                 }
             }
-            loop = 0;
+            
             //Moves CCW until stepCount(initial -400) matches the step of the closest object
             for (loop = stepCount; loop != stepClosest; loop++){
                 moveCCW();
@@ -96,33 +115,20 @@ void main(void){
         //This might make it drive 4m forward, 250mm/s and takes 16 seconds. 
         //Or it might not.
         if (PB7Counter >= 10 && PB7 == 0){
-            totalDistTrav = 0;
+            totalDistTrav = 0;  //Resets distance traveled
             
             //Drive command [Velocity high][Velocity low][Radius high][Radius low]
             //Radius of 0x7FFF is a straight line
             //Negative radius turns right
             ser_putch(137);     
                 ser_putch(0x00);    
-                ser_putch(0b11111010);    
+                ser_putch(0b11111010);   //250mm/s 
                 ser_putch(0x7F);  
                 ser_putch(0xFF);  
             
             //Continuously updates LCD with distance traveled while moving
             for (loop = 0; loop < 400; loop++){
-                ser_putch(142);     //Requests packet of sensor data
-                ser_putch(19);      //Specifies distance packet for request
-    
-                ser_getch();        //Gets the distance value returned as 2 bytes, high byte first.
-                highByte = rxbyte;  //Puts the high byte into variable
-                ser_getch();        //Gets the low byte of the sensor packet
-                lowByte = rxbyte;   //Puts the low byte into variable
-                
-                distTrav = (256*highByte + lowByte);    //Distance traveled since data was last requested
-                totalDistTrav = ((totalDistTrav + distTrav)/10);  //Total distance traveled since button push in CM
-                
-                lcdSetCursor(0b11000000);   //Second row, first position
-                lcdWriteToDigitBCD(totalDistTrav);  //Print the total distance to LCD
-                
+                getDistTrav();    //Gets distance and printd
                 __delay_ms(40);   //Loop long enough to travel 4m
             }    
         
@@ -130,8 +136,37 @@ void main(void){
                 ser_putch(0x00);    //Set velocity to 0 mm/s to stop.
                 ser_putch(0x00);    
                 ser_putch(0x7F);    
-                ser_putch(0xFF);    
+                ser_putch(0xFF);               
+        }
+        
+        //Perform 'Square' manoeuvre... maybe
+        if (PB6Counter >= 10 && PB6 == 0){
+            totalDistTrav = 0;  //Resets distance traveled
             
+            for (loop = 0; loop < 4; loop++){
+                ser_putch(137);         //Drive command
+                    ser_putch(0x00);
+                    ser_putch(0b11111010);  //250mm/s
+                    ser_putch(0xFF);        //Turn in place clockwise
+                    ser_putch(0xFF);
+                __delay_ms(1000);   //Delay some amount of time to turn 90 deg    
+                
+                for (loop2 = 0; loop2 < 100; loop2++){    
+                    ser_putch(137);         //Drive command
+                        ser_putch(0x00);
+                        ser_putch(0b11111010);  //250mm/s
+                        ser_putch(0x7F);        //Drive straight
+                        ser_putch(0xFF);
+                    getDistTrav();    //Gets distance and print to LCD
+                    __delay_ms(40);       
+                }
+            }
+            ser_putch(137);         //Drive command
+                ser_putch(0x00);    //Set velocity to 0 mm/s to stop.
+                ser_putch(0x00);    
+                ser_putch(0x7F);    
+                ser_putch(0xFF);  
+                
         }
 
 
