@@ -1438,6 +1438,17 @@ extern __bit __timeout;
 # 7 "main.h"
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
+# 28
+void getDistTrav(void);
+
+unsigned char rxbyte = 0;
+signed int stepClosest = 0;
+signed int adcClosest = 1000;
+signed int highByte = 0;
+signed int lowByte = 0;
+signed int distTrav = 0;
+signed int totalDistTrav = 0;
+
 # 17 "LCD.h"
 volatile unsigned int stepCountNeg = 0;
 volatile unsigned int degrees = 0;
@@ -1463,7 +1474,13 @@ void lcdWriteToDigitBCD(unsigned int data);
 
 void setupLCD(void);
 
-# 7 "ser.h"
+# 6 "ser.h"
+signed int speedH = 0;
+signed int speedL = 0;
+signed int radH = 0;
+signed int radL = 0;
+
+
 void ser_init(void);
 
 
@@ -1471,6 +1488,12 @@ void ser_putch(unsigned char c);
 
 
 unsigned char ser_getch();
+
+
+void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
+
+
+void getDistTrav(void);
 
 # 7 "SPI.h"
 void setupSPI(void);
@@ -1480,14 +1503,14 @@ unsigned char spi_transfer(unsigned char data);
 volatile unsigned int adcRAW = 0;
 volatile unsigned int Distance = 0;
 
-void _ADCMain(void);
-void _setupADC(void);
+void ADCMain(void);
+void setupADC(void);
 unsigned int getADC(void);
 unsigned int adcConvertMM(unsigned int);
 
 # 6 "motor.h"
-void _moveCW(void);
-void _moveCCW(void);
+void moveCW(void);
+void moveCCW(void);
 
 signed char stepCount = 0;
 char negativeFlag = 0;
@@ -1497,21 +1520,17 @@ char currentStep = 0;
 volatile unsigned int time_count;
 volatile bit FLAG_1000MS;
 
-unsigned char rxbyte = 0;
-signed int stepClosest = 0;
-signed int adcClosest = 1000;
-signed int highByte = 0;
-signed int lowByte = 0;
-signed int distTrav = 0;
-signed int totalDistTrav = 0;
+
+
 unsigned char controlByte = 0;
 signed int loop = 0;
+signed int loop2 = 0;
 
-
+unsigned char PB6Counter = 0;
 unsigned char PB7Counter = 0;
 unsigned char PB8Counter = 0;
 
-# 30
+# 26
 void interrupt isr(void){
 
 if(TMR0IF){
@@ -1533,10 +1552,11 @@ if (!RB0 == 1)
 PB8Counter++;
 if (!RB1 == 1)
 PB7Counter++;
+if (!RB2 == 1)
+PB6Counter++;
 
 }
 }
-
 
 void main(void){
 
@@ -1554,20 +1574,22 @@ ser_putch(132);
 
 while(1){
 
-# 79
+
+
+
 if (PB8Counter >= 10 && !RB0 == 0){
 for (loop = 0; loop < 400; loop++){
-_moveCW();
-_ADCMain();
+moveCW();
+ADCMain();
 if (adcRAW > adcClosest){
 adcClosest = adcRAW;
 stepClosest = stepCount;
 }
 }
-loop = 0;
+
 
 for (loop = stepCount; loop != stepClosest; loop++){
-_moveCCW();
+moveCCW();
 }
 }
 
@@ -1577,39 +1599,32 @@ _moveCCW();
 if (PB7Counter >= 10 && !RB1 == 0){
 totalDistTrav = 0;
 
-
-
-
-ser_putch(137);
-ser_putch(0x00);
-ser_putch(0b11111010);
-ser_putch(0x7F);
-ser_putch(0xFF);
+Drive(0,250,0x7F,0xFF);
 
 
 for (loop = 0; loop < 400; loop++){
-ser_putch(142);
-ser_putch(19);
-
-ser_getch();
-highByte = rxbyte;
-ser_getch();
-lowByte = rxbyte;
-
-distTrav = (256*highByte + lowByte);
-totalDistTrav = ((totalDistTrav + distTrav)/10);
-
-lcdSetCursor(0b11000000);
-lcdWriteToDigitBCD(totalDistTrav);
-
+getDistTrav();
 _delay((unsigned long)((40)*(20000000/4000.0)));
 }
 
-ser_putch(137);
-ser_putch(0x00);
-ser_putch(0x00);
-ser_putch(0x7F);
-ser_putch(0xFF);
+Drive(0,0,0x7F,0xFF);
+}
+
+
+if (PB6Counter >= 10 && !RB2 == 0){
+totalDistTrav = 0;
+
+for (loop = 0; loop < 4; loop++){
+Drive(0,250,0xFF,0xFF);
+_delay((unsigned long)((1000)*(20000000/4000.0)));
+
+for (loop2 = 0; loop2 < 100; loop2++){
+Drive(0,250,0x7F,0xFF);
+getDistTrav();
+_delay((unsigned long)((40)*(20000000/4000.0)));
+}
+}
+Drive(0,0,0x7F,0xFF);
 
 }
 

@@ -1045,6 +1045,49 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p x CP=OFF ]
 [p x LVP=OFF ]
 [p x PWRTE=OFF ]
+[; ;main.h: 28: void getDistTrav(void);
+"30
+[v _rxbyte `uc ~T0 @X0 1 e ]
+[i _rxbyte
+-> -> 0 `i `uc
+]
+[; ;main.h: 30: unsigned char rxbyte = 0;
+"31
+[v _stepClosest `i ~T0 @X0 1 e ]
+[i _stepClosest
+-> 0 `i
+]
+[; ;main.h: 31: signed int stepClosest = 0;
+"32
+[v _adcClosest `i ~T0 @X0 1 e ]
+[i _adcClosest
+-> 1000 `i
+]
+[; ;main.h: 32: signed int adcClosest = 1000;
+"33
+[v _highByte `i ~T0 @X0 1 e ]
+[i _highByte
+-> 0 `i
+]
+[; ;main.h: 33: signed int highByte = 0;
+"34
+[v _lowByte `i ~T0 @X0 1 e ]
+[i _lowByte
+-> 0 `i
+]
+[; ;main.h: 34: signed int lowByte = 0;
+"35
+[v _distTrav `i ~T0 @X0 1 e ]
+[i _distTrav
+-> 0 `i
+]
+[; ;main.h: 35: signed int distTrav = 0;
+"36
+[v _totalDistTrav `i ~T0 @X0 1 e ]
+[i _totalDistTrav
+-> 0 `i
+]
+[; ;main.h: 36: signed int totalDistTrav = 0;
 "17 LCD.h
 [v _stepCountNeg `Vui ~T0 @X0 1 e ]
 [i _stepCountNeg
