@@ -3,7 +3,7 @@
 
 
 void moveCW(void){
-    //This run of the function will cause stepCount to be negative, so sets a flag
+    //This run of the function will cause stepCount to be negative.
     //Only relevant for printing stepCount to LCD
     if (stepCount == 0) negativeFlag = 1;       
 
@@ -53,8 +53,8 @@ void moveCW(void){
 }
 
 void moveCCW(void){
-
-    if (stepCount == (-1)) negativeFlag = 0;    //This run of function will cause stepCount to be pos again, so resets flag
+    //This run of function will cause stepCount to be pos again, so resets flag
+    if (stepCount == (-1)) negativeFlag = 0;    
     
     stepCount++;            //Increment stepCount
 

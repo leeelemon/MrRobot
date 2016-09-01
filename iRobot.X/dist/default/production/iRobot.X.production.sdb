@@ -3,6 +3,8 @@
 [d edition pro ]
 [d chip 16F877A ]
 [d frameptr 6 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
 "62 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
 "86 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\ftadd.c
@@ -17,13 +19,15 @@
 [v _lcdWriteControl lcdWriteControl `(v  1 e 1 0 ]
 "20
 [v _lcdWriteData lcdWriteData `(v  1 e 1 0 ]
+"31
+[v _lcdSetCursor lcdSetCursor `(v  1 e 1 0 ]
 "42
 [v _lcdWriteToDigitBCD lcdWriteToDigitBCD `(v  1 e 1 0 ]
 "86
 [v _setupLCD setupLCD `(v  1 e 1 0 ]
-"29 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\main.c
+"30 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\main.c
 [v _isr isr `II(v  1 e 1 0 ]
-"54
+"56
 [v _main main `(v  1 e 1 0 ]
 "4 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\ser.c
 [v _ser_init ser_init `(v  1 e 1 0 ]
@@ -121,20 +125,22 @@
 [v _lowByte lowByte `i  1 e 2 0 ]
 "17
 [v _distTrav distTrav `i  1 e 2 0 ]
-"19
-[v _x x `i  1 e 2 0 ]
-"22
-[v _PB7Counter PB7Counter `uc  1 e 1 0 ]
+"18
+[v _totalDistTrav totalDistTrav `i  1 e 2 0 ]
+"20
+[v _loop loop `i  1 e 2 0 ]
 "23
+[v _PB7Counter PB7Counter `uc  1 e 1 0 ]
+"24
 [v _PB8Counter PB8Counter `uc  1 e 1 0 ]
 "9 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\motor.h
 [v _stepCount stepCount `c  1 e 1 0 ]
-"54 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\main.c
+"56 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"60
+"62
 [v main@controlByte controlByte `uc  1 a 1 18 ]
-"134
+"139
 } 0
 "23 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\SPI.c
 [v _spi_transfer spi_transfer `(uc  1 e 1 0 ]
@@ -156,14 +162,6 @@
 [v _setupLCD setupLCD `(v  1 e 1 0 ]
 {
 "103
-} 0
-"9
-[v _lcdWriteControl lcdWriteControl `(v  1 e 1 0 ]
-{
-[v lcdWriteControl@databyte databyte `uc  1 a 1 wreg ]
-[v lcdWriteControl@databyte databyte `uc  1 a 1 wreg ]
-[v lcdWriteControl@databyte databyte `uc  1 a 1 2 ]
-"17
 } 0
 "28 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\ser.c
 [v _ser_putch ser_putch `(v  1 e 1 0 ]
@@ -206,10 +204,39 @@
 [v lcdWriteData@databyte databyte `uc  1 a 1 2 ]
 "28
 } 0
-"29 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\main.c
+"31
+[v _lcdSetCursor lcdSetCursor `(v  1 e 1 0 ]
+{
+[v lcdSetCursor@address address `uc  1 a 1 wreg ]
+[v lcdSetCursor@address address `uc  1 a 1 wreg ]
+[v lcdSetCursor@address address `uc  1 a 1 3 ]
+"34
+} 0
+"9
+[v _lcdWriteControl lcdWriteControl `(v  1 e 1 0 ]
+{
+[v lcdWriteControl@databyte databyte `uc  1 a 1 wreg ]
+[v lcdWriteControl@databyte databyte `uc  1 a 1 wreg ]
+[v lcdWriteControl@databyte databyte `uc  1 a 1 2 ]
+"17
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"11
+[v ___awdiv@quotient quotient `i  1 a 2 7 ]
+"12
+[v ___awdiv@sign sign `uc  1 a 1 6 ]
+[v ___awdiv@counter counter `uc  1 a 1 5 ]
+"6
+[v ___awdiv@divisor divisor `i  1 p 2 0 ]
+[v ___awdiv@dividend dividend `i  1 p 2 2 ]
+"42
+} 0
+"30 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\main.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"51
+"53
 } 0
 "6 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]

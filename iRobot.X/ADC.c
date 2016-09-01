@@ -22,7 +22,7 @@ void ADCMain(void){
         lcdSetCursor(0b10000000);   //First line, first position
         lcdWriteToDigitBCD(adcRAW); //Write the raw ADC value
       
-//        adcConvertMM(adcRAW);       //Use Liam's conversion and sensor
+        adcConvertMM(adcRAW);       //Use Liam's conversion and sensor
 }
 
 //get an adc result from the selected channel
@@ -55,7 +55,7 @@ unsigned int getADC(void){
 //Converts 10bit value to a distance (mm) using the following equation.
 //Interpolates between 10cm intervals based on the 10 bit ADC value.
 //(adcMAX-adcRAW)/(adcMAX - adcMIN)]*(DistMax - DistMin) + DistMin
-/*
+
 unsigned int adcConvertMM(unsigned int adcRAW){
 
     if (adcRAW < 517 && adcRAW >= 513)                          //1: 10-20
@@ -97,7 +97,7 @@ unsigned int adcConvertMM(unsigned int adcRAW){
     return(Distance); //Returns the converted distance to be written to LCD    
 }
         
-*/         
+        
         
         
             

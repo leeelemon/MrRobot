@@ -1480,14 +1480,14 @@ unsigned char spi_transfer(unsigned char data);
 volatile unsigned int adcRAW = 0;
 volatile unsigned int Distance = 0;
 
-void ADCMain(void);
-void setupADC(void);
+void _ADCMain(void);
+void _setupADC(void);
 unsigned int getADC(void);
 unsigned int adcConvertMM(unsigned int);
 
 # 6 "motor.h"
-void moveCW(void);
-void moveCCW(void);
+void _moveCW(void);
+void _moveCCW(void);
 
 signed char stepCount = 0;
 char negativeFlag = 0;
@@ -1503,14 +1503,15 @@ signed int adcClosest = 1000;
 signed int highByte = 0;
 signed int lowByte = 0;
 signed int distTrav = 0;
+signed int totalDistTrav = 0;
 unsigned char controlByte = 0;
-signed int x = 0;
+signed int loop = 0;
 
 
 unsigned char PB7Counter = 0;
 unsigned char PB8Counter = 0;
 
-# 29
+# 30
 void interrupt isr(void){
 
 if(TMR0IF){
@@ -1524,7 +1525,8 @@ RC2 = 1; __nop(); RC2 = 0;;
 }
 
 if(time_count % 1000 == 0){
-FLAG_1000MS = 1;
+RB0 = !RB0;
+
 time_count = 0;
 }
 if (!RB0 == 1)
@@ -1547,15 +1549,45 @@ setupADC();
 unsigned char controlByte = 0b00001101;
 spi_transfer(controlByte);
 
-
 ser_putch(128);
 ser_putch(132);
 
-ser_putch(136);
-ser_putch(4);
+while(1){
+
+# 79
+if (PB8Counter >= 10 && !RB0 == 0){
+for (loop = 0; loop < 400; loop++){
+_moveCW();
+_ADCMain();
+if (adcRAW > adcClosest){
+adcClosest = adcRAW;
+stepClosest = stepCount;
+}
+}
+loop = 0;
+
+for (loop = stepCount; loop != stepClosest; loop++){
+_moveCCW();
+}
+}
 
 
-_delay((unsigned long)((10000)*(20000000/4000.0)));
+
+
+if (PB7Counter >= 10 && !RB1 == 0){
+totalDistTrav = 0;
+
+
+
+
+ser_putch(137);
+ser_putch(0x00);
+ser_putch(0b11111010);
+ser_putch(0x7F);
+ser_putch(0xFF);
+
+
+for (loop = 0; loop < 400; loop++){
 ser_putch(142);
 ser_putch(19);
 
@@ -1565,51 +1597,18 @@ ser_getch();
 lowByte = rxbyte;
 
 distTrav = (256*highByte + lowByte);
+totalDistTrav = ((totalDistTrav + distTrav)/10);
 
-lcdWriteToDigitBCD(distTrav);
+lcdSetCursor(0b11000000);
+lcdWriteToDigitBCD(totalDistTrav);
 
-
-while(1){
-if(FLAG_1000MS){
-RB0 = !RB0;
-FLAG_1000MS = 0;
+_delay((unsigned long)((40)*(20000000/4000.0)));
 }
-
-
-
-
-if (PB8Counter >= 10 && !RB0 == 0){
-for (x = 0; x<400; x++){
-moveCW();
-ADCMain();
-if (adcRAW < adcClosest){
-adcClosest = adcRAW;
-stepClosest = stepCount;
-}
-}
-
-
-for (x=stepCount; x=stepClosest; x++){
-moveCCW();
-}
-}
-
-
-
-
-if (PB7Counter >= 10 && !RB1 == 0){
-ser_putch(137);
-ser_putch(0x00);
-ser_putch(0b11111010);
-ser_putch(0xFF);
-ser_putch(0xFF);
-
-
 
 ser_putch(137);
 ser_putch(0x00);
 ser_putch(0x00);
-ser_putch(0xFF);
+ser_putch(0x7F);
 ser_putch(0xFF);
 
 }

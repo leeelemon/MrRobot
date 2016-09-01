@@ -15,6 +15,7 @@ signed int adcClosest = 1000;
 signed int highByte = 0;
 signed int lowByte = 0;
 signed int distTrav = 0;
+signed int totalDistTrav = 0;
 unsigned char controlByte = 0;
 signed int loop = 0;
 
@@ -39,7 +40,8 @@ void interrupt isr(void){
         }
 
         if(time_count % 1000 == 0){
-            FLAG_1000MS = 1;	// Raise flag for 500ms
+            RB0 = !RB0;     //Toggle LED           
+            //    FLAG_1000MS = 1;	// Raise flag for 500ms
             time_count = 0;	// Clear time_count        
         }
         if (PB8 == 1)
@@ -61,34 +63,15 @@ void main(void){
     
     unsigned char controlByte = 0b00001101;
     spi_transfer(controlByte);
-
-    
+   
     ser_putch(128);     //Startup
     ser_putch(132);     //Full mode
-
-    ser_putch(136);     //Demo mode
-    ser_putch(4);       //Demo 4 - Figure 8
     
-    //This is just the testing bit, it wont be in the final code
-    __delay_ms(10000);  //Waits 10 seconds before requesting the distance traveled
-    ser_putch(142);     //Requests packet of sensor data
-    ser_putch(19);      //Specifies distance packet for request
-    
-    ser_getch();        //Gets the distance value returned as 2 bytes, high byte first.
-    highByte = rxbyte;  //Puts the high byte into variable
-    ser_getch();        //Gets the low byte of the sensor packet
-    lowByte = rxbyte;   //Puts the low byte into variable
-    
-    distTrav = (256*highByte + lowByte);  //Converts 2 byte value into a single binary
-    
-    lcdWriteToDigitBCD(distTrav); //Writes received packet value to LCD in millimeters.
-    
-    
-   while(1){       
-        if(FLAG_1000MS){
-            RB0 = !RB0;
-            FLAG_1000MS = 0;
-        }
+    while(1){       
+//        if(FLAG_1000MS){          Moved to interrupt
+//            RB0 = !RB0;
+//            FLAG_1000MS = 0;
+//        }
         
         //Rotates 360 and compares adcRAW at every half step.
         //If it detects a closer object than the previous closest then it stores 
@@ -113,18 +96,40 @@ void main(void){
         //This might make it drive 4m forward, 250mm/s and takes 16 seconds. 
         //Or it might not.
         if (PB7Counter >= 10 && PB7 == 0){
-            ser_putch(137);     //Drive command [Velocity high][Velocity low][Radius high][Radius low]
-                ser_putch(0x00);    //Velocity high byte in mm/s
-                ser_putch(0b11111010);    //Velocity low byte in mm/s
-                ser_putch(0xFF);  //Radius high byte, higher value means straighter path
-                ser_putch(0xFF);  //Radius low byte, negative value means turn right
-                
-//            __delay_ms(16000);    //Delay long enough to move 4m
+            totalDistTrav = 0;
             
+            //Drive command [Velocity high][Velocity low][Radius high][Radius low]
+            //Radius of 0x7FFF is a straight line
+            //Negative radius turns right
+            ser_putch(137);     
+                ser_putch(0x00);    
+                ser_putch(0b11111010);    
+                ser_putch(0x7F);  
+                ser_putch(0xFF);  
+            
+            //Continuously updates LCD with distance traveled while moving
+            for (loop = 0; loop < 400; loop++){
+                ser_putch(142);     //Requests packet of sensor data
+                ser_putch(19);      //Specifies distance packet for request
+    
+                ser_getch();        //Gets the distance value returned as 2 bytes, high byte first.
+                highByte = rxbyte;  //Puts the high byte into variable
+                ser_getch();        //Gets the low byte of the sensor packet
+                lowByte = rxbyte;   //Puts the low byte into variable
+                
+                distTrav = (256*highByte + lowByte);    //Distance traveled since data was last requested
+                totalDistTrav = ((totalDistTrav + distTrav)/10);  //Total distance traveled since button push in CM
+                
+                lcdSetCursor(0b11000000);   //Second row, first position
+                lcdWriteToDigitBCD(totalDistTrav);  //Print the total distance to LCD
+                
+                __delay_ms(40);   //Loop long enough to travel 4m
+            }    
+        
             ser_putch(137);     //Drive command [Velocity high][Velocity low][Radius high][Radius low]
                 ser_putch(0x00);    //Set velocity to 0 mm/s to stop.
                 ser_putch(0x00);    
-                ser_putch(0xFF);    
+                ser_putch(0x7F);    
                 ser_putch(0xFF);    
             
         }
