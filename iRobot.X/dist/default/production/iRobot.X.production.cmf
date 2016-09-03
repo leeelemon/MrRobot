@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\Brendan\AppData\Local\Temp\sa6g.obj
+$C:\Users\Brendan\AppData\Local\Temp\scmc.obj
 end_init CODE 0 E E 4 2
 $dist/default/production\iRobot.X.production.obj
 cinit CODE 0 7E6 7E6 1A 2
@@ -85,23 +85,23 @@ STRING 800-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\iRobot.X.production.obj
-7E6 cinit CODE >661:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7E6 cinit CODE >664:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7E6 cinit CODE >762:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7EB cinit CODE >763:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7EC cinit CODE >764:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7F1 cinit CODE >765:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7F2 cinit CODE >784:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7F3 cinit CODE >785:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7F4 cinit CODE >786:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7F5 cinit CODE >787:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7F6 cinit CODE >788:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7F9 cinit CODE >791:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7FA cinit CODE >792:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7FB cinit CODE >795:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7FC cinit CODE >801:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7FC cinit CODE >803:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-7FD cinit CODE >804:C:\Users\Brendan\AppData\Local\Temp\sa6g.
+7E6 cinit CODE >661:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7E6 cinit CODE >664:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7E6 cinit CODE >762:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7EB cinit CODE >763:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7EC cinit CODE >764:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7F1 cinit CODE >765:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7F2 cinit CODE >784:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7F3 cinit CODE >785:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7F4 cinit CODE >786:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7F5 cinit CODE >787:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7F6 cinit CODE >788:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7F9 cinit CODE >791:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7FA cinit CODE >792:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7FB cinit CODE >795:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7FC cinit CODE >801:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7FC cinit CODE >803:C:\Users\Brendan\AppData\Local\Temp\scmc.
+7FD cinit CODE >804:C:\Users\Brendan\AppData\Local\Temp\scmc.
 0 intentry CODE >26:C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\main.c
 47D text15 CODE >6:C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwmod.c
 47D text15 CODE >13:C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwmod.c
@@ -307,16 +307,16 @@ $dist/default/production\iRobot.X.production.obj
 7BD maintext CODE >109:C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\main.c
 7D0 maintext CODE >119:C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\main.c
 7E5 maintext CODE >67:C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\main.c
-3AC clrtext CODE >771:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-3AC clrtext CODE >772:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-3AD clrtext CODE >773:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-3AD clrtext CODE >774:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-3AE clrtext CODE >775:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-3AF clrtext CODE >776:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-3B0 clrtext CODE >777:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-3B1 clrtext CODE >778:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-3B2 clrtext CODE >779:C:\Users\Brendan\AppData\Local\Temp\sa6g.
-3B3 clrtext CODE >780:C:\Users\Brendan\AppData\Local\Temp\sa6g.
+3AC clrtext CODE >771:C:\Users\Brendan\AppData\Local\Temp\scmc.
+3AC clrtext CODE >772:C:\Users\Brendan\AppData\Local\Temp\scmc.
+3AD clrtext CODE >773:C:\Users\Brendan\AppData\Local\Temp\scmc.
+3AD clrtext CODE >774:C:\Users\Brendan\AppData\Local\Temp\scmc.
+3AE clrtext CODE >775:C:\Users\Brendan\AppData\Local\Temp\scmc.
+3AF clrtext CODE >776:C:\Users\Brendan\AppData\Local\Temp\scmc.
+3B0 clrtext CODE >777:C:\Users\Brendan\AppData\Local\Temp\scmc.
+3B1 clrtext CODE >778:C:\Users\Brendan\AppData\Local\Temp\scmc.
+3B2 clrtext CODE >779:C:\Users\Brendan\AppData\Local\Temp\scmc.
+3B3 clrtext CODE >780:C:\Users\Brendan\AppData\Local\Temp\scmc.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -349,12 +349,12 @@ _PEIE 5E 0 ABS 0 - dist/default/production\iRobot.X.production.obj
 _RCIF 65 0 ABS 0 - dist/default/production\iRobot.X.production.obj
 _TMR0 1 0 ABS 0 - dist/default/production\iRobot.X.production.obj
 _TRMT 4C1 0 ABS 0 - dist/default/production\iRobot.X.production.obj
-___sp 0 0 STACK 2 stack C:\Users\Brendan\AppData\Local\Temp\sa6g.obj
+___sp 0 0 STACK 2 stack C:\Users\Brendan\AppData\Local\Temp\scmc.obj
 _loop 28 0 BANK0 1 bssBANK0 dist/default/production\iRobot.X.production.obj
 _main C8A 0 CODE 0 maintext dist/default/production\iRobot.X.production.obj
 btemp 7E 0 ABS 0 - dist/default/production\iRobot.X.production.obj
 ltemp 7E 0 ABS 0 - dist/default/production\iRobot.X.production.obj
-start 1C 0 CODE 0 init C:\Users\Brendan\AppData\Local\Temp\sa6g.obj
+start 1C 0 CODE 0 init C:\Users\Brendan\AppData\Local\Temp\scmc.obj
 ttemp 7E 0 ABS 0 - dist/default/production\iRobot.X.production.obj
 wtemp 7E 0 ABS 0 - dist/default/production\iRobot.X.production.obj
 __size_of___awdiv 0 0 ABS 0 - dist/default/production\iRobot.X.production.obj
@@ -374,12 +374,12 @@ ttemp2 84 0 ABS 0 - dist/default/production\iRobot.X.production.obj
 ttemp3 87 0 ABS 0 - dist/default/production\iRobot.X.production.obj
 ttemp4 7F 0 ABS 0 - dist/default/production\iRobot.X.production.obj
 __size_of_lcdWriteControl 0 0 ABS 0 - dist/default/production\iRobot.X.production.obj
-intlevel0 0 0 CODE 0 functab C:\Users\Brendan\AppData\Local\Temp\sa6g.obj
-intlevel1 0 0 CODE 0 functab C:\Users\Brendan\AppData\Local\Temp\sa6g.obj
-intlevel2 0 0 CODE 0 functab C:\Users\Brendan\AppData\Local\Temp\sa6g.obj
-intlevel3 0 0 CODE 0 functab C:\Users\Brendan\AppData\Local\Temp\sa6g.obj
-intlevel4 0 0 CODE 0 functab C:\Users\Brendan\AppData\Local\Temp\sa6g.obj
-intlevel5 0 0 CODE 0 functab C:\Users\Brendan\AppData\Local\Temp\sa6g.obj
+intlevel0 0 0 CODE 0 functab C:\Users\Brendan\AppData\Local\Temp\scmc.obj
+intlevel1 0 0 CODE 0 functab C:\Users\Brendan\AppData\Local\Temp\scmc.obj
+intlevel2 0 0 CODE 0 functab C:\Users\Brendan\AppData\Local\Temp\scmc.obj
+intlevel3 0 0 CODE 0 functab C:\Users\Brendan\AppData\Local\Temp\scmc.obj
+intlevel4 0 0 CODE 0 functab C:\Users\Brendan\AppData\Local\Temp\scmc.obj
+intlevel5 0 0 CODE 0 functab C:\Users\Brendan\AppData\Local\Temp\scmc.obj
 _lcdWriteData 7E0 0 CODE 0 text8 dist/default/production\iRobot.X.production.obj
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 wtemp0 7E 0 ABS 0 - dist/default/production\iRobot.X.production.obj
@@ -427,7 +427,7 @@ _TMR0IF 5A 0 ABS 0 - dist/default/production\iRobot.X.production.obj
 __end_of_ser_putch 7A4 0 CODE 0 text13 dist/default/production\iRobot.X.production.obj
 __size_of_ser_getch 0 0 ABS 0 - dist/default/production\iRobot.X.production.obj
 __size_of_ser_putch 0 0 ABS 0 - dist/default/production\iRobot.X.production.obj
-___int_sp 0 0 STACK 2 stack C:\Users\Brendan\AppData\Local\Temp\sa6g.obj
+___int_sp 0 0 STACK 2 stack C:\Users\Brendan\AppData\Local\Temp\scmc.obj
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -489,7 +489,7 @@ lcdWriteData@databyte 48 0 BANK0 1 cstackBANK0 dist/default/production\iRobot.X.
 __end_of_isr 9EA 0 CODE 0 text14 dist/default/production\iRobot.X.production.obj
 __size_of_lcdWriteToDigitBCD 0 0 ABS 0 - dist/default/production\iRobot.X.production.obj
 __Lintentry 0 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\Brendan\AppData\Local\Temp\sa6g.obj
+reset_vec 0 0 CODE 0 reset_vec C:\Users\Brendan\AppData\Local\Temp\scmc.obj
 __pdataBANK0 5B 0 BANK0 1 dataBANK0 dist/default/production\iRobot.X.production.obj
 _PB8Counter 40 0 BANK0 1 bssBANK0 dist/default/production\iRobot.X.production.obj
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
@@ -520,8 +520,8 @@ _rxbyte 42 0 BANK0 1 bssBANK0 dist/default/production\iRobot.X.production.obj
 _PB7Counter 3F 0 BANK0 1 bssBANK0 dist/default/production\iRobot.X.production.obj
 lcdWriteToDigitBCD@HunsDigit 4D 0 BANK0 1 cstackBANK0 dist/default/production\iRobot.X.production.obj
 _lowByte 2C 0 BANK0 1 bssBANK0 dist/default/production\iRobot.X.production.obj
-stackhi 0 0 ABS 0 - C:\Users\Brendan\AppData\Local\Temp\sa6g.obj
-stacklo 0 0 ABS 0 - C:\Users\Brendan\AppData\Local\Temp\sa6g.obj
+stackhi 0 0 ABS 0 - C:\Users\Brendan\AppData\Local\Temp\scmc.obj
+stacklo 0 0 ABS 0 - C:\Users\Brendan\AppData\Local\Temp\scmc.obj
 lcdWriteToDigitBCD@OnesDigit 53 0 BANK0 1 cstackBANK0 dist/default/production\iRobot.X.production.obj
 __CFG_LVP$OFF 0 0 ABS 0 - dist/default/production\iRobot.X.production.obj
 _highByte 44 0 BANK0 1 bssBANK0 dist/default/production\iRobot.X.production.obj
