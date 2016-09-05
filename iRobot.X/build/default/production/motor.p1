@@ -1,30 +1,10 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"1950 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
-[v _TXSTA `Vuc ~T0 @X0 0 e@152 ]
-"937
-[v _RCSTA `Vuc ~T0 @X0 0 e@24 ]
-"2030
-[v _SPBRG `Vuc ~T0 @X0 0 e@153 ]
-"2483
-[v _PEIE `Vb ~T0 @X0 0 e@94 ]
-"2443
-[v _GIE `Vb ~T0 @X0 0 e@95 ]
-"2741
-[v _TRMT `Vb ~T0 @X0 0 e@1217 ]
-"1031
-[v _TXREG `Vuc ~T0 @X0 0 e@25 ]
+"270 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
+[v _PORTC `Vuc ~T0 @X0 0 e@7 ]
 [v F1091 `(v ~T0 @X0 1 tf1`ul ]
 "152 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic.h
 [v __delay `JF1091 ~T0 @X0 0 e ]
 [p i __delay ]
-"2559 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
-[v _RCIF `Vb ~T0 @X0 0 e@101 ]
-"1037
-[v _RCREG `Vuc ~T0 @X0 0 e@26 ]
-"30 lcd.h
-[v _lcdSetCursor `(v ~T0 @X0 0 ef1`uc ]
-"36
-[v _lcdWriteToDigitBCD `(v ~T0 @X0 0 ef1`ui ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -1093,197 +1073,281 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `i
 ]
 [; ;main.h: 35: signed int totalDistTrav = 0;
-"6 ser.h
-[v _speedH `i ~T0 @X0 1 e ]
-[i _speedH
--> 0 `i
+[; ;motor.h: 6: void moveCW(void);
+[; ;motor.h: 7: void moveCCW(void);
+"9 motor.h
+[v _stepCount `c ~T0 @X0 1 e ]
+[i _stepCount
+-> -> 0 `i `c
 ]
-[; ;ser.h: 6: signed int speedH = 0;
-"7
-[v _speedL `i ~T0 @X0 1 e ]
-[i _speedL
--> 0 `i
+[; ;motor.h: 9: signed char stepCount = 0;
+"10
+[v _negativeFlag `uc ~T0 @X0 1 e ]
+[i _negativeFlag
+-> -> 0 `i `uc
 ]
-[; ;ser.h: 7: signed int speedL = 0;
-"8
-[v _radH `i ~T0 @X0 1 e ]
-[i _radH
--> 0 `i
+[; ;motor.h: 10: char negativeFlag = 0;
+"11
+[v _currentStep `uc ~T0 @X0 1 e ]
+[i _currentStep
+-> -> 0 `i `uc
 ]
-[; ;ser.h: 8: signed int radH = 0;
-"9
-[v _radL `i ~T0 @X0 1 e ]
-[i _radL
--> 0 `i
-]
-[; ;ser.h: 9: signed int radL = 0;
-[; ;ser.h: 12: void ser_init(void);
-[; ;ser.h: 15: void ser_putch(unsigned char c);
-[; ;ser.h: 18: signed int ser_getch();
-[; ;ser.h: 21: void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
-[; ;ser.h: 24: signed int getDistTrav(void);
-"17 lcd.h
-[v _stepCountNeg `Vui ~T0 @X0 1 e ]
-[i _stepCountNeg
--> -> 0 `i `ui
-]
-[; ;lcd.h: 17: volatile unsigned int stepCountNeg = 0;
-"18
-[v _degrees `Vui ~T0 @X0 1 e ]
-[i _degrees
--> -> 0 `i `ui
-]
-[; ;lcd.h: 18: volatile unsigned int degrees = 0;
-[; ;lcd.h: 21: void lcdWriteStepCount(unsigned int stepCount);
-[; ;lcd.h: 24: void lcdWriteControl(unsigned char databyte);
-[; ;lcd.h: 27: void lcdWriteData(unsigned char databyte);
-[; ;lcd.h: 30: void lcdSetCursor(unsigned char address);
-[; ;lcd.h: 33: void lcdWriteString(char * s);
-[; ;lcd.h: 36: void lcdWriteToDigitBCD(unsigned int data);
-[; ;lcd.h: 39: void setupLCD(void);
-"5 ser.c
-[v _ser_init `(v ~T0 @X0 1 ef ]
+[; ;motor.h: 11: char currentStep = 0;
+"5 motor.c
+[v _moveCW `(v ~T0 @X0 1 ef ]
 {
-[; ;ser.c: 5: void ser_init(void){
-[e :U _ser_init ]
+[; ;motor.c: 5: void moveCW(void){
+[e :U _moveCW ]
 [f ]
-[; ;ser.c: 7: TXSTA = 0b00100100;
-"7
-[e = _TXSTA -> -> 36 `i `uc ]
-[; ;ser.c: 8: RCSTA = 0b10011000;
+[; ;motor.c: 8: if (stepCount == 0) negativeFlag = 1;
 "8
-[e = _RCSTA -> -> 152 `i `uc ]
-[; ;ser.c: 24: SPBRG = 20;
+[e $ ! == -> _stepCount `i -> 0 `i 97  ]
+[e = _negativeFlag -> -> 1 `i `uc ]
+[e :U 97 ]
+[; ;motor.c: 10: stepCount--;
+"10
+[e -- _stepCount -> -> 1 `i `c ]
+[; ;motor.c: 13: switch(currentStep){
+"13
+[e $U 99  ]
+{
+[; ;motor.c: 15: case 7: PORTC = 0b00011011;
+"15
+[e :U 100 ]
+[e = _PORTC -> -> 27 `i `uc ]
+[; ;motor.c: 16: currentStep--;
+"16
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 17: break;
+"17
+[e $U 98  ]
+[; ;motor.c: 19: case 6: PORTC = 0b00010111;
+"19
+[e :U 101 ]
+[e = _PORTC -> -> 23 `i `uc ]
+[; ;motor.c: 20: currentStep--;
+"20
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 21: break;
+"21
+[e $U 98  ]
+[; ;motor.c: 23: case 5: PORTC = 0b00110101;
+"23
+[e :U 102 ]
+[e = _PORTC -> -> 53 `i `uc ]
+[; ;motor.c: 24: currentStep--;
 "24
-[e = _SPBRG -> -> 20 `i `uc ]
-[; ;ser.c: 26: PEIE = 1;
-"26
-[e = _PEIE -> -> 1 `i `b ]
-[; ;ser.c: 27: (GIE = 1);
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 25: break;
+"25
+[e $U 98  ]
+[; ;motor.c: 27: case 4: PORTC = 0b00100111;
 "27
-[e = _GIE -> -> 1 `i `b ]
-[; ;ser.c: 28: }
+[e :U 103 ]
+[e = _PORTC -> -> 39 `i `uc ]
+[; ;motor.c: 28: currentStep--;
 "28
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 29: break;
+"29
+[e $U 98  ]
+[; ;motor.c: 31: case 3: PORTC = 0b00101011;
+"31
+[e :U 104 ]
+[e = _PORTC -> -> 43 `i `uc ]
+[; ;motor.c: 32: currentStep--;
+"32
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 33: break;
+"33
+[e $U 98  ]
+[; ;motor.c: 35: case 2: PORTC = 0b00101110;
+"35
+[e :U 105 ]
+[e = _PORTC -> -> 46 `i `uc ]
+[; ;motor.c: 36: currentStep--;
+"36
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 37: break;
+"37
+[e $U 98  ]
+[; ;motor.c: 39: case 1: PORTC = 0b00111100;
+"39
+[e :U 106 ]
+[e = _PORTC -> -> 60 `i `uc ]
+[; ;motor.c: 40: currentStep--;
+"40
+[e -- _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 41: break;
+"41
+[e $U 98  ]
+[; ;motor.c: 43: case 0: PORTC = 0b00011110;
+"43
+[e :U 107 ]
+[e = _PORTC -> -> 30 `i `uc ]
+[; ;motor.c: 44: currentStep = 7;
+"44
+[e = _currentStep -> -> 7 `i `uc ]
+[; ;motor.c: 45: break;
+"45
+[e $U 98  ]
+[; ;motor.c: 47: default: PORTC = 0b00111001;
+"47
+[e :U 108 ]
+[e = _PORTC -> -> 57 `i `uc ]
+[; ;motor.c: 48: break;
+"48
+[e $U 98  ]
+"49
+}
+[; ;motor.c: 49: }
+[e $U 98  ]
+"13
+[e :U 99 ]
+[e [\ _currentStep , $ -> -> 7 `i `uc 100
+ , $ -> -> 6 `i `uc 101
+ , $ -> -> 5 `i `uc 102
+ , $ -> -> 4 `i `uc 103
+ , $ -> -> 3 `i `uc 104
+ , $ -> -> 2 `i `uc 105
+ , $ -> -> 1 `i `uc 106
+ , $ -> -> 0 `i `uc 107
+ 108 ]
+"49
+[e :U 98 ]
+[; ;motor.c: 51: _delay((unsigned long)((3)*(20000000/4000.0)));
+"51
+[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;motor.c: 53: }
+"53
 [e :UE 96 ]
 }
-"30
-[v _ser_putch `(v ~T0 @X0 1 ef1`uc ]
+"55
+[v _moveCCW `(v ~T0 @X0 1 ef ]
 {
-[; ;ser.c: 30: void ser_putch(unsigned char c){
-[e :U _ser_putch ]
-[v _c `uc ~T0 @X0 1 r1 ]
+[; ;motor.c: 55: void moveCCW(void){
+[e :U _moveCCW ]
 [f ]
-[; ;ser.c: 31: while(!TRMT);
-"31
-[e $U 98  ]
-[e :U 99 ]
-[e :U 98 ]
-[e $ ! _TRMT 99  ]
-[e :U 100 ]
-[; ;ser.c: 32: TXREG=c;
-"32
-[e = _TXREG _c ]
-[; ;ser.c: 33: _delay((unsigned long)((100)*(20000000/4000.0)));
-"33
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;ser.c: 35: }
-"35
-[e :UE 97 ]
-}
-"37
-[v _ser_getch `(i ~T0 @X0 1 ef ]
-{
-[; ;ser.c: 37: signed int ser_getch(){
-[e :U _ser_getch ]
-[f ]
-[; ;ser.c: 38: while(!RCIF);
-"38
-[e $U 102  ]
-[e :U 103 ]
-[e :U 102 ]
-[e $ ! _RCIF 103  ]
-[e :U 104 ]
-[v _rxbyte `i ~T0 @X0 1 a ]
-[; ;ser.c: 39: signed int rxbyte = RCREG;
-"39
-[e = _rxbyte -> _RCREG `i ]
-[; ;ser.c: 40: _delay((unsigned long)((100)*(20000000/4000.0)));
-"40
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;ser.c: 41: return rxbyte;
-"41
-[e ) _rxbyte ]
-[e $UE 101  ]
-[; ;ser.c: 43: }
-"43
-[e :UE 101 ]
-}
-"48
-[v _Drive `(v ~T0 @X0 1 ef4`i`i`i`i ]
-{
-[; ;ser.c: 48: void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL){
-[e :U _Drive ]
-[v _speedH `i ~T0 @X0 1 r1 ]
-[v _speedL `i ~T0 @X0 1 r2 ]
-[v _radH `i ~T0 @X0 1 r3 ]
-[v _radL `i ~T0 @X0 1 r4 ]
-[f ]
-[; ;ser.c: 49: ser_putch(137);
-"49
-[e ( _ser_putch (1 -> -> 137 `i `uc ]
-[; ;ser.c: 50: ser_putch(speedH);
-"50
-[e ( _ser_putch (1 -> _speedH `uc ]
-[; ;ser.c: 51: ser_putch(speedL);
-"51
-[e ( _ser_putch (1 -> _speedL `uc ]
-[; ;ser.c: 52: ser_putch(radH);
-"52
-[e ( _ser_putch (1 -> _radH `uc ]
-[; ;ser.c: 53: ser_putch(radL);
-"53
-[e ( _ser_putch (1 -> _radL `uc ]
-[; ;ser.c: 54: }
-"54
-[e :UE 105 ]
-}
-"56
-[v _getDistTrav `(i ~T0 @X0 1 ef ]
-{
-[; ;ser.c: 56: signed int getDistTrav(void){
-[e :U _getDistTrav ]
-[f ]
-[; ;ser.c: 57: ser_putch(142);
+[; ;motor.c: 57: if (stepCount == (-1)) negativeFlag = 0;
 "57
-[e ( _ser_putch (1 -> -> 142 `i `uc ]
-[; ;ser.c: 58: ser_putch(19);
-"58
-[e ( _ser_putch (1 -> -> 19 `i `uc ]
-[; ;ser.c: 59: _delay((unsigned long)((10)*(20000000/4000.0)));
+[e $ ! == -> _stepCount `i -U -> 1 `i 110  ]
+[e = _negativeFlag -> -> 0 `i `uc ]
+[e :U 110 ]
+[; ;motor.c: 59: stepCount++;
 "59
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;ser.c: 61: highByte = ser_getch();
-"61
-[e = _highByte ( _ser_getch ..  ]
-[; ;ser.c: 62: _delay((unsigned long)((10)*(20000000/4000.0)));
+[e ++ _stepCount -> -> 1 `i `c ]
+[; ;motor.c: 62: switch(currentStep){
 "62
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;ser.c: 63: lowByte = ser_getch();
+[e $U 112  ]
+{
+[; ;motor.c: 63: case 0: PORTC = 0b00101110;
 "63
-[e = _lowByte ( _ser_getch ..  ]
-[; ;ser.c: 65: distTrav = (256*highByte + lowByte);
+[e :U 113 ]
+[e = _PORTC -> -> 46 `i `uc ]
+[; ;motor.c: 64: currentStep++;
+"64
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 65: break;
 "65
-[e = _distTrav + * -> 256 `i _highByte _lowByte ]
-[; ;ser.c: 66: totalDistTrav = ((totalDistTrav + distTrav));
-"66
-[e = _totalDistTrav + _totalDistTrav _distTrav ]
-[; ;ser.c: 69: lcdSetCursor(0b11000000);
+[e $U 111  ]
+[; ;motor.c: 67: case 1: PORTC = 0b00101011;
+"67
+[e :U 114 ]
+[e = _PORTC -> -> 43 `i `uc ]
+[; ;motor.c: 68: currentStep++;
+"68
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 69: break;
 "69
-[e ( _lcdSetCursor (1 -> -> 192 `i `uc ]
-[; ;ser.c: 70: lcdWriteToDigitBCD(totalDistTrav);
-"70
-[e ( _lcdWriteToDigitBCD (1 -> _totalDistTrav `ui ]
-[; ;ser.c: 71: }
+[e $U 111  ]
+[; ;motor.c: 71: case 2: PORTC = 0b00100111;
 "71
-[e :UE 106 ]
+[e :U 115 ]
+[e = _PORTC -> -> 39 `i `uc ]
+[; ;motor.c: 72: currentStep++;
+"72
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 73: break;
+"73
+[e $U 111  ]
+[; ;motor.c: 75: case 3: PORTC = 0b00110101;
+"75
+[e :U 116 ]
+[e = _PORTC -> -> 53 `i `uc ]
+[; ;motor.c: 76: currentStep++;
+"76
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 77: break;
+"77
+[e $U 111  ]
+[; ;motor.c: 79: case 4: PORTC = 0b00010111;
+"79
+[e :U 117 ]
+[e = _PORTC -> -> 23 `i `uc ]
+[; ;motor.c: 80: currentStep++;
+"80
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 81: break;
+"81
+[e $U 111  ]
+[; ;motor.c: 83: case 5: PORTC = 0b00011011;
+"83
+[e :U 118 ]
+[e = _PORTC -> -> 27 `i `uc ]
+[; ;motor.c: 84: currentStep++;
+"84
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 85: break;
+"85
+[e $U 111  ]
+[; ;motor.c: 87: case 6: PORTC = 0b00011110;
+"87
+[e :U 119 ]
+[e = _PORTC -> -> 30 `i `uc ]
+[; ;motor.c: 88: currentStep++;
+"88
+[e ++ _currentStep -> -> 1 `i `uc ]
+[; ;motor.c: 89: break;
+"89
+[e $U 111  ]
+[; ;motor.c: 91: case 7: PORTC = 0b00111100;
+"91
+[e :U 120 ]
+[e = _PORTC -> -> 60 `i `uc ]
+[; ;motor.c: 92: currentStep = 0;
+"92
+[e = _currentStep -> -> 0 `i `uc ]
+[; ;motor.c: 93: break;
+"93
+[e $U 111  ]
+[; ;motor.c: 95: default: PORTC = 0b00111001;
+"95
+[e :U 121 ]
+[e = _PORTC -> -> 57 `i `uc ]
+[; ;motor.c: 96: break;
+"96
+[e $U 111  ]
+"97
+}
+[; ;motor.c: 97: }
+[e $U 111  ]
+"62
+[e :U 112 ]
+[e [\ _currentStep , $ -> -> 0 `i `uc 113
+ , $ -> -> 1 `i `uc 114
+ , $ -> -> 2 `i `uc 115
+ , $ -> -> 3 `i `uc 116
+ , $ -> -> 4 `i `uc 117
+ , $ -> -> 5 `i `uc 118
+ , $ -> -> 6 `i `uc 119
+ , $ -> -> 7 `i `uc 120
+ 121 ]
+"97
+[e :U 111 ]
+[; ;motor.c: 99: _delay((unsigned long)((3)*(20000000/4000.0)));
+"99
+[e ( __delay (1 -> * -> -> 3 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;motor.c: 103: }
+"103
+[e :UE 109 ]
 }

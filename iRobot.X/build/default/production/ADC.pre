@@ -1,5 +1,5 @@
 
-# 1 "main.c"
+# 1 "ADC.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -1447,6 +1447,15 @@ signed int lowByte = 0;
 signed int distTrav = 0;
 signed int totalDistTrav = 0;
 
+# 6 "ADC.h"
+volatile unsigned int adcRAW = 0;
+volatile unsigned int Distance = 0;
+
+void ADCMain(void);
+void setupADC(void);
+unsigned int getADC(void);
+unsigned int adcConvertMM(unsigned int);
+
 # 17 "LCD.h"
 volatile unsigned int stepCountNeg = 0;
 volatile unsigned int degrees = 0;
@@ -1472,176 +1481,92 @@ void lcdWriteToDigitBCD(unsigned int data);
 
 void setupLCD(void);
 
-# 6 "ser.h"
-signed int speedH = 0;
-signed int speedL = 0;
-signed int radH = 0;
-signed int radL = 0;
+# 8 "ADC.c"
+void setupADC(void){
+PORTA = 0;
+TRISA = 0b11111111;
 
 
-void ser_init(void);
+ADCON0 = 0b10001001;
+ADCON1 = 0b00000010;
 
-
-void ser_putch(unsigned char c);
-
-
-signed int ser_getch();
-
-
-void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
-
-
-signed int getDistTrav(void);
-
-# 7 "SPI.h"
-void setupSPI(void);
-unsigned char spi_transfer(unsigned char data);
-
-# 6 "ADC.h"
-volatile unsigned int adcRAW = 0;
-volatile unsigned int Distance = 0;
-
-void ADCMain(void);
-void setupADC(void);
-unsigned int getADC(void);
-unsigned int adcConvertMM(unsigned int);
-
-# 6 "motor.h"
-void moveCW(void);
-void moveCCW(void);
-
-signed char stepCount = 0;
-char negativeFlag = 0;
-char currentStep = 0;
-
-# 9 "main.c"
-volatile unsigned int time_count;
-volatile bit FLAG_1000MS;
-volatile bit FLAG_PLAY;
-volatile bit driving = 0;
-
-signed int current = 0;
-
-
-unsigned char controlByte = 0;
-signed int loop = 0;
-
-
-unsigned char PB6Counter = 0;
-unsigned char PB7Counter = 0;
-unsigned char PB8Counter = 0;
-
-char count = 0;
-
-# 31
-void interrupt isr(void){
-
-if(TMR0IF){
-TMR0IF = 0;
-TMR0 = 100;
-time_count++;
-
-if(time_count % 1 == 0) {
-
-RC2 = 1; __nop(); RC2 = 0;;
+_delay((unsigned long)((50)*(20000000/4000000.0)));
 }
 
-if(time_count % 1000 == 0){
-RB4 = !RB4;
+void ADCMain(void){
 
-time_count = 0;
+getADC();
+lcdSetCursor(0b10000000);
+lcdWriteToDigitBCD(adcRAW);
+
+adcConvertMM(adcRAW);
 }
-if (!RB0 == 1)
-PB8Counter++;
-if (!RB1 == 1)
-PB7Counter++;
-if (!RB2 == 1)
-PB6Counter++;
+
+
+unsigned int getADC(void){
+
+ADRESH = 0;
+ADRESL = 0;
+
+GO = 1;
+while(GO) continue;
+
+
+
+adcRAW = (4*ADRESH);
+
+switch(ADRESL){
+case 0b01000000: adcRAW = adcRAW + 1;
+break;
+case 0b10000000: adcRAW = adcRAW + 2;
+break;
+case 0b11000000: adcRAW = adcRAW + 3;
+break;
+default: adcRAW = adcRAW;
+}
+
+return(adcRAW);
+}
 
 # 59
-}
-}
+unsigned int adcConvertMM(unsigned int adcRAW){
 
+if (adcRAW < 517 && adcRAW >= 513)
+Distance = (((51700 - adcRAW*100)/4) + 100);
 
-void main(void){
-_delay((unsigned long)((5000)*(20000000/4000.0)));
+if (adcRAW < 513 && adcRAW >= 393)
+Distance = (((51300 - adcRAW*100)/120) + 200);
 
+if (adcRAW < 393 && adcRAW >= 298)
+Distance = (((39300 - adcRAW*100)/95) + 300);
 
-setupSPI();
-ser_init();
-setupLCD();
-setupADC();
+if (adcRAW < 298 && adcRAW >= 236)
+Distance = (((29800 - adcRAW*100)/62) + 400);
 
-TRISB = 0b00000001;
+if (adcRAW < 236 && adcRAW >= 194)
+Distance = (((23600 - adcRAW*100)/42) + 500);
 
-unsigned char controlByte = 0b00001101;
-spi_transfer(controlByte);
+if (adcRAW < 194 && adcRAW >= 168)
+Distance = (((19400 - adcRAW*100)/26) + 600);
 
-RB3 = 0;
-_delay((unsigned long)((1000)*(20000000/4000.0)));
-ser_putch(128);
-_delay((unsigned long)((1000)*(20000000/4000.0)));
-ser_putch(132);
-_delay((unsigned long)((1000)*(20000000/4000.0)));
-RB3 = 1;
+if (adcRAW < 168 && adcRAW >= 144)
+Distance = (((16800 - adcRAW*100)/24) + 700);
 
-lcdWriteToDigitBCD(totalDistTrav);
+if (adcRAW < 144 && adcRAW >= 129)
+Distance = (((14400 - adcRAW*100)/15) + 800);
 
-# 93
-while(1){
+if (adcRAW < 129 && adcRAW >= 110)
+Distance = (((12900 - adcRAW*100)/19) + 900 + 50);
 
+if (adcRAW < 110 && adcRAW >= 98)
+Distance = (((11000 - adcRAW*100)/12) + 1000 + 100);
 
+if (adcRAW < 98 && adcRAW >= 90)
+Distance = (((9800 - adcRAW*100)/8) + 1100 + 150);
 
+if(adcRAW < 90 || adcRAW >= 517)
+Distance = 0;
 
-if (PB7Counter >= 10 && !RB1 == 0){
-for (loop = 0; loop < 400; loop++){
-moveCW();
-ADCMain();
-if (adcRAW > adcClosest){
-adcClosest = adcRAW;
-stepClosest = stepCount;
-}
+return(Distance);
 }
 
-
-for (loop = stepCount; loop != stepClosest; loop++){
-moveCCW();
-}
-}
-
-# 118
-if (PB6Counter >= 10 && !RB2 == 0){
-Drive(1,200,0x7F,0xFF);
-while (totalDistTrav <= 4000){
-count++;
-if(count >=20){
-getDistTrav();
-count = 0;
-}
-
-}
-Drive(0,0,0x7F,0xFF);
-}
-
-
-if (PB8Counter >= 10 && !RB0 == 0){
-totalDistTrav = 0;
-
-for (loop = 0; loop < 4; loop++){
-Drive(0,250,0xFF,0xFF);
-_delay((unsigned long)((500)*(20000000/4000.0)));
-
-for (totalDistTrav = 0; totalDistTrav < 1000;){
-Drive(0,250,0x7F,0xFF);
-getDistTrav();
-}
-totalDistTrav = 0;
-}
-
-Drive(0,0,0x7F,0xFF);
-
-}
-
-
-}
-}

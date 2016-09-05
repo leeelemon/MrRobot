@@ -1,5 +1,5 @@
 
-# 1 "main.c"
+# 1 "motor.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -1447,65 +1447,6 @@ signed int lowByte = 0;
 signed int distTrav = 0;
 signed int totalDistTrav = 0;
 
-# 17 "LCD.h"
-volatile unsigned int stepCountNeg = 0;
-volatile unsigned int degrees = 0;
-
-
-void lcdWriteStepCount(unsigned int stepCount);
-
-
-void lcdWriteControl(unsigned char databyte);
-
-
-void lcdWriteData(unsigned char databyte);
-
-
-void lcdSetCursor(unsigned char address);
-
-
-void lcdWriteString(char * s);
-
-
-void lcdWriteToDigitBCD(unsigned int data);
-
-
-void setupLCD(void);
-
-# 6 "ser.h"
-signed int speedH = 0;
-signed int speedL = 0;
-signed int radH = 0;
-signed int radL = 0;
-
-
-void ser_init(void);
-
-
-void ser_putch(unsigned char c);
-
-
-signed int ser_getch();
-
-
-void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
-
-
-signed int getDistTrav(void);
-
-# 7 "SPI.h"
-void setupSPI(void);
-unsigned char spi_transfer(unsigned char data);
-
-# 6 "ADC.h"
-volatile unsigned int adcRAW = 0;
-volatile unsigned int Distance = 0;
-
-void ADCMain(void);
-void setupADC(void);
-unsigned int getADC(void);
-unsigned int adcConvertMM(unsigned int);
-
 # 6 "motor.h"
 void moveCW(void);
 void moveCCW(void);
@@ -1514,134 +1455,104 @@ signed char stepCount = 0;
 char negativeFlag = 0;
 char currentStep = 0;
 
-# 9 "main.c"
-volatile unsigned int time_count;
-volatile bit FLAG_1000MS;
-volatile bit FLAG_PLAY;
-volatile bit driving = 0;
-
-signed int current = 0;
+# 5 "motor.c"
+void moveCW(void){
 
 
-unsigned char controlByte = 0;
-signed int loop = 0;
+if (stepCount == 0) negativeFlag = 1;
+
+stepCount--;
 
 
-unsigned char PB6Counter = 0;
-unsigned char PB7Counter = 0;
-unsigned char PB8Counter = 0;
+switch(currentStep){
 
-char count = 0;
+case 7: PORTC = 0b00011011;
+currentStep--;
+break;
 
-# 31
-void interrupt isr(void){
+case 6: PORTC = 0b00010111;
+currentStep--;
+break;
 
-if(TMR0IF){
-TMR0IF = 0;
-TMR0 = 100;
-time_count++;
+case 5: PORTC = 0b00110101;
+currentStep--;
+break;
 
-if(time_count % 1 == 0) {
+case 4: PORTC = 0b00100111;
+currentStep--;
+break;
 
-RC2 = 1; __nop(); RC2 = 0;;
+case 3: PORTC = 0b00101011;
+currentStep--;
+break;
+
+case 2: PORTC = 0b00101110;
+currentStep--;
+break;
+
+case 1: PORTC = 0b00111100;
+currentStep--;
+break;
+
+case 0: PORTC = 0b00011110;
+currentStep = 7;
+break;
+
+default: PORTC = 0b00111001;
+break;
 }
 
-if(time_count % 1000 == 0){
-RB4 = !RB4;
-
-time_count = 0;
-}
-if (!RB0 == 1)
-PB8Counter++;
-if (!RB1 == 1)
-PB7Counter++;
-if (!RB2 == 1)
-PB6Counter++;
-
-# 59
-}
-}
-
-
-void main(void){
-_delay((unsigned long)((5000)*(20000000/4000.0)));
-
-
-setupSPI();
-ser_init();
-setupLCD();
-setupADC();
-
-TRISB = 0b00000001;
-
-unsigned char controlByte = 0b00001101;
-spi_transfer(controlByte);
-
-RB3 = 0;
-_delay((unsigned long)((1000)*(20000000/4000.0)));
-ser_putch(128);
-_delay((unsigned long)((1000)*(20000000/4000.0)));
-ser_putch(132);
-_delay((unsigned long)((1000)*(20000000/4000.0)));
-RB3 = 1;
-
-lcdWriteToDigitBCD(totalDistTrav);
-
-# 93
-while(1){
-
-
-
-
-if (PB7Counter >= 10 && !RB1 == 0){
-for (loop = 0; loop < 400; loop++){
-moveCW();
-ADCMain();
-if (adcRAW > adcClosest){
-adcClosest = adcRAW;
-stepClosest = stepCount;
-}
-}
-
-
-for (loop = stepCount; loop != stepClosest; loop++){
-moveCCW();
-}
-}
-
-# 118
-if (PB6Counter >= 10 && !RB2 == 0){
-Drive(1,200,0x7F,0xFF);
-while (totalDistTrav <= 4000){
-count++;
-if(count >=20){
-getDistTrav();
-count = 0;
-}
-
-}
-Drive(0,0,0x7F,0xFF);
-}
-
-
-if (PB8Counter >= 10 && !RB0 == 0){
-totalDistTrav = 0;
-
-for (loop = 0; loop < 4; loop++){
-Drive(0,250,0xFF,0xFF);
-_delay((unsigned long)((500)*(20000000/4000.0)));
-
-for (totalDistTrav = 0; totalDistTrav < 1000;){
-Drive(0,250,0x7F,0xFF);
-getDistTrav();
-}
-totalDistTrav = 0;
-}
-
-Drive(0,0,0x7F,0xFF);
+_delay((unsigned long)((3)*(20000000/4000.0)));
 
 }
 
+void moveCCW(void){
+
+if (stepCount == (-1)) negativeFlag = 0;
+
+stepCount++;
+
+
+switch(currentStep){
+case 0: PORTC = 0b00101110;
+currentStep++;
+break;
+
+case 1: PORTC = 0b00101011;
+currentStep++;
+break;
+
+case 2: PORTC = 0b00100111;
+currentStep++;
+break;
+
+case 3: PORTC = 0b00110101;
+currentStep++;
+break;
+
+case 4: PORTC = 0b00010111;
+currentStep++;
+break;
+
+case 5: PORTC = 0b00011011;
+currentStep++;
+break;
+
+case 6: PORTC = 0b00011110;
+currentStep++;
+break;
+
+case 7: PORTC = 0b00111100;
+currentStep = 0;
+break;
+
+default: PORTC = 0b00111001;
+break;
+}
+
+_delay((unsigned long)((3)*(20000000/4000.0)));
+
+
 
 }
-}
+

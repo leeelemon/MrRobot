@@ -1438,9 +1438,7 @@ extern __bit __timeout;
 # 7 "main.h"
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
-# 28
-void getDistTrav(void);
-
+# 29
 unsigned char rxbyte = 0;
 signed int stepClosest = 0;
 signed int adcClosest = 1000;
@@ -1462,13 +1460,13 @@ void ser_init(void);
 void ser_putch(unsigned char c);
 
 
-unsigned char ser_getch();
+signed int ser_getch();
 
 
 void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
 
 
-void getDistTrav(void);
+signed int getDistTrav(void);
 
 # 17 "lcd.h"
 volatile unsigned int stepCountNeg = 0;
@@ -1501,7 +1499,7 @@ void ser_init(void){
 TXSTA = 0b00100100;
 RCSTA = 0b10011000;
 
-# 23
+# 24
 SPBRG = 20;
 
 PEIE = 1;
@@ -1511,12 +1509,16 @@ PEIE = 1;
 void ser_putch(unsigned char c){
 while(!TRMT);
 TXREG=c;
+_delay((unsigned long)((100)*(20000000/4000.0)));
+
 }
 
-unsigned char ser_getch(){
+signed int ser_getch(){
 while(!RCIF);
-unsigned char rxbyte = RCREG;
+signed int rxbyte = RCREG;
+_delay((unsigned long)((100)*(20000000/4000.0)));
 return rxbyte;
+
 }
 
 
@@ -1530,17 +1532,18 @@ ser_putch(radH);
 ser_putch(radL);
 }
 
-void getDistTrav(void){
+signed int getDistTrav(void){
 ser_putch(142);
 ser_putch(19);
+_delay((unsigned long)((10)*(20000000/4000.0)));
 
-ser_getch();
-highByte = rxbyte;
-ser_getch();
-lowByte = rxbyte;
+highByte = ser_getch();
+_delay((unsigned long)((10)*(20000000/4000.0)));
+lowByte = ser_getch();
 
 distTrav = (256*highByte + lowByte);
-totalDistTrav = ((totalDistTrav + distTrav)/10);
+totalDistTrav = ((totalDistTrav + distTrav));
+
 
 lcdSetCursor(0b11000000);
 lcdWriteToDigitBCD(totalDistTrav);

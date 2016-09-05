@@ -1,30 +1,30 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"1950 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
-[v _TXSTA `Vuc ~T0 @X0 0 e@152 ]
-"937
-[v _RCSTA `Vuc ~T0 @X0 0 e@24 ]
-"2030
-[v _SPBRG `Vuc ~T0 @X0 0 e@153 ]
-"2483
-[v _PEIE `Vb ~T0 @X0 0 e@94 ]
-"2443
-[v _GIE `Vb ~T0 @X0 0 e@95 ]
-"2741
-[v _TRMT `Vb ~T0 @X0 0 e@1217 ]
-"1031
-[v _TXREG `Vuc ~T0 @X0 0 e@25 ]
+"160 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
+[v _PORTA `Vuc ~T0 @X0 0 e@5 ]
+"1288
+[v _TRISA `Vuc ~T0 @X0 0 e@133 ]
+"1124
+[v _ADCON0 `Vuc ~T0 @X0 0 e@31 ]
+"2175
+[v _ADCON1 `Vuc ~T0 @X0 0 e@159 ]
 [v F1091 `(v ~T0 @X0 1 tf1`ul ]
 "152 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic.h
 [v __delay `JF1091 ~T0 @X0 0 e ]
 [p i __delay ]
-"2559 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
-[v _RCIF `Vb ~T0 @X0 0 e@101 ]
-"1037
-[v _RCREG `Vuc ~T0 @X0 0 e@26 ]
-"30 lcd.h
+"11 ADC.h
+[v _getADC `(ui ~T0 @X0 0 ef ]
+"30 LCD.h
 [v _lcdSetCursor `(v ~T0 @X0 0 ef1`uc ]
 "36
 [v _lcdWriteToDigitBCD `(v ~T0 @X0 0 ef1`ui ]
+"12 ADC.h
+[v _adcConvertMM `(ui ~T0 @X0 0 ef1`ui ]
+"1118 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
+[v _ADRESH `Vuc ~T0 @X0 0 e@30 ]
+"2169
+[v _ADRESL `Vuc ~T0 @X0 0 e@158 ]
+"2445
+[v _GO `Vb ~T0 @X0 0 e@250 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -1093,197 +1093,259 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `i
 ]
 [; ;main.h: 35: signed int totalDistTrav = 0;
-"6 ser.h
-[v _speedH `i ~T0 @X0 1 e ]
-[i _speedH
--> 0 `i
+"6 ADC.h
+[v _adcRAW `Vui ~T0 @X0 1 e ]
+[i _adcRAW
+-> -> 0 `i `ui
 ]
-[; ;ser.h: 6: signed int speedH = 0;
+[; ;ADC.h: 6: volatile unsigned int adcRAW = 0;
 "7
-[v _speedL `i ~T0 @X0 1 e ]
-[i _speedL
--> 0 `i
+[v _Distance `Vui ~T0 @X0 1 e ]
+[i _Distance
+-> -> 0 `i `ui
 ]
-[; ;ser.h: 7: signed int speedL = 0;
-"8
-[v _radH `i ~T0 @X0 1 e ]
-[i _radH
--> 0 `i
-]
-[; ;ser.h: 8: signed int radH = 0;
-"9
-[v _radL `i ~T0 @X0 1 e ]
-[i _radL
--> 0 `i
-]
-[; ;ser.h: 9: signed int radL = 0;
-[; ;ser.h: 12: void ser_init(void);
-[; ;ser.h: 15: void ser_putch(unsigned char c);
-[; ;ser.h: 18: signed int ser_getch();
-[; ;ser.h: 21: void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
-[; ;ser.h: 24: signed int getDistTrav(void);
-"17 lcd.h
+[; ;ADC.h: 7: volatile unsigned int Distance = 0;
+[; ;ADC.h: 9: void ADCMain(void);
+[; ;ADC.h: 10: void setupADC(void);
+[; ;ADC.h: 11: unsigned int getADC(void);
+[; ;ADC.h: 12: unsigned int adcConvertMM(unsigned int);
+"17 LCD.h
 [v _stepCountNeg `Vui ~T0 @X0 1 e ]
 [i _stepCountNeg
 -> -> 0 `i `ui
 ]
-[; ;lcd.h: 17: volatile unsigned int stepCountNeg = 0;
+[; ;LCD.h: 17: volatile unsigned int stepCountNeg = 0;
 "18
 [v _degrees `Vui ~T0 @X0 1 e ]
 [i _degrees
 -> -> 0 `i `ui
 ]
-[; ;lcd.h: 18: volatile unsigned int degrees = 0;
-[; ;lcd.h: 21: void lcdWriteStepCount(unsigned int stepCount);
-[; ;lcd.h: 24: void lcdWriteControl(unsigned char databyte);
-[; ;lcd.h: 27: void lcdWriteData(unsigned char databyte);
-[; ;lcd.h: 30: void lcdSetCursor(unsigned char address);
-[; ;lcd.h: 33: void lcdWriteString(char * s);
-[; ;lcd.h: 36: void lcdWriteToDigitBCD(unsigned int data);
-[; ;lcd.h: 39: void setupLCD(void);
-"5 ser.c
-[v _ser_init `(v ~T0 @X0 1 ef ]
+[; ;LCD.h: 18: volatile unsigned int degrees = 0;
+[; ;LCD.h: 21: void lcdWriteStepCount(unsigned int stepCount);
+[; ;LCD.h: 24: void lcdWriteControl(unsigned char databyte);
+[; ;LCD.h: 27: void lcdWriteData(unsigned char databyte);
+[; ;LCD.h: 30: void lcdSetCursor(unsigned char address);
+[; ;LCD.h: 33: void lcdWriteString(char * s);
+[; ;LCD.h: 36: void lcdWriteToDigitBCD(unsigned int data);
+[; ;LCD.h: 39: void setupLCD(void);
+"8 ADC.c
+[v _setupADC `(v ~T0 @X0 1 ef ]
 {
-[; ;ser.c: 5: void ser_init(void){
-[e :U _ser_init ]
+[; ;ADC.c: 8: void setupADC(void){
+[e :U _setupADC ]
 [f ]
-[; ;ser.c: 7: TXSTA = 0b00100100;
-"7
-[e = _TXSTA -> -> 36 `i `uc ]
-[; ;ser.c: 8: RCSTA = 0b10011000;
-"8
-[e = _RCSTA -> -> 152 `i `uc ]
-[; ;ser.c: 24: SPBRG = 20;
-"24
-[e = _SPBRG -> -> 20 `i `uc ]
-[; ;ser.c: 26: PEIE = 1;
-"26
-[e = _PEIE -> -> 1 `i `b ]
-[; ;ser.c: 27: (GIE = 1);
-"27
-[e = _GIE -> -> 1 `i `b ]
-[; ;ser.c: 28: }
-"28
+[; ;ADC.c: 9: PORTA = 0;
+"9
+[e = _PORTA -> -> 0 `i `uc ]
+[; ;ADC.c: 10: TRISA = 0b11111111;
+"10
+[e = _TRISA -> -> 255 `i `uc ]
+[; ;ADC.c: 13: ADCON0 = 0b10001001;
+"13
+[e = _ADCON0 -> -> 137 `i `uc ]
+[; ;ADC.c: 14: ADCON1 = 0b00000010;
+"14
+[e = _ADCON1 -> -> 2 `i `uc ]
+[; ;ADC.c: 16: _delay((unsigned long)((50)*(20000000/4000000.0)));
+"16
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 20000000 `l `d .4000000.0 `ul ]
+[; ;ADC.c: 17: }
+"17
 [e :UE 96 ]
 }
-"30
-[v _ser_putch `(v ~T0 @X0 1 ef1`uc ]
+"19
+[v _ADCMain `(v ~T0 @X0 1 ef ]
 {
-[; ;ser.c: 30: void ser_putch(unsigned char c){
-[e :U _ser_putch ]
-[v _c `uc ~T0 @X0 1 r1 ]
+[; ;ADC.c: 19: void ADCMain(void){
+[e :U _ADCMain ]
 [f ]
-[; ;ser.c: 31: while(!TRMT);
-"31
-[e $U 98  ]
-[e :U 99 ]
-[e :U 98 ]
-[e $ ! _TRMT 99  ]
-[e :U 100 ]
-[; ;ser.c: 32: TXREG=c;
-"32
-[e = _TXREG _c ]
-[; ;ser.c: 33: _delay((unsigned long)((100)*(20000000/4000.0)));
-"33
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;ser.c: 35: }
-"35
+[; ;ADC.c: 21: getADC();
+"21
+[e ( _getADC ..  ]
+[; ;ADC.c: 22: lcdSetCursor(0b10000000);
+"22
+[e ( _lcdSetCursor (1 -> -> 128 `i `uc ]
+[; ;ADC.c: 23: lcdWriteToDigitBCD(adcRAW);
+"23
+[e ( _lcdWriteToDigitBCD (1 _adcRAW ]
+[; ;ADC.c: 25: adcConvertMM(adcRAW);
+"25
+[e ( _adcConvertMM (1 _adcRAW ]
+[; ;ADC.c: 26: }
+"26
 [e :UE 97 ]
 }
-"37
-[v _ser_getch `(i ~T0 @X0 1 ef ]
+"29
+[v _getADC `(ui ~T0 @X0 1 ef ]
 {
-[; ;ser.c: 37: signed int ser_getch(){
-[e :U _ser_getch ]
+[; ;ADC.c: 29: unsigned int getADC(void){
+[e :U _getADC ]
 [f ]
-[; ;ser.c: 38: while(!RCIF);
-"38
-[e $U 102  ]
-[e :U 103 ]
-[e :U 102 ]
-[e $ ! _RCIF 103  ]
-[e :U 104 ]
-[v _rxbyte `i ~T0 @X0 1 a ]
-[; ;ser.c: 39: signed int rxbyte = RCREG;
+[; ;ADC.c: 31: ADRESH = 0;
+"31
+[e = _ADRESH -> -> 0 `i `uc ]
+[; ;ADC.c: 32: ADRESL = 0;
+"32
+[e = _ADRESL -> -> 0 `i `uc ]
+[; ;ADC.c: 34: GO = 1;
+"34
+[e = _GO -> -> 1 `i `b ]
+[; ;ADC.c: 35: while(GO) continue;
+"35
+[e $U 99  ]
+[e :U 100 ]
+[e $U 99  ]
+[e :U 99 ]
+[e $ _GO 100  ]
+[e :U 101 ]
+[; ;ADC.c: 39: adcRAW = (4*ADRESH);
 "39
-[e = _rxbyte -> _RCREG `i ]
-[; ;ser.c: 40: _delay((unsigned long)((100)*(20000000/4000.0)));
-"40
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;ser.c: 41: return rxbyte;
+[e = _adcRAW -> * -> 4 `i -> _ADRESH `i `ui ]
+[; ;ADC.c: 41: switch(ADRESL){
 "41
-[e ) _rxbyte ]
-[e $UE 101  ]
-[; ;ser.c: 43: }
+[e $U 103  ]
+{
+[; ;ADC.c: 42: case 0b01000000: adcRAW = adcRAW + 1;
+"42
+[e :U 104 ]
+[e = _adcRAW + _adcRAW -> -> 1 `i `ui ]
+[; ;ADC.c: 43: break;
 "43
-[e :UE 101 ]
-}
+[e $U 102  ]
+[; ;ADC.c: 44: case 0b10000000: adcRAW = adcRAW + 2;
+"44
+[e :U 105 ]
+[e = _adcRAW + _adcRAW -> -> 2 `i `ui ]
+[; ;ADC.c: 45: break;
+"45
+[e $U 102  ]
+[; ;ADC.c: 46: case 0b11000000: adcRAW = adcRAW + 3;
+"46
+[e :U 106 ]
+[e = _adcRAW + _adcRAW -> -> 3 `i `ui ]
+[; ;ADC.c: 47: break;
+"47
+[e $U 102  ]
+[; ;ADC.c: 48: default: adcRAW = adcRAW;
 "48
-[v _Drive `(v ~T0 @X0 1 ef4`i`i`i`i ]
-{
-[; ;ser.c: 48: void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL){
-[e :U _Drive ]
-[v _speedH `i ~T0 @X0 1 r1 ]
-[v _speedL `i ~T0 @X0 1 r2 ]
-[v _radH `i ~T0 @X0 1 r3 ]
-[v _radL `i ~T0 @X0 1 r4 ]
-[f ]
-[; ;ser.c: 49: ser_putch(137);
+[e :U 107 ]
+[e = _adcRAW _adcRAW ]
 "49
-[e ( _ser_putch (1 -> -> 137 `i `uc ]
-[; ;ser.c: 50: ser_putch(speedH);
-"50
-[e ( _ser_putch (1 -> _speedH `uc ]
-[; ;ser.c: 51: ser_putch(speedL);
-"51
-[e ( _ser_putch (1 -> _speedL `uc ]
-[; ;ser.c: 52: ser_putch(radH);
-"52
-[e ( _ser_putch (1 -> _radH `uc ]
-[; ;ser.c: 53: ser_putch(radL);
-"53
-[e ( _ser_putch (1 -> _radL `uc ]
-[; ;ser.c: 54: }
-"54
-[e :UE 105 ]
 }
-"56
-[v _getDistTrav `(i ~T0 @X0 1 ef ]
-{
-[; ;ser.c: 56: signed int getDistTrav(void){
-[e :U _getDistTrav ]
-[f ]
-[; ;ser.c: 57: ser_putch(142);
-"57
-[e ( _ser_putch (1 -> -> 142 `i `uc ]
-[; ;ser.c: 58: ser_putch(19);
-"58
-[e ( _ser_putch (1 -> -> 19 `i `uc ]
-[; ;ser.c: 59: _delay((unsigned long)((10)*(20000000/4000.0)));
+[; ;ADC.c: 49: }
+[e $U 102  ]
+"41
+[e :U 103 ]
+[e [\ _ADRESL , $ -> -> 64 `i `uc 104
+ , $ -> -> 128 `i `uc 105
+ , $ -> -> 192 `i `uc 106
+ 107 ]
+"49
+[e :U 102 ]
+[; ;ADC.c: 51: return(adcRAW);
+"51
+[e ) _adcRAW ]
+[e $UE 98  ]
+[; ;ADC.c: 52: }
+"52
+[e :UE 98 ]
+}
 "59
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;ser.c: 61: highByte = ser_getch();
+[v _adcConvertMM `(ui ~T0 @X0 1 ef1`ui ]
+{
+[; ;ADC.c: 59: unsigned int adcConvertMM(unsigned int adcRAW){
+[e :U _adcConvertMM ]
+[v _adcRAW `ui ~T0 @X0 1 r1 ]
+[f ]
+[; ;ADC.c: 61: if (adcRAW < 517 && adcRAW >= 513)
 "61
-[e = _highByte ( _ser_getch ..  ]
-[; ;ser.c: 62: _delay((unsigned long)((10)*(20000000/4000.0)));
+[e $ ! && < _adcRAW -> -> 517 `i `ui >= _adcRAW -> -> 513 `i `ui 109  ]
+[; ;ADC.c: 62: Distance = (((51700 - adcRAW*100)/4) + 100);
 "62
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;ser.c: 63: lowByte = ser_getch();
-"63
-[e = _lowByte ( _ser_getch ..  ]
-[; ;ser.c: 65: distTrav = (256*highByte + lowByte);
+[e = _Distance -> + / - -> 51700 `l -> * _adcRAW -> -> 100 `i `ui `l -> -> 4 `i `l -> -> 100 `i `l `ui ]
+[e :U 109 ]
+[; ;ADC.c: 64: if (adcRAW < 513 && adcRAW >= 393)
+"64
+[e $ ! && < _adcRAW -> -> 513 `i `ui >= _adcRAW -> -> 393 `i `ui 110  ]
+[; ;ADC.c: 65: Distance = (((51300 - adcRAW*100)/120) + 200);
 "65
-[e = _distTrav + * -> 256 `i _highByte _lowByte ]
-[; ;ser.c: 66: totalDistTrav = ((totalDistTrav + distTrav));
-"66
-[e = _totalDistTrav + _totalDistTrav _distTrav ]
-[; ;ser.c: 69: lcdSetCursor(0b11000000);
-"69
-[e ( _lcdSetCursor (1 -> -> 192 `i `uc ]
-[; ;ser.c: 70: lcdWriteToDigitBCD(totalDistTrav);
+[e = _Distance -> + / - -> 51300 `l -> * _adcRAW -> -> 100 `i `ui `l -> -> 120 `i `l -> -> 200 `i `l `ui ]
+[e :U 110 ]
+[; ;ADC.c: 67: if (adcRAW < 393 && adcRAW >= 298)
+"67
+[e $ ! && < _adcRAW -> -> 393 `i `ui >= _adcRAW -> -> 298 `i `ui 111  ]
+[; ;ADC.c: 68: Distance = (((39300 - adcRAW*100)/95) + 300);
+"68
+[e = _Distance -> + / - -> 39300 `l -> * _adcRAW -> -> 100 `i `ui `l -> -> 95 `i `l -> -> 300 `i `l `ui ]
+[e :U 111 ]
+[; ;ADC.c: 70: if (adcRAW < 298 && adcRAW >= 236)
 "70
-[e ( _lcdWriteToDigitBCD (1 -> _totalDistTrav `ui ]
-[; ;ser.c: 71: }
+[e $ ! && < _adcRAW -> -> 298 `i `ui >= _adcRAW -> -> 236 `i `ui 112  ]
+[; ;ADC.c: 71: Distance = (((29800 - adcRAW*100)/62) + 400);
 "71
-[e :UE 106 ]
+[e = _Distance + / - -> -> 29800 `i `ui * _adcRAW -> -> 100 `i `ui -> -> 62 `i `ui -> -> 400 `i `ui ]
+[e :U 112 ]
+[; ;ADC.c: 73: if (adcRAW < 236 && adcRAW >= 194)
+"73
+[e $ ! && < _adcRAW -> -> 236 `i `ui >= _adcRAW -> -> 194 `i `ui 113  ]
+[; ;ADC.c: 74: Distance = (((23600 - adcRAW*100)/42) + 500);
+"74
+[e = _Distance + / - -> -> 23600 `i `ui * _adcRAW -> -> 100 `i `ui -> -> 42 `i `ui -> -> 500 `i `ui ]
+[e :U 113 ]
+[; ;ADC.c: 76: if (adcRAW < 194 && adcRAW >= 168)
+"76
+[e $ ! && < _adcRAW -> -> 194 `i `ui >= _adcRAW -> -> 168 `i `ui 114  ]
+[; ;ADC.c: 77: Distance = (((19400 - adcRAW*100)/26) + 600);
+"77
+[e = _Distance + / - -> -> 19400 `i `ui * _adcRAW -> -> 100 `i `ui -> -> 26 `i `ui -> -> 600 `i `ui ]
+[e :U 114 ]
+[; ;ADC.c: 79: if (adcRAW < 168 && adcRAW >= 144)
+"79
+[e $ ! && < _adcRAW -> -> 168 `i `ui >= _adcRAW -> -> 144 `i `ui 115  ]
+[; ;ADC.c: 80: Distance = (((16800 - adcRAW*100)/24) + 700);
+"80
+[e = _Distance + / - -> -> 16800 `i `ui * _adcRAW -> -> 100 `i `ui -> -> 24 `i `ui -> -> 700 `i `ui ]
+[e :U 115 ]
+[; ;ADC.c: 82: if (adcRAW < 144 && adcRAW >= 129)
+"82
+[e $ ! && < _adcRAW -> -> 144 `i `ui >= _adcRAW -> -> 129 `i `ui 116  ]
+[; ;ADC.c: 83: Distance = (((14400 - adcRAW*100)/15) + 800);
+"83
+[e = _Distance + / - -> -> 14400 `i `ui * _adcRAW -> -> 100 `i `ui -> -> 15 `i `ui -> -> 800 `i `ui ]
+[e :U 116 ]
+[; ;ADC.c: 85: if (adcRAW < 129 && adcRAW >= 110)
+"85
+[e $ ! && < _adcRAW -> -> 129 `i `ui >= _adcRAW -> -> 110 `i `ui 117  ]
+[; ;ADC.c: 86: Distance = (((12900 - adcRAW*100)/19) + 900 + 50);
+"86
+[e = _Distance + + / - -> -> 12900 `i `ui * _adcRAW -> -> 100 `i `ui -> -> 19 `i `ui -> -> 900 `i `ui -> -> 50 `i `ui ]
+[e :U 117 ]
+[; ;ADC.c: 88: if (adcRAW < 110 && adcRAW >= 98)
+"88
+[e $ ! && < _adcRAW -> -> 110 `i `ui >= _adcRAW -> -> 98 `i `ui 118  ]
+[; ;ADC.c: 89: Distance = (((11000 - adcRAW*100)/12) + 1000 + 100);
+"89
+[e = _Distance + + / - -> -> 11000 `i `ui * _adcRAW -> -> 100 `i `ui -> -> 12 `i `ui -> -> 1000 `i `ui -> -> 100 `i `ui ]
+[e :U 118 ]
+[; ;ADC.c: 91: if (adcRAW < 98 && adcRAW >= 90)
+"91
+[e $ ! && < _adcRAW -> -> 98 `i `ui >= _adcRAW -> -> 90 `i `ui 119  ]
+[; ;ADC.c: 92: Distance = (((9800 - adcRAW*100)/8) + 1100 + 150);
+"92
+[e = _Distance + + / - -> -> 9800 `i `ui * _adcRAW -> -> 100 `i `ui -> -> 8 `i `ui -> -> 1100 `i `ui -> -> 150 `i `ui ]
+[e :U 119 ]
+[; ;ADC.c: 94: if(adcRAW < 90 || adcRAW >= 517)
+"94
+[e $ ! || < _adcRAW -> -> 90 `i `ui >= _adcRAW -> -> 517 `i `ui 120  ]
+[; ;ADC.c: 95: Distance = 0;
+"95
+[e = _Distance -> -> 0 `i `ui ]
+[e :U 120 ]
+[; ;ADC.c: 97: return(Distance);
+"97
+[e ) _Distance ]
+[e $UE 108  ]
+[; ;ADC.c: 98: }
+"98
+[e :UE 108 ]
 }
