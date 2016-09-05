@@ -1438,9 +1438,7 @@ extern __bit __timeout;
 # 7 "main.h"
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
-# 28
-void getDistTrav(void);
-
+# 29
 unsigned char rxbyte = 0;
 signed int stepClosest = 0;
 signed int adcClosest = 1000;

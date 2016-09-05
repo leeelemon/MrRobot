@@ -8,7 +8,10 @@
 
 volatile unsigned int time_count;
 volatile bit FLAG_1000MS;
+volatile bit FLAG_PLAY;
+volatile bit driving = 0;
 
+signed int current = 0;
 
 
 unsigned char controlByte = 0;
@@ -18,6 +21,8 @@ signed int loop = 0;
 unsigned char PB6Counter = 0;
 unsigned char PB7Counter = 0;
 unsigned char PB8Counter = 0;
+
+char count = 0;
 
 
 
@@ -36,7 +41,7 @@ void interrupt isr(void){
         }
 
         if(time_count % 1000 == 0){
-            RB0 = !RB0;     //Toggle LED           
+            RB4 = !RB4;     //Toggle LED           
             //    FLAG_1000MS = 1;	// Raise flag for 500ms
             time_count = 0;	// Clear time_count        
         }
@@ -46,11 +51,17 @@ void interrupt isr(void){
             PB7Counter++;
         if (PB6 == 1)
             PB6Counter++;
+       
         
-    }   
+    
+                
+        
+    }
 }
 
+
 void main(void){
+__delay_ms(5000);
 
 //Initialise and setup
     setupSPI();
@@ -58,18 +69,33 @@ void main(void){
     setupLCD();
     setupADC();
     
+    TRISB = 0b00000001;
+    
     unsigned char controlByte = 0b00001101;
     spi_transfer(controlByte);
    
+    RB3 = 0;
+    __delay_ms(1000);
     ser_putch(128);     //Startup
+    __delay_ms(1000);
     ser_putch(132);     //Full mode
+    __delay_ms(1000);
+    RB3 = 1;
+    
+    lcdWriteToDigitBCD(totalDistTrav);
+    
+
+        
+    
+    
+    
     
     while(1){       
         
         //Rotates 360 and compares adcRAW at every half step.
         //If it detects a closer object than the previous closest then it stores 
         //the stepCount corresponding to that object.
-        if (PB8Counter >= 10 && PB8 == 0){
+        if (PB7Counter >= 10 && PB7 == 0){
             for (loop = 0; loop < 400; loop++){           
                 moveCW();
                 ADCMain();
@@ -88,26 +114,29 @@ void main(void){
        
         //This might make it drive 4m forward, 250mm/s and takes 16 seconds. 
         //Or it might not.
-        if (PB7Counter >= 10 && PB7 == 0){
-            totalDistTrav = 0;  //Resets distance traveled
+
+    if (PB6Counter >= 10 && PB6 == 0){
+        Drive(1,200,0x7F,0xFF); //Drive, 456mm/s, straight
+        while (totalDistTrav <= 4000){
+            count++;            
+            if(count >=20){
+                getDistTrav();
+                count = 0;   
+                }
             
-            for (totalDistTrav = 0; totalDistTrav < 400;){
-            Drive(0,250,0x7F,0xFF); //Drive, 250mm/s, straight
-            getDistTrav();
-            
-            }                
-            Drive(0,0,0x7F,0xFF);   //Drive, 0mm/s, straight (STOP)             
-        }
+        }                
+    Drive(0,0,0x7F,0xFF);   //Drive, 0mm/s, straight (STOP)             
+    }
         
         //Perform 'Square' manoeuvre... maybe
-        if (PB6Counter >= 10 && PB6 == 0){
+        if (PB8Counter >= 10 && PB8 == 0){
             totalDistTrav = 0;  //Resets distance traveled
             
             for (loop = 0; loop < 4; loop++){
                 Drive(0,250,0xFF,0xFF);     //Drive, 250mm/s, turn on spot left 
-                __delay_ms(1000);           //Delay some amount of time to turn 90 deg    
+                __delay_ms(500);           //Delay some amount of time to turn 90 deg    
                 
-                for (totalDistTrav = 0; totalDistTrav < 100;){                        
+                for (totalDistTrav = 0; totalDistTrav < 1000;){                        
                     Drive(0,250,0x7F,0xFF); //Drive, 250mm/s, straight
                     getDistTrav();          //Gets distance and print to LCD                         
                 }

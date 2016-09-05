@@ -20,6 +20,7 @@ void ser_init(void){
 	TXEN=0;						//reset transmitter
 	TXEN=1;						//enable the transmitter
 */
+    
 	SPBRG = 20; 					//Baud rate 57600
 //	RCIE = 1;						//enable receive interrupt
 	PEIE = 1;						//enable peripheral interrupt
@@ -29,12 +30,16 @@ void ser_init(void){
 void ser_putch(unsigned char c){	
 	while(!TRMT);					//while buffer is not empty, wait
 	TXREG=c;						//load register with data to be transmitted
+    __delay_ms(100);
+    
 }
 
-unsigned char ser_getch(){
+signed int ser_getch(){
 	while(!RCIF);
-	unsigned char rxbyte = RCREG;
+	signed int rxbyte = RCREG;
+    __delay_ms(100);
 	return rxbyte;
+    
 }
 
 //Drive command (Velocity high, Velocity low, Radius high, Radius low)
@@ -48,18 +53,19 @@ void Drive(signed int speedH, signed int speedL, signed int radH, signed int rad
         ser_putch(radL);
 }
 
-void getDistTrav(void){
+signed int getDistTrav(void){
     ser_putch(142);     //Requests packet of sensor data
     ser_putch(19);      //Specifies distance packet for request
-    
-    ser_getch();        //Gets the distance value returned as 2 bytes, high byte first.
-    highByte = rxbyte;  //Puts the high byte into variable
-    ser_getch();        //Gets the low byte of the sensor packet
-    lowByte = rxbyte;   //Puts the low byte into variable
-                
+    __delay_ms(10);
+          
+    highByte = ser_getch();  //Puts the high byte into variable
+    __delay_ms(10);
+    lowByte = ser_getch();   //Puts the low byte into variable
+     
     distTrav = (256*highByte + lowByte);    //Distance traveled since data was last requested
-    totalDistTrav = ((totalDistTrav + distTrav)/10);  //Total distance traveled since button push in CM
-                
+    totalDistTrav = ((totalDistTrav + distTrav));  //Total distance traveled since button push in CM
+  
+    
     lcdSetCursor(0b11000000);   //Second row, first position
     lcdWriteToDigitBCD(totalDistTrav);  //Print the total distance to LCD
 }

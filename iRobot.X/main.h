@@ -25,7 +25,6 @@
 #define PB7 !RB1
 #define PB8 !RB0
 
-void getDistTrav(void);
 
 unsigned char rxbyte = 0;
 signed int stepClosest = 0;

@@ -15,12 +15,12 @@ void ser_init(void);
 void ser_putch(unsigned char c);	
 
 //receives serial data
-unsigned char ser_getch();
+signed int ser_getch();
 
 //Drive command
 void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
 
 //Gets distance travelled from sensor, converts, and prints to LCD
-void getDistTrav(void);
+signed int getDistTrav(void);
 
 #endif //_SER_H

@@ -1438,9 +1438,7 @@ extern __bit __timeout;
 # 7 "main.h"
 #pragma config BOREN = OFF, CPD = OFF, WRT = OFF, FOSC = HS, WDTE = OFF, CP = OFF, LVP = OFF, PWRTE = OFF
 
-# 28
-void getDistTrav(void);
-
+# 29
 unsigned char rxbyte = 0;
 signed int stepClosest = 0;
 signed int adcClosest = 1000;
@@ -1487,13 +1485,13 @@ void ser_init(void);
 void ser_putch(unsigned char c);
 
 
-unsigned char ser_getch();
+signed int ser_getch();
 
 
 void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
 
 
-void getDistTrav(void);
+signed int getDistTrav(void);
 
 # 7 "SPI.h"
 void setupSPI(void);
@@ -1519,18 +1517,23 @@ char currentStep = 0;
 # 9 "main.c"
 volatile unsigned int time_count;
 volatile bit FLAG_1000MS;
+volatile bit FLAG_PLAY;
+volatile bit driving = 0;
 
+signed int current = 0;
 
 
 unsigned char controlByte = 0;
 signed int loop = 0;
-signed int loop2 = 0;
+
 
 unsigned char PB6Counter = 0;
 unsigned char PB7Counter = 0;
 unsigned char PB8Counter = 0;
 
-# 26
+char count = 0;
+
+# 31
 void interrupt isr(void){
 
 if(TMR0IF){
@@ -1544,7 +1547,7 @@ RC2 = 1; __nop(); RC2 = 0;;
 }
 
 if(time_count % 1000 == 0){
-RB0 = !RB0;
+RB4 = !RB4;
 
 time_count = 0;
 }
@@ -1555,10 +1558,13 @@ PB7Counter++;
 if (!RB2 == 1)
 PB6Counter++;
 
+# 59
 }
 }
 
+
 void main(void){
+_delay((unsigned long)((5000)*(20000000/4000.0)));
 
 
 setupSPI();
@@ -1566,18 +1572,28 @@ ser_init();
 setupLCD();
 setupADC();
 
+TRISB = 0b00000001;
+
 unsigned char controlByte = 0b00001101;
 spi_transfer(controlByte);
 
+RB3 = 0;
+_delay((unsigned long)((1000)*(20000000/4000.0)));
 ser_putch(128);
+_delay((unsigned long)((1000)*(20000000/4000.0)));
 ser_putch(132);
+_delay((unsigned long)((1000)*(20000000/4000.0)));
+RB3 = 1;
 
+lcdWriteToDigitBCD(totalDistTrav);
+
+# 93
 while(1){
 
 
 
 
-if (PB8Counter >= 10 && !RB0 == 0){
+if (PB7Counter >= 10 && !RB1 == 0){
 for (loop = 0; loop < 400; loop++){
 moveCW();
 ADCMain();
@@ -1593,37 +1609,35 @@ moveCCW();
 }
 }
 
-
-
-
-if (PB7Counter >= 10 && !RB1 == 0){
-totalDistTrav = 0;
-
-Drive(0,250,0x7F,0xFF);
-
-
-for (loop = 0; loop < 400; loop++){
+# 118
+if (PB6Counter >= 10 && !RB2 == 0){
+Drive(1,200,0x7F,0xFF);
+while (totalDistTrav <= 4000){
+count++;
+if(count >=20){
 getDistTrav();
-_delay((unsigned long)((40)*(20000000/4000.0)));
+count = 0;
 }
 
+}
 Drive(0,0,0x7F,0xFF);
 }
 
 
-if (PB6Counter >= 10 && !RB2 == 0){
+if (PB8Counter >= 10 && !RB0 == 0){
 totalDistTrav = 0;
 
 for (loop = 0; loop < 4; loop++){
 Drive(0,250,0xFF,0xFF);
-_delay((unsigned long)((1000)*(20000000/4000.0)));
+_delay((unsigned long)((500)*(20000000/4000.0)));
 
-for (loop2 = 0; loop2 < 100; loop2++){
+for (totalDistTrav = 0; totalDistTrav < 1000;){
 Drive(0,250,0x7F,0xFF);
 getDistTrav();
-_delay((unsigned long)((40)*(20000000/4000.0)));
 }
+totalDistTrav = 0;
 }
+
 Drive(0,0,0x7F,0xFF);
 
 }

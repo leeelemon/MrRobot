@@ -13,7 +13,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TRMT `Vb ~T0 @X0 0 e@1217 ]
 "1031
 [v _TXREG `Vuc ~T0 @X0 0 e@25 ]
-"2559
+[v F1091 `(v ~T0 @X0 1 tf1`ul ]
+"152 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic.h
+[v __delay `JF1091 ~T0 @X0 0 e ]
+[p i __delay ]
+"2559 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16f877a.h
 [v _RCIF `Vb ~T0 @X0 0 e@101 ]
 "1037
 [v _RCREG `Vuc ~T0 @X0 0 e@26 ]
@@ -1047,49 +1051,48 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p x CP=OFF ]
 [p x LVP=OFF ]
 [p x PWRTE=OFF ]
-[; ;main.h: 28: void getDistTrav(void);
-"30
+"29
 [v _rxbyte `uc ~T0 @X0 1 e ]
 [i _rxbyte
 -> -> 0 `i `uc
 ]
-[; ;main.h: 30: unsigned char rxbyte = 0;
-"31
+[; ;main.h: 29: unsigned char rxbyte = 0;
+"30
 [v _stepClosest `i ~T0 @X0 1 e ]
 [i _stepClosest
 -> 0 `i
 ]
-[; ;main.h: 31: signed int stepClosest = 0;
-"32
+[; ;main.h: 30: signed int stepClosest = 0;
+"31
 [v _adcClosest `i ~T0 @X0 1 e ]
 [i _adcClosest
 -> 1000 `i
 ]
-[; ;main.h: 32: signed int adcClosest = 1000;
-"33
+[; ;main.h: 31: signed int adcClosest = 1000;
+"32
 [v _highByte `i ~T0 @X0 1 e ]
 [i _highByte
 -> 0 `i
 ]
-[; ;main.h: 33: signed int highByte = 0;
-"34
+[; ;main.h: 32: signed int highByte = 0;
+"33
 [v _lowByte `i ~T0 @X0 1 e ]
 [i _lowByte
 -> 0 `i
 ]
-[; ;main.h: 34: signed int lowByte = 0;
-"35
+[; ;main.h: 33: signed int lowByte = 0;
+"34
 [v _distTrav `i ~T0 @X0 1 e ]
 [i _distTrav
 -> 0 `i
 ]
-[; ;main.h: 35: signed int distTrav = 0;
-"36
+[; ;main.h: 34: signed int distTrav = 0;
+"35
 [v _totalDistTrav `i ~T0 @X0 1 e ]
 [i _totalDistTrav
 -> 0 `i
 ]
-[; ;main.h: 36: signed int totalDistTrav = 0;
+[; ;main.h: 35: signed int totalDistTrav = 0;
 "6 ser.h
 [v _speedH `i ~T0 @X0 1 e ]
 [i _speedH
@@ -1116,9 +1119,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ser.h: 9: signed int radL = 0;
 [; ;ser.h: 12: void ser_init(void);
 [; ;ser.h: 15: void ser_putch(unsigned char c);
-[; ;ser.h: 18: unsigned char ser_getch();
+[; ;ser.h: 18: signed int ser_getch();
 [; ;ser.h: 21: void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
-[; ;ser.h: 24: void getDistTrav(void);
+[; ;ser.h: 24: signed int getDistTrav(void);
 "17 lcd.h
 [v _stepCountNeg `Vui ~T0 @X0 1 e ]
 [i _stepCountNeg
@@ -1150,131 +1153,137 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ser.c: 8: RCSTA = 0b10011000;
 "8
 [e = _RCSTA -> -> 152 `i `uc ]
-[; ;ser.c: 23: SPBRG = 20;
-"23
+[; ;ser.c: 24: SPBRG = 20;
+"24
 [e = _SPBRG -> -> 20 `i `uc ]
-[; ;ser.c: 25: PEIE = 1;
-"25
-[e = _PEIE -> -> 1 `i `b ]
-[; ;ser.c: 26: (GIE = 1);
+[; ;ser.c: 26: PEIE = 1;
 "26
-[e = _GIE -> -> 1 `i `b ]
-[; ;ser.c: 27: }
+[e = _PEIE -> -> 1 `i `b ]
+[; ;ser.c: 27: (GIE = 1);
 "27
+[e = _GIE -> -> 1 `i `b ]
+[; ;ser.c: 28: }
+"28
 [e :UE 96 ]
 }
-"29
+"30
 [v _ser_putch `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;ser.c: 29: void ser_putch(unsigned char c){
+[; ;ser.c: 30: void ser_putch(unsigned char c){
 [e :U _ser_putch ]
 [v _c `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;ser.c: 30: while(!TRMT);
-"30
+[; ;ser.c: 31: while(!TRMT);
+"31
 [e $U 98  ]
 [e :U 99 ]
 [e :U 98 ]
 [e $ ! _TRMT 99  ]
 [e :U 100 ]
-[; ;ser.c: 31: TXREG=c;
-"31
-[e = _TXREG _c ]
-[; ;ser.c: 32: }
+[; ;ser.c: 32: TXREG=c;
 "32
+[e = _TXREG _c ]
+[; ;ser.c: 33: _delay((unsigned long)((100)*(20000000/4000.0)));
+"33
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;ser.c: 35: }
+"35
 [e :UE 97 ]
 }
-"34
-[v _ser_getch `(uc ~T0 @X0 1 ef ]
+"37
+[v _ser_getch `(i ~T0 @X0 1 ef ]
 {
-[; ;ser.c: 34: unsigned char ser_getch(){
+[; ;ser.c: 37: signed int ser_getch(){
 [e :U _ser_getch ]
 [f ]
-[; ;ser.c: 35: while(!RCIF);
-"35
+[; ;ser.c: 38: while(!RCIF);
+"38
 [e $U 102  ]
 [e :U 103 ]
 [e :U 102 ]
 [e $ ! _RCIF 103  ]
 [e :U 104 ]
-[v _rxbyte `uc ~T0 @X0 1 a ]
-[; ;ser.c: 36: unsigned char rxbyte = RCREG;
-"36
-[e = _rxbyte _RCREG ]
-[; ;ser.c: 37: return rxbyte;
-"37
+[v _rxbyte `i ~T0 @X0 1 a ]
+[; ;ser.c: 39: signed int rxbyte = RCREG;
+"39
+[e = _rxbyte -> _RCREG `i ]
+[; ;ser.c: 40: _delay((unsigned long)((100)*(20000000/4000.0)));
+"40
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;ser.c: 41: return rxbyte;
+"41
 [e ) _rxbyte ]
 [e $UE 101  ]
-[; ;ser.c: 38: }
-"38
+[; ;ser.c: 43: }
+"43
 [e :UE 101 ]
 }
-"43
+"48
 [v _Drive `(v ~T0 @X0 1 ef4`i`i`i`i ]
 {
-[; ;ser.c: 43: void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL){
+[; ;ser.c: 48: void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL){
 [e :U _Drive ]
 [v _speedH `i ~T0 @X0 1 r1 ]
 [v _speedL `i ~T0 @X0 1 r2 ]
 [v _radH `i ~T0 @X0 1 r3 ]
 [v _radL `i ~T0 @X0 1 r4 ]
 [f ]
-[; ;ser.c: 44: ser_putch(137);
-"44
-[e ( _ser_putch (1 -> -> 137 `i `uc ]
-[; ;ser.c: 45: ser_putch(speedH);
-"45
-[e ( _ser_putch (1 -> _speedH `uc ]
-[; ;ser.c: 46: ser_putch(speedL);
-"46
-[e ( _ser_putch (1 -> _speedL `uc ]
-[; ;ser.c: 47: ser_putch(radH);
-"47
-[e ( _ser_putch (1 -> _radH `uc ]
-[; ;ser.c: 48: ser_putch(radL);
-"48
-[e ( _ser_putch (1 -> _radL `uc ]
-[; ;ser.c: 49: }
+[; ;ser.c: 49: ser_putch(137);
 "49
+[e ( _ser_putch (1 -> -> 137 `i `uc ]
+[; ;ser.c: 50: ser_putch(speedH);
+"50
+[e ( _ser_putch (1 -> _speedH `uc ]
+[; ;ser.c: 51: ser_putch(speedL);
+"51
+[e ( _ser_putch (1 -> _speedL `uc ]
+[; ;ser.c: 52: ser_putch(radH);
+"52
+[e ( _ser_putch (1 -> _radH `uc ]
+[; ;ser.c: 53: ser_putch(radL);
+"53
+[e ( _ser_putch (1 -> _radL `uc ]
+[; ;ser.c: 54: }
+"54
 [e :UE 105 ]
 }
-"51
-[v _getDistTrav `(v ~T0 @X0 1 ef ]
+"56
+[v _getDistTrav `(i ~T0 @X0 1 ef ]
 {
-[; ;ser.c: 51: void getDistTrav(void){
+[; ;ser.c: 56: signed int getDistTrav(void){
 [e :U _getDistTrav ]
 [f ]
-[; ;ser.c: 52: ser_putch(142);
-"52
-[e ( _ser_putch (1 -> -> 142 `i `uc ]
-[; ;ser.c: 53: ser_putch(19);
-"53
-[e ( _ser_putch (1 -> -> 19 `i `uc ]
-[; ;ser.c: 55: ser_getch();
-"55
-[e ( _ser_getch ..  ]
-[; ;ser.c: 56: highByte = rxbyte;
-"56
-[e = _highByte -> _rxbyte `i ]
-[; ;ser.c: 57: ser_getch();
+[; ;ser.c: 57: ser_putch(142);
 "57
-[e ( _ser_getch ..  ]
-[; ;ser.c: 58: lowByte = rxbyte;
+[e ( _ser_putch (1 -> -> 142 `i `uc ]
+[; ;ser.c: 58: ser_putch(19);
 "58
-[e = _lowByte -> _rxbyte `i ]
-[; ;ser.c: 60: distTrav = (256*highByte + lowByte);
-"60
-[e = _distTrav + * -> 256 `i _highByte _lowByte ]
-[; ;ser.c: 61: totalDistTrav = ((totalDistTrav + distTrav)/10);
+[e ( _ser_putch (1 -> -> 19 `i `uc ]
+[; ;ser.c: 59: _delay((unsigned long)((10)*(20000000/4000.0)));
+"59
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;ser.c: 61: highByte = ser_getch();
 "61
-[e = _totalDistTrav / + _totalDistTrav _distTrav -> 10 `i ]
-[; ;ser.c: 63: lcdSetCursor(0b11000000);
+[e = _highByte ( _ser_getch ..  ]
+[; ;ser.c: 62: _delay((unsigned long)((10)*(20000000/4000.0)));
+"62
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;ser.c: 63: lowByte = ser_getch();
 "63
-[e ( _lcdSetCursor (1 -> -> 192 `i `uc ]
-[; ;ser.c: 64: lcdWriteToDigitBCD(totalDistTrav);
-"64
-[e ( _lcdWriteToDigitBCD (1 -> _totalDistTrav `ui ]
-[; ;ser.c: 65: }
+[e = _lowByte ( _ser_getch ..  ]
+[; ;ser.c: 65: distTrav = (256*highByte + lowByte);
 "65
+[e = _distTrav + * -> 256 `i _highByte _lowByte ]
+[; ;ser.c: 66: totalDistTrav = ((totalDistTrav + distTrav));
+"66
+[e = _totalDistTrav + _totalDistTrav _distTrav ]
+[; ;ser.c: 69: lcdSetCursor(0b11000000);
+"69
+[e ( _lcdSetCursor (1 -> -> 192 `i `uc ]
+[; ;ser.c: 70: lcdWriteToDigitBCD(totalDistTrav);
+"70
+[e ( _lcdWriteToDigitBCD (1 -> _totalDistTrav `ui ]
+[; ;ser.c: 71: }
+"71
 [e :UE 106 ]
 }
