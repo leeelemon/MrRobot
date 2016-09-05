@@ -47,7 +47,7 @@ void interrupt isr(void){
         if (PB6 == 1)
             PB6Counter++;
         
-    }
+    }   
 }
 
 void main(void){

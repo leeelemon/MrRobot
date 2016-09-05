@@ -13,13 +13,17 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>main.c</itemPath>
-      <itemPath>../ser.h</itemPath>
       <itemPath>LCD.c</itemPath>
       <itemPath>LCD.h</itemPath>
       <itemPath>SPI.c</itemPath>
       <itemPath>SPI.h</itemPath>
       <itemPath>main.h</itemPath>
       <itemPath>ser.c</itemPath>
+      <itemPath>motor.c</itemPath>
+      <itemPath>motor.h</itemPath>
+      <itemPath>ser.h</itemPath>
+      <itemPath>ADC.c</itemPath>
+      <itemPath>ADC.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -38,7 +42,7 @@
         <targetDevice>PIC16F877A</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>ICD3PlatformTool</platformTool>
+        <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>1.38</languageToolchainVersion>
         <platform>3</platform>
