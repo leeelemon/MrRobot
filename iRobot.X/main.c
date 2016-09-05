@@ -13,7 +13,7 @@ volatile bit FLAG_1000MS;
 
 unsigned char controlByte = 0;
 signed int loop = 0;
-signed int loop2 = 0;
+
 
 unsigned char PB6Counter = 0;
 unsigned char PB7Counter = 0;
@@ -91,14 +91,11 @@ void main(void){
         if (PB7Counter >= 10 && PB7 == 0){
             totalDistTrav = 0;  //Resets distance traveled
             
+            for (totalDistTrav = 0; totalDistTrav < 400;){
             Drive(0,250,0x7F,0xFF); //Drive, 250mm/s, straight
-                        
-            //Continuously updates LCD with distance traveled while moving
-            for (loop = 0; loop < 400; loop++){
-                getDistTrav();    //Gets distance and prints
-                __delay_ms(40);   //Loop long enough to travel 4m
-            }    
+            getDistTrav();
             
+            }                
             Drive(0,0,0x7F,0xFF);   //Drive, 0mm/s, straight (STOP)             
         }
         
@@ -110,12 +107,13 @@ void main(void){
                 Drive(0,250,0xFF,0xFF);     //Drive, 250mm/s, turn on spot left 
                 __delay_ms(1000);           //Delay some amount of time to turn 90 deg    
                 
-                for (loop2 = 0; loop2 < 100; loop2++){    
+                for (totalDistTrav = 0; totalDistTrav < 100;){                        
                     Drive(0,250,0x7F,0xFF); //Drive, 250mm/s, straight
-                    getDistTrav();          //Gets distance and print to LCD
-                    __delay_ms(40);       
+                    getDistTrav();          //Gets distance and print to LCD                         
                 }
+                totalDistTrav = 0;
             }
+            
             Drive(0,0,0x7F,0xFF); //Drive, 0mm/s, straight (STOP) 
                 
         }
