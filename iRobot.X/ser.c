@@ -30,14 +30,11 @@ void ser_init(void){
 void ser_putch(unsigned char c){	
 	while(!TRMT);					//while buffer is not empty, wait
 	TXREG=c;						//load register with data to be transmitted
-    __delay_ms(100);
-    
 }
 
-signed int ser_getch(){
+unsigned char ser_getch(){
 	while(!RCIF);
-	signed int rxbyte = RCREG;
-    __delay_ms(100);
+	unsigned char rxbyte = RCREG;
 	return rxbyte;
     
 }
@@ -53,19 +50,23 @@ void Drive(signed int speedH, signed int speedL, signed int radH, signed int rad
         ser_putch(radL);
 }
 
-signed int getDistTrav(void){
-    ser_putch(142);     //Requests packet of sensor data
-    ser_putch(19);      //Specifies distance packet for request
-    __delay_ms(10);
-          
-    highByte = ser_getch();  //Puts the high byte into variable
-    __delay_ms(10);
-    lowByte = ser_getch();   //Puts the low byte into variable
-     
-    distTrav = (256*highByte + lowByte);    //Distance traveled since data was last requested
-    totalDistTrav = ((totalDistTrav + distTrav));  //Total distance traveled since button push in CM
-  
+
+//Will return as requested sensor data, specify packetID and how many bytes the expected output is.
+signed int getSensorData(unsigned char packetID, unsigned char bytes){
+    ser_putch(142);
+        ser_putch(packetID);
     
-    lcdSetCursor(0b11000000);   //Second row, first position
-    lcdWriteToDigitBCD(totalDistTrav);  //Print the total distance to LCD
+    if (bytes == 2)
+        highByte = ser_getch();  
+    else 
+        highByte = 0;
+        
+    lowByte = ser_getch();
+    
+    signed int sensor = (256*highByte + lowByte);
+    
+    return sensor;
+    
+    
+    
 }

@@ -29,10 +29,11 @@
 unsigned char rxbyte = 0;
 signed int stepClosest = 0;
 signed int adcClosest = 1000;
-signed int highByte = 0;
-signed int lowByte = 0;
+unsigned char highByte = 0;
+unsigned char lowByte = 0;
 signed int distTrav = 0;
 signed int totalDistTrav = 0;
+signed int angleTurned = 0;
 
 
 

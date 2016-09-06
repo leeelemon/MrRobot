@@ -9,10 +9,6 @@
 volatile unsigned int time_count;
 volatile bit FLAG_1000MS;
 volatile bit FLAG_PLAY;
-volatile bit driving = 0;
-
-signed int current = 0;
-
 
 unsigned char controlByte = 0;
 signed int loop = 0;
@@ -45,6 +41,7 @@ void interrupt isr(void){
             //    FLAG_1000MS = 1;	// Raise flag for 500ms
             time_count = 0;	// Clear time_count        
         }
+        
         if (PB8 == 1)
             PB8Counter++;
         if (PB7 == 1)
@@ -69,27 +66,16 @@ __delay_ms(5000);
     setupLCD();
     setupADC();
     
-    TRISB = 0b00000001;
-    
     unsigned char controlByte = 0b00001101;
     spi_transfer(controlByte);
    
-    RB3 = 0;
-    __delay_ms(1000);
     ser_putch(128);     //Startup
-    __delay_ms(1000);
+    __delay_ms(3000);
     ser_putch(132);     //Full mode
-    __delay_ms(1000);
-    RB3 = 1;
-    
+  
     lcdWriteToDigitBCD(totalDistTrav);
     
-
-        
-    
-    
-    
-    
+   
     while(1){       
         
         //Rotates 360 and compares adcRAW at every half step.
@@ -103,50 +89,58 @@ __delay_ms(5000);
                     adcClosest = adcRAW;
                     stepClosest = stepCount;              
                 }
-            }
-            
+            }           
             //Moves CCW until stepCount(initial -400) matches the step of the closest object
             for (loop = stepCount; loop != stepClosest; loop++){
                 moveCCW();
-            }            
+            } 
+            PB7Counter = 0;
         }
 
        
         //This might make it drive 4m forward, 250mm/s and takes 16 seconds. 
         //Or it might not.
 
-    if (PB6Counter >= 10 && PB6 == 0){
-        Drive(1,200,0x7F,0xFF); //Drive, 456mm/s, straight
-        while (totalDistTrav <= 4000){
-            count++;            
-            if(count >=20){
-                getDistTrav();
-                count = 0;   
-                }
-            
-        }                
-    Drive(0,0,0x7F,0xFF);   //Drive, 0mm/s, straight (STOP)             
-    }
+        if (PB6Counter >= 10 && PB6 == 0){
+            Drive(1,144,0x7F,0xFF); //Drive, 400mm/s, straight
+            while (totalDistTrav << 4000){
+                distTrav = getSensorData(19,2);   //Distance packetID, 2 bytes expected
+                totalDistTrav = (totalDistTrav + distTrav);
+                                        
+                lcdSetCursor(0x00);     //Print distance on first row first position
+                lcdWriteToDigitBCD(totalDistTrav);  
+            }            
+                            
+            Drive(0,0,0x7F,0xFF);   //Drive, 0mm/s, straight (STOP)
+            PB6Counter = 0;
+        }
         
-        //Perform 'Square' manoeuvre... maybe
+        //Perform 'Square' manoeuvre
         if (PB8Counter >= 10 && PB8 == 0){
             totalDistTrav = 0;  //Resets distance traveled
             
-            for (loop = 0; loop < 4; loop++){
-                Drive(0,250,0xFF,0xFF);     //Drive, 250mm/s, turn on spot left 
-                __delay_ms(500);           //Delay some amount of time to turn 90 deg    
+            for (loop = 0; loop < 4; loop++){   //Loop 4 times
                 
-                for (totalDistTrav = 0; totalDistTrav < 1000;){                        
-                    Drive(0,250,0x7F,0xFF); //Drive, 250mm/s, straight
-                    getDistTrav();          //Gets distance and print to LCD                         
+                //Turn 90 degrees
+                Drive(0,250,0xFF,0xFF);     //Drive, 250mm/s, turn on spot right 
+                while (angleTurned >> -90){
+                    angleTurned = getSensorData(20,2);  //Angle packetID, 2 bytes expected
+                }  
+                
+                //Drive 1m
+                Drive(0,250,0x7F,0xFF);     //Drive, 250mm/s, straight
+                while (totalDistTrav << 1000){                        
+                    distTrav = getSensorData(19,2);   //Distance packetID, 2 bytes expected
+                    totalDistTrav = (totalDistTrav + distTrav);
+                                        
+                    lcdSetCursor(0x00);     //Print distance on first row first position
+                    lcdWriteToDigitBCD(totalDistTrav);                  
                 }
                 totalDistTrav = 0;
             }
             
             Drive(0,0,0x7F,0xFF); //Drive, 0mm/s, straight (STOP) 
-                
+            PB8Counter = 0;    
         }
-
-
     }
 }
