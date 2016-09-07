@@ -1442,10 +1442,11 @@ extern __bit __timeout;
 unsigned char rxbyte = 0;
 signed int stepClosest = 0;
 signed int adcClosest = 1000;
-signed int highByte = 0;
-signed int lowByte = 0;
+unsigned char highByte = 0;
+unsigned char lowByte = 0;
 signed int distTrav = 0;
 signed int totalDistTrav = 0;
+signed int angleTurned = 0;
 
 # 17 "LCD.h"
 volatile unsigned int stepCountNeg = 0;
@@ -1485,13 +1486,13 @@ void ser_init(void);
 void ser_putch(unsigned char c);
 
 
-signed int ser_getch();
+unsigned char ser_getch();
 
 
 void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
 
 
-signed int getDistTrav(void);
+signed int getSensorData(unsigned char packetID, unsigned char bytes);
 
 # 7 "SPI.h"
 void setupSPI(void);
@@ -1517,15 +1518,13 @@ char currentStep = 0;
 # 9 "main.c"
 volatile unsigned int time_count;
 volatile bit FLAG_1000MS;
-volatile bit FLAG_PLAY;
-volatile bit driving = 0;
 
-signed int current = 0;
-
+volatile char FLAG_Play;
+volatile char FLAG_Advanced;
+volatile char FLAG_AdvPlay;
 
 unsigned char controlByte = 0;
 signed int loop = 0;
-
 
 unsigned char PB6Counter = 0;
 unsigned char PB7Counter = 0;
@@ -1533,7 +1532,7 @@ unsigned char PB8Counter = 0;
 
 char count = 0;
 
-# 31
+# 29
 void interrupt isr(void){
 
 if(TMR0IF){
@@ -1551,6 +1550,7 @@ RB4 = !RB4;
 
 time_count = 0;
 }
+
 if (!RB0 == 1)
 PB8Counter++;
 if (!RB1 == 1)
@@ -1558,7 +1558,16 @@ PB7Counter++;
 if (!RB2 == 1)
 PB6Counter++;
 
-# 59
+if(getSensorData(18,1) == 0b00000001)
+FLAG_Play++;
+
+if(getSensorData(18,1) == 0b00000100)
+FLAG_Advanced++;
+
+if(getSensorData(18,1) == 0b00000101)
+FLAG_AdvPlay++;
+
+# 68
 }
 }
 
@@ -1572,28 +1581,23 @@ ser_init();
 setupLCD();
 setupADC();
 
-TRISB = 0b00000001;
-
 unsigned char controlByte = 0b00001101;
 spi_transfer(controlByte);
 
-RB3 = 0;
-_delay((unsigned long)((1000)*(20000000/4000.0)));
 ser_putch(128);
-_delay((unsigned long)((1000)*(20000000/4000.0)));
+_delay((unsigned long)((3000)*(20000000/4000.0)));
 ser_putch(132);
-_delay((unsigned long)((1000)*(20000000/4000.0)));
-RB3 = 1;
 
 lcdWriteToDigitBCD(totalDistTrav);
 
-# 93
+
 while(1){
 
 
 
 
-if (PB7Counter >= 10 && !RB1 == 0){
+if (PB8Counter >= 10 && !RB0 == 0){
+adcClosest = 0;
 for (loop = 0; loop < 400; loop++){
 moveCW();
 ADCMain();
@@ -1603,45 +1607,64 @@ stepClosest = stepCount;
 }
 }
 
-
 for (loop = stepCount; loop != stepClosest; loop++){
 moveCCW();
 }
+PB8Counter = 0;
 }
 
-# 118
-if (PB6Counter >= 10 && !RB2 == 0){
-Drive(1,200,0x7F,0xFF);
-while (totalDistTrav <= 4000){
-count++;
-if(count >=20){
-getDistTrav();
-count = 0;
+
+
+
+if (FLAG_Play >= 10 && getSensorData(18,1) == 0x00){
+Drive(1,144,0x7F,0xFF);
+while (totalDistTrav < 4000){
+distTrav = getSensorData(19,2);
+totalDistTrav = (totalDistTrav + distTrav);
+
+lcdSetCursor(0x00);
+lcdWriteToDigitBCD(totalDistTrav);
 }
 
-}
 Drive(0,0,0x7F,0xFF);
+FLAG_Play = 0;
 }
 
 
-if (PB8Counter >= 10 && !RB0 == 0){
+if (FLAG_Advanced >= 10 && getSensorData(18,1) == 0x00){
 totalDistTrav = 0;
 
 for (loop = 0; loop < 4; loop++){
-Drive(0,250,0xFF,0xFF);
-_delay((unsigned long)((500)*(20000000/4000.0)));
 
-for (totalDistTrav = 0; totalDistTrav < 1000;){
+
+Drive(0,250,0xFF,0xFF);
+while (angleTurned > -90){
+angleTurned = getSensorData(20,2);
+}
+
+
 Drive(0,250,0x7F,0xFF);
-getDistTrav();
+while (totalDistTrav < 1000){
+distTrav = getSensorData(19,2);
+totalDistTrav = (totalDistTrav + distTrav);
+
+lcdSetCursor(0x00);
+lcdWriteToDigitBCD(totalDistTrav);
 }
 totalDistTrav = 0;
 }
 
 Drive(0,0,0x7F,0xFF);
-
+FLAG_Advanced = 0;
 }
 
+
+if(FLAG_AdvPlay >= 10 && getSensorData(18,1) == 0x00){
+
+
+
+FLAG_AdvPlay = 0;
+}
 
 }
 }
