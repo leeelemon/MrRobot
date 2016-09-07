@@ -1064,17 +1064,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;main.h: 31: signed int adcClosest = 1000;
 "32
-[v _highByte `i ~T0 @X0 1 e ]
+[v _highByte `uc ~T0 @X0 1 e ]
 [i _highByte
--> 0 `i
+-> -> 0 `i `uc
 ]
-[; ;main.h: 32: signed int highByte = 0;
+[; ;main.h: 32: unsigned char highByte = 0;
 "33
-[v _lowByte `i ~T0 @X0 1 e ]
+[v _lowByte `uc ~T0 @X0 1 e ]
 [i _lowByte
--> 0 `i
+-> -> 0 `i `uc
 ]
-[; ;main.h: 33: signed int lowByte = 0;
+[; ;main.h: 33: unsigned char lowByte = 0;
 "34
 [v _distTrav `i ~T0 @X0 1 e ]
 [i _distTrav
@@ -1087,6 +1087,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `i
 ]
 [; ;main.h: 35: signed int totalDistTrav = 0;
+"36
+[v _angleTurned `i ~T0 @X0 1 e ]
+[i _angleTurned
+-> 0 `i
+]
+[; ;main.h: 36: signed int angleTurned = 0;
 "17 LCD.h
 [v _stepCountNeg `Vui ~T0 @X0 1 e ]
 [i _stepCountNeg

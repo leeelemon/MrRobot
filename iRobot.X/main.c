@@ -8,11 +8,13 @@
 
 volatile unsigned int time_count;
 volatile bit FLAG_1000MS;
-volatile bit FLAG_PLAY;
+
+volatile char FLAG_Play;
+volatile char FLAG_Advanced;
+volatile char FLAG_AdvPlay;
 
 unsigned char controlByte = 0;
 signed int loop = 0;
-
 
 unsigned char PB6Counter = 0;
 unsigned char PB7Counter = 0;
@@ -48,6 +50,16 @@ void interrupt isr(void){
             PB7Counter++;
         if (PB6 == 1)
             PB6Counter++;
+        
+        if(getSensorData(18,1) == 0b00000001)
+            FLAG_Play++;
+        
+        if(getSensorData(18,1) == 0b00000100)
+            FLAG_Advanced++;
+        
+        if(getSensorData(18,1) == 0b00000101)
+            FLAG_AdvPlay++;
+            
        
         
     
@@ -81,7 +93,8 @@ __delay_ms(5000);
         //Rotates 360 and compares adcRAW at every half step.
         //If it detects a closer object than the previous closest then it stores 
         //the stepCount corresponding to that object.
-        if (PB7Counter >= 10 && PB7 == 0){
+        if (PB8Counter >= 10 && PB8 == 0){
+            adcClosest = 0;
             for (loop = 0; loop < 400; loop++){           
                 moveCW();
                 ADCMain();
@@ -94,16 +107,15 @@ __delay_ms(5000);
             for (loop = stepCount; loop != stepClosest; loop++){
                 moveCCW();
             } 
-            PB7Counter = 0;
+            PB8Counter = 0;
         }
 
        
-        //This might make it drive 4m forward, 250mm/s and takes 16 seconds. 
-        //Or it might not.
+        //Drive forward 4m straight line
 
-        if (PB6Counter >= 10 && PB6 == 0){
+        if (FLAG_Play >= 10 && getSensorData(18,1) == 0x00){
             Drive(1,144,0x7F,0xFF); //Drive, 400mm/s, straight
-            while (totalDistTrav << 4000){
+            while (totalDistTrav < 4000){
                 distTrav = getSensorData(19,2);   //Distance packetID, 2 bytes expected
                 totalDistTrav = (totalDistTrav + distTrav);
                                         
@@ -112,24 +124,24 @@ __delay_ms(5000);
             }            
                             
             Drive(0,0,0x7F,0xFF);   //Drive, 0mm/s, straight (STOP)
-            PB6Counter = 0;
+            FLAG_Play = 0;
         }
         
         //Perform 'Square' manoeuvre
-        if (PB8Counter >= 10 && PB8 == 0){
+        if (FLAG_Advanced >= 10 && getSensorData(18,1) == 0x00){
             totalDistTrav = 0;  //Resets distance traveled
             
             for (loop = 0; loop < 4; loop++){   //Loop 4 times
                 
                 //Turn 90 degrees
                 Drive(0,250,0xFF,0xFF);     //Drive, 250mm/s, turn on spot right 
-                while (angleTurned >> -90){
+                while (angleTurned > -90){
                     angleTurned = getSensorData(20,2);  //Angle packetID, 2 bytes expected
                 }  
                 
                 //Drive 1m
                 Drive(0,250,0x7F,0xFF);     //Drive, 250mm/s, straight
-                while (totalDistTrav << 1000){                        
+                while (totalDistTrav < 1000){                        
                     distTrav = getSensorData(19,2);   //Distance packetID, 2 bytes expected
                     totalDistTrav = (totalDistTrav + distTrav);
                                         
@@ -140,7 +152,16 @@ __delay_ms(5000);
             }
             
             Drive(0,0,0x7F,0xFF); //Drive, 0mm/s, straight (STOP) 
-            PB8Counter = 0;    
+            FLAG_Advanced = 0;    
         }
+        
+        //Do something when both buttons are pushed (wall follow)
+        if(FLAG_AdvPlay >= 10 && getSensorData(18,1) == 0x00){
+            
+            
+            
+            FLAG_AdvPlay = 0;
+        }
+        
     }
 }
