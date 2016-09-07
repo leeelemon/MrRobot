@@ -9,9 +9,6 @@
 volatile unsigned int time_count;
 volatile bit FLAG_1000MS;
 
-volatile char FLAG_Play;
-volatile char FLAG_Advanced;
-volatile char FLAG_AdvPlay;
 
 unsigned char controlByte = 0;
 signed int loop = 0;
@@ -114,7 +111,7 @@ __delay_ms(5000);
        
         //Drive forward 4m straight line
 
-        if (FLAG_Play >= 10 && getSensorData(18,1) == 0x00){
+        if (getSensorData(18,1) == 0b00000001){ //Play button
             Drive(1,144,0x7F,0xFF); //Drive, 400mm/s, straight
             while (totalDistTrav < 4000){
                 distTrav = getSensorData(19,2);   //Distance packetID, 2 bytes expected
@@ -125,11 +122,11 @@ __delay_ms(5000);
             }            
                             
             Drive(0,0,0x7F,0xFF);   //Drive, 0mm/s, straight (STOP)
-            FLAG_Play = 0;
+           
         }
         
         //Perform 'Square' manoeuvre
-        if (FLAG_Advanced >= 10 && getSensorData(18,1) == 0x00){
+        if (getSensorData(18,1) == 0b00000100){ //Advanced button
             totalDistTrav = 0;  //Resets distance traveled
             
             for (loop = 0; loop < 4; loop++){   //Loop 4 times
@@ -153,15 +150,15 @@ __delay_ms(5000);
             }
             
             Drive(0,0,0x7F,0xFF); //Drive, 0mm/s, straight (STOP) 
-            FLAG_Advanced = 0;    
+               
         }
         
         //Do something when both buttons are pushed (wall follow)
-        if(FLAG_AdvPlay >= 10 && getSensorData(18,1) == 0x00){
+        if(getSensorData(18,1) == 0b00000101){  //Play and Advanced at the same time
             
             
             
-            FLAG_AdvPlay = 0;
+            
         }
         
     }
