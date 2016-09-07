@@ -51,7 +51,7 @@ void interrupt isr(void){
         if (PB6 == 1)
             PB6Counter++;
         
-        if(getSensorData(18,1) == 0b00000001)
+  /*     if(getSensorData(18,1) == 0b00000001)
             FLAG_Play++;
         
         if(getSensorData(18,1) == 0b00000100)
@@ -60,7 +60,7 @@ void interrupt isr(void){
         if(getSensorData(18,1) == 0b00000101)
             FLAG_AdvPlay++;
             
-       
+   */    
         
     
                 
@@ -81,10 +81,11 @@ __delay_ms(5000);
     unsigned char controlByte = 0b00001101;
     spi_transfer(controlByte);
    
+    __delay_ms(1000);
     ser_putch(128);     //Startup
-    __delay_ms(3000);
+    __delay_ms(1000);
     ser_putch(132);     //Full mode
-  
+    __delay_ms(1000);
     lcdWriteToDigitBCD(totalDistTrav);
     
    

@@ -1558,6 +1558,7 @@ PB7Counter++;
 if (!RB2 == 1)
 PB6Counter++;
 
+
 if(getSensorData(18,1) == 0b00000001)
 FLAG_Play++;
 
@@ -1567,27 +1568,28 @@ FLAG_Advanced++;
 if(getSensorData(18,1) == 0b00000101)
 FLAG_AdvPlay++;
 
-# 68
+# 69
 }
 }
-
 
 void main(void){
 _delay((unsigned long)((5000)*(20000000/4000.0)));
 
 
 setupSPI();
+_delay((unsigned long)((5000)*(20000000/4000.0)));
 ser_init();
+_delay((unsigned long)((5000)*(20000000/4000.0)));
 setupLCD();
 setupADC();
 
 unsigned char controlByte = 0b00001101;
 spi_transfer(controlByte);
-
+_delay((unsigned long)((3000)*(20000000/4000.0)));
 ser_putch(128);
 _delay((unsigned long)((3000)*(20000000/4000.0)));
 ser_putch(132);
-
+_delay((unsigned long)((3000)*(20000000/4000.0)));
 lcdWriteToDigitBCD(totalDistTrav);
 
 

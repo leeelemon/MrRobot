@@ -1326,33 +1326,33 @@ Version 3.2 HI-TECH Software Intermediate Code
 "52
 [e ++ _PB6Counter -> -> 1 `i `uc ]
 [e :U 102 ]
-[; ;main.c: 54: if(getSensorData(18,1) == 0b00000001)
-"54
-[e $ ! == ( _getSensorData (2 , -> -> 18 `i `uc -> -> 1 `i `uc -> 1 `i 103  ]
-[; ;main.c: 55: FLAG_Play++;
+[; ;main.c: 55: if(getSensorData(18,1) == 0b00000001)
 "55
+[e $ ! == ( _getSensorData (2 , -> -> 18 `i `uc -> -> 1 `i `uc -> 1 `i 103  ]
+[; ;main.c: 56: FLAG_Play++;
+"56
 [e ++ _FLAG_Play -> -> 1 `i `uc ]
 [e :U 103 ]
-[; ;main.c: 57: if(getSensorData(18,1) == 0b00000100)
-"57
-[e $ ! == ( _getSensorData (2 , -> -> 18 `i `uc -> -> 1 `i `uc -> 4 `i 104  ]
-[; ;main.c: 58: FLAG_Advanced++;
+[; ;main.c: 58: if(getSensorData(18,1) == 0b00000100)
 "58
+[e $ ! == ( _getSensorData (2 , -> -> 18 `i `uc -> -> 1 `i `uc -> 4 `i 104  ]
+[; ;main.c: 59: FLAG_Advanced++;
+"59
 [e ++ _FLAG_Advanced -> -> 1 `i `uc ]
 [e :U 104 ]
-[; ;main.c: 60: if(getSensorData(18,1) == 0b00000101)
-"60
-[e $ ! == ( _getSensorData (2 , -> -> 18 `i `uc -> -> 1 `i `uc -> 5 `i 105  ]
-[; ;main.c: 61: FLAG_AdvPlay++;
+[; ;main.c: 61: if(getSensorData(18,1) == 0b00000101)
 "61
+[e $ ! == ( _getSensorData (2 , -> -> 18 `i `uc -> -> 1 `i `uc -> 5 `i 105  ]
+[; ;main.c: 62: FLAG_AdvPlay++;
+"62
 [e ++ _FLAG_AdvPlay -> -> 1 `i `uc ]
 [e :U 105 ]
-"68
+"69
 }
 [e :U 97 ]
-[; ;main.c: 68: }
 [; ;main.c: 69: }
-"69
+[; ;main.c: 70: }
+"70
 [e :UE 96 ]
 }
 "72
@@ -1367,251 +1367,263 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 76: setupSPI();
 "76
 [e ( _setupSPI ..  ]
-[; ;main.c: 77: ser_init();
+[; ;main.c: 77: _delay((unsigned long)((5000)*(20000000/4000.0)));
 "77
-[e ( _ser_init ..  ]
-[; ;main.c: 78: setupLCD();
+[e ( __delay (1 -> * -> -> 5000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;main.c: 78: ser_init();
 "78
-[e ( _setupLCD ..  ]
-[; ;main.c: 79: setupADC();
+[e ( _ser_init ..  ]
+[; ;main.c: 79: _delay((unsigned long)((5000)*(20000000/4000.0)));
 "79
+[e ( __delay (1 -> * -> -> 5000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;main.c: 80: setupLCD();
+"80
+[e ( _setupLCD ..  ]
+[; ;main.c: 81: setupADC();
+"81
 [e ( _setupADC ..  ]
 [v _controlByte `uc ~T0 @X0 1 a ]
-[; ;main.c: 81: unsigned char controlByte = 0b00001101;
-"81
+[; ;main.c: 83: unsigned char controlByte = 0b00001101;
+"83
 [e = _controlByte -> -> 13 `i `uc ]
-[; ;main.c: 82: spi_transfer(controlByte);
-"82
-[e ( _spi_transfer (1 _controlByte ]
-[; ;main.c: 84: ser_putch(128);
+[; ;main.c: 84: spi_transfer(controlByte);
 "84
-[e ( _ser_putch (1 -> -> 128 `i `uc ]
+[e ( _spi_transfer (1 _controlByte ]
 [; ;main.c: 85: _delay((unsigned long)((3000)*(20000000/4000.0)));
 "85
 [e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;main.c: 86: ser_putch(132);
+[; ;main.c: 86: ser_putch(128);
 "86
-[e ( _ser_putch (1 -> -> 132 `i `uc ]
-[; ;main.c: 88: lcdWriteToDigitBCD(totalDistTrav);
+[e ( _ser_putch (1 -> -> 128 `i `uc ]
+[; ;main.c: 87: _delay((unsigned long)((3000)*(20000000/4000.0)));
+"87
+[e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;main.c: 88: ser_putch(132);
 "88
+[e ( _ser_putch (1 -> -> 132 `i `uc ]
+[; ;main.c: 89: _delay((unsigned long)((3000)*(20000000/4000.0)));
+"89
+[e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;main.c: 90: lcdWriteToDigitBCD(totalDistTrav);
+"90
 [e ( _lcdWriteToDigitBCD (1 -> _totalDistTrav `ui ]
-[; ;main.c: 91: while(1){
-"91
+[; ;main.c: 93: while(1){
+"93
 [e :U 108 ]
 {
-[; ;main.c: 96: if (PB8Counter >= 10 && !RB0 == 0){
-"96
+[; ;main.c: 98: if (PB8Counter >= 10 && !RB0 == 0){
+"98
 [e $ ! && >= -> _PB8Counter `i -> 10 `i == -> ! _RB0 `i -> 0 `i 110  ]
 {
-[; ;main.c: 97: adcClosest = 0;
-"97
+[; ;main.c: 99: adcClosest = 0;
+"99
 [e = _adcClosest -> 0 `i ]
-[; ;main.c: 98: for (loop = 0; loop < 400; loop++){
-"98
+[; ;main.c: 100: for (loop = 0; loop < 400; loop++){
+"100
 {
 [e = _loop -> 0 `i ]
 [e $ < _loop -> 400 `i 111  ]
 [e $U 112  ]
 [e :U 111 ]
 {
-[; ;main.c: 99: moveCW();
-"99
-[e ( _moveCW ..  ]
-[; ;main.c: 100: ADCMain();
-"100
-[e ( _ADCMain ..  ]
-[; ;main.c: 101: if (adcRAW > adcClosest){
+[; ;main.c: 101: moveCW();
 "101
+[e ( _moveCW ..  ]
+[; ;main.c: 102: ADCMain();
+"102
+[e ( _ADCMain ..  ]
+[; ;main.c: 103: if (adcRAW > adcClosest){
+"103
 [e $ ! > _adcRAW -> _adcClosest `ui 114  ]
 {
-[; ;main.c: 102: adcClosest = adcRAW;
-"102
-[e = _adcClosest -> _adcRAW `i ]
-[; ;main.c: 103: stepClosest = stepCount;
-"103
-[e = _stepClosest -> _stepCount `i ]
+[; ;main.c: 104: adcClosest = adcRAW;
 "104
+[e = _adcClosest -> _adcRAW `i ]
+[; ;main.c: 105: stepClosest = stepCount;
+"105
+[e = _stepClosest -> _stepCount `i ]
+"106
 }
 [e :U 114 ]
-"105
+"107
 }
-"98
+"100
 [e ++ _loop -> 1 `i ]
 [e $ < _loop -> 400 `i 111  ]
 [e :U 112 ]
-"105
-}
-[; ;main.c: 104: }
-[; ;main.c: 105: }
-[; ;main.c: 107: for (loop = stepCount; loop != stepClosest; loop++){
 "107
+}
+[; ;main.c: 106: }
+[; ;main.c: 107: }
+[; ;main.c: 109: for (loop = stepCount; loop != stepClosest; loop++){
+"109
 {
 [e = _loop -> _stepCount `i ]
 [e $U 118  ]
 [e :U 115 ]
 {
-[; ;main.c: 108: moveCCW();
-"108
+[; ;main.c: 110: moveCCW();
+"110
 [e ( _moveCCW ..  ]
-"109
+"111
 }
-"107
+"109
 [e ++ _loop -> 1 `i ]
 [e :U 118 ]
 [e $ != _loop _stepClosest 115  ]
 [e :U 116 ]
-"109
-}
-[; ;main.c: 109: }
-[; ;main.c: 110: PB8Counter = 0;
-"110
-[e = _PB8Counter -> -> 0 `i `uc ]
 "111
 }
-[e :U 110 ]
 [; ;main.c: 111: }
-[; ;main.c: 116: if (FLAG_Play >= 10 && getSensorData(18,1) == 0x00){
-"116
+[; ;main.c: 112: PB8Counter = 0;
+"112
+[e = _PB8Counter -> -> 0 `i `uc ]
+"113
+}
+[e :U 110 ]
+[; ;main.c: 113: }
+[; ;main.c: 118: if (FLAG_Play >= 10 && getSensorData(18,1) == 0x00){
+"118
 [e $ ! && >= -> _FLAG_Play `i -> 10 `i == ( _getSensorData (2 , -> -> 18 `i `uc -> -> 1 `i `uc -> 0 `i 119  ]
 {
-[; ;main.c: 117: Drive(1,144,0x7F,0xFF);
-"117
+[; ;main.c: 119: Drive(1,144,0x7F,0xFF);
+"119
 [e ( _Drive (4 , , , -> 1 `i -> 144 `i -> 127 `i -> 255 `i ]
-[; ;main.c: 118: while (totalDistTrav < 4000){
-"118
+[; ;main.c: 120: while (totalDistTrav < 4000){
+"120
 [e $U 120  ]
 [e :U 121 ]
 {
-[; ;main.c: 119: distTrav = getSensorData(19,2);
-"119
+[; ;main.c: 121: distTrav = getSensorData(19,2);
+"121
 [e = _distTrav ( _getSensorData (2 , -> -> 19 `i `uc -> -> 2 `i `uc ]
-[; ;main.c: 120: totalDistTrav = (totalDistTrav + distTrav);
-"120
-[e = _totalDistTrav + _totalDistTrav _distTrav ]
-[; ;main.c: 122: lcdSetCursor(0x00);
+[; ;main.c: 122: totalDistTrav = (totalDistTrav + distTrav);
 "122
-[e ( _lcdSetCursor (1 -> -> 0 `i `uc ]
-[; ;main.c: 123: lcdWriteToDigitBCD(totalDistTrav);
-"123
-[e ( _lcdWriteToDigitBCD (1 -> _totalDistTrav `ui ]
+[e = _totalDistTrav + _totalDistTrav _distTrav ]
+[; ;main.c: 124: lcdSetCursor(0x00);
 "124
+[e ( _lcdSetCursor (1 -> -> 0 `i `uc ]
+[; ;main.c: 125: lcdWriteToDigitBCD(totalDistTrav);
+"125
+[e ( _lcdWriteToDigitBCD (1 -> _totalDistTrav `ui ]
+"126
 }
 [e :U 120 ]
-"118
+"120
 [e $ < _totalDistTrav -> 4000 `i 121  ]
 [e :U 122 ]
-[; ;main.c: 124: }
-[; ;main.c: 126: Drive(0,0,0x7F,0xFF);
-"126
-[e ( _Drive (4 , , , -> 0 `i -> 0 `i -> 127 `i -> 255 `i ]
-[; ;main.c: 127: FLAG_Play = 0;
-"127
-[e = _FLAG_Play -> -> 0 `i `uc ]
+[; ;main.c: 126: }
+[; ;main.c: 128: Drive(0,0,0x7F,0xFF);
 "128
+[e ( _Drive (4 , , , -> 0 `i -> 0 `i -> 127 `i -> 255 `i ]
+[; ;main.c: 129: FLAG_Play = 0;
+"129
+[e = _FLAG_Play -> -> 0 `i `uc ]
+"130
 }
 [e :U 119 ]
-[; ;main.c: 128: }
-[; ;main.c: 131: if (FLAG_Advanced >= 10 && getSensorData(18,1) == 0x00){
-"131
+[; ;main.c: 130: }
+[; ;main.c: 133: if (FLAG_Advanced >= 10 && getSensorData(18,1) == 0x00){
+"133
 [e $ ! && >= -> _FLAG_Advanced `i -> 10 `i == ( _getSensorData (2 , -> -> 18 `i `uc -> -> 1 `i `uc -> 0 `i 123  ]
 {
-[; ;main.c: 132: totalDistTrav = 0;
-"132
-[e = _totalDistTrav -> 0 `i ]
-[; ;main.c: 134: for (loop = 0; loop < 4; loop++){
+[; ;main.c: 134: totalDistTrav = 0;
 "134
+[e = _totalDistTrav -> 0 `i ]
+[; ;main.c: 136: for (loop = 0; loop < 4; loop++){
+"136
 {
 [e = _loop -> 0 `i ]
 [e $ < _loop -> 4 `i 124  ]
 [e $U 125  ]
 [e :U 124 ]
 {
-[; ;main.c: 137: Drive(0,250,0xFF,0xFF);
-"137
+[; ;main.c: 139: Drive(0,250,0xFF,0xFF);
+"139
 [e ( _Drive (4 , , , -> 0 `i -> 250 `i -> 255 `i -> 255 `i ]
-[; ;main.c: 138: while (angleTurned > -90){
-"138
+[; ;main.c: 140: while (angleTurned > -90){
+"140
 [e $U 127  ]
 [e :U 128 ]
 {
-[; ;main.c: 139: angleTurned = getSensorData(20,2);
-"139
+[; ;main.c: 141: angleTurned = getSensorData(20,2);
+"141
 [e = _angleTurned ( _getSensorData (2 , -> -> 20 `i `uc -> -> 2 `i `uc ]
-"140
+"142
 }
 [e :U 127 ]
-"138
+"140
 [e $ > _angleTurned -U -> 90 `i 128  ]
 [e :U 129 ]
-[; ;main.c: 140: }
-[; ;main.c: 143: Drive(0,250,0x7F,0xFF);
-"143
+[; ;main.c: 142: }
+[; ;main.c: 145: Drive(0,250,0x7F,0xFF);
+"145
 [e ( _Drive (4 , , , -> 0 `i -> 250 `i -> 127 `i -> 255 `i ]
-[; ;main.c: 144: while (totalDistTrav < 1000){
-"144
+[; ;main.c: 146: while (totalDistTrav < 1000){
+"146
 [e $U 130  ]
 [e :U 131 ]
 {
-[; ;main.c: 145: distTrav = getSensorData(19,2);
-"145
+[; ;main.c: 147: distTrav = getSensorData(19,2);
+"147
 [e = _distTrav ( _getSensorData (2 , -> -> 19 `i `uc -> -> 2 `i `uc ]
-[; ;main.c: 146: totalDistTrav = (totalDistTrav + distTrav);
-"146
-[e = _totalDistTrav + _totalDistTrav _distTrav ]
-[; ;main.c: 148: lcdSetCursor(0x00);
+[; ;main.c: 148: totalDistTrav = (totalDistTrav + distTrav);
 "148
-[e ( _lcdSetCursor (1 -> -> 0 `i `uc ]
-[; ;main.c: 149: lcdWriteToDigitBCD(totalDistTrav);
-"149
-[e ( _lcdWriteToDigitBCD (1 -> _totalDistTrav `ui ]
+[e = _totalDistTrav + _totalDistTrav _distTrav ]
+[; ;main.c: 150: lcdSetCursor(0x00);
 "150
-}
-[e :U 130 ]
-"144
-[e $ < _totalDistTrav -> 1000 `i 131  ]
-[e :U 132 ]
-[; ;main.c: 150: }
-[; ;main.c: 151: totalDistTrav = 0;
+[e ( _lcdSetCursor (1 -> -> 0 `i `uc ]
+[; ;main.c: 151: lcdWriteToDigitBCD(totalDistTrav);
 "151
-[e = _totalDistTrav -> 0 `i ]
+[e ( _lcdWriteToDigitBCD (1 -> _totalDistTrav `ui ]
 "152
 }
-"134
+[e :U 130 ]
+"146
+[e $ < _totalDistTrav -> 1000 `i 131  ]
+[e :U 132 ]
+[; ;main.c: 152: }
+[; ;main.c: 153: totalDistTrav = 0;
+"153
+[e = _totalDistTrav -> 0 `i ]
+"154
+}
+"136
 [e ++ _loop -> 1 `i ]
 [e $ < _loop -> 4 `i 124  ]
 [e :U 125 ]
-"152
-}
-[; ;main.c: 152: }
-[; ;main.c: 154: Drive(0,0,0x7F,0xFF);
 "154
-[e ( _Drive (4 , , , -> 0 `i -> 0 `i -> 127 `i -> 255 `i ]
-[; ;main.c: 155: FLAG_Advanced = 0;
-"155
-[e = _FLAG_Advanced -> -> 0 `i `uc ]
+}
+[; ;main.c: 154: }
+[; ;main.c: 156: Drive(0,0,0x7F,0xFF);
 "156
+[e ( _Drive (4 , , , -> 0 `i -> 0 `i -> 127 `i -> 255 `i ]
+[; ;main.c: 157: FLAG_Advanced = 0;
+"157
+[e = _FLAG_Advanced -> -> 0 `i `uc ]
+"158
 }
 [e :U 123 ]
-[; ;main.c: 156: }
-[; ;main.c: 159: if(FLAG_AdvPlay >= 10 && getSensorData(18,1) == 0x00){
-"159
+[; ;main.c: 158: }
+[; ;main.c: 161: if(FLAG_AdvPlay >= 10 && getSensorData(18,1) == 0x00){
+"161
 [e $ ! && >= -> _FLAG_AdvPlay `i -> 10 `i == ( _getSensorData (2 , -> -> 18 `i `uc -> -> 1 `i `uc -> 0 `i 133  ]
 {
-[; ;main.c: 163: FLAG_AdvPlay = 0;
-"163
+[; ;main.c: 165: FLAG_AdvPlay = 0;
+"165
 [e = _FLAG_AdvPlay -> -> 0 `i `uc ]
-"164
-}
-[e :U 133 ]
 "166
 }
+[e :U 133 ]
+"168
+}
 [e :U 107 ]
-"91
+"93
 [e $U 108  ]
 [e :U 109 ]
-[; ;main.c: 164: }
 [; ;main.c: 166: }
-[; ;main.c: 167: }
-"167
+[; ;main.c: 168: }
+[; ;main.c: 169: }
+"169
 [e :UE 106 ]
 }
