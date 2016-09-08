@@ -1,5 +1,5 @@
 
-# 1 "ser.c"
+# 1 "main.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -1448,6 +1448,31 @@ signed int distTrav = 0;
 signed int totalDistTrav = 0;
 signed int angleTurned = 0;
 
+# 17 "LCD.h"
+volatile unsigned int stepCountNeg = 0;
+volatile unsigned int degrees = 0;
+
+
+void lcdWriteStepCount(unsigned int stepCount);
+
+
+void lcdWriteControl(unsigned char databyte);
+
+
+void lcdWriteData(unsigned char databyte);
+
+
+void lcdSetCursor(unsigned char address);
+
+
+void lcdWriteString(char * s);
+
+
+void lcdWriteToDigitBCD(unsigned int data);
+
+
+void setupLCD(void);
+
 # 6 "ser.h"
 unsigned char speedH = 0;
 unsigned char speedL = 0;
@@ -1476,91 +1501,166 @@ void DriveDirect(unsigned char RightSpeedH, unsigned char RightSpeedL, unsigned 
 
 signed int getSensorData(unsigned char packetID, unsigned char bytes);
 
-# 17 "lcd.h"
-volatile unsigned int stepCountNeg = 0;
-volatile unsigned int degrees = 0;
+# 7 "SPI.h"
+void setupSPI(void);
+unsigned char spi_transfer(unsigned char data);
+
+# 6 "ADC.h"
+volatile unsigned int adcRAW = 0;
+volatile unsigned int Distance = 0;
+
+void ADCMain(void);
+void setupADC(void);
+unsigned int getADC(void);
+unsigned int adcConvertMM(unsigned int);
+
+# 6 "motor.h"
+void moveCW(void);
+void moveCCW(void);
+
+signed char stepCount = 0;
+char negativeFlag = 0;
+char currentStep = 0;
+
+# 9 "main.c"
+volatile unsigned int time_count;
+volatile bit FLAG_1000MS;
 
 
-void lcdWriteStepCount(unsigned int stepCount);
+unsigned char controlByte = 0;
+signed int loop = 0;
 
+unsigned char PB6Counter = 0;
+unsigned char PB7Counter = 0;
+unsigned char PB8Counter = 0;
 
-void lcdWriteControl(unsigned char databyte);
+char count = 0;
 
+# 26
+void interrupt isr(void){
 
-void lcdWriteData(unsigned char databyte);
+if(TMR0IF){
+TMR0IF = 0;
+TMR0 = 100;
+time_count++;
 
+if(time_count % 1 == 0) {
 
-void lcdSetCursor(unsigned char address);
-
-
-void lcdWriteString(char * s);
-
-
-void lcdWriteToDigitBCD(unsigned int data);
-
-
-void setupLCD(void);
-
-# 5 "ser.c"
-void ser_init(void){
-
-TXSTA = 0b00100100;
-RCSTA = 0b10011000;
-
-# 24
-SPBRG = 20;
-
-PEIE = 1;
-(GIE = 1);
+RC2 = 1; __nop(); RC2 = 0;;
 }
 
-void ser_putch(unsigned char c){
-while(!TRMT);
-TXREG=c;
+if(time_count % 1000 == 0){
+RB4 = !RB4;
+
+time_count = 0;
 }
 
-unsigned char ser_getch(){
-while(!RCIF);
-unsigned char rxbyte = RCREG;
-return rxbyte;
+if (!RB0 == 1)
+PB8Counter++;
+if (!RB1 == 1)
+PB7Counter++;
+if (!RB2 == 1)
+PB6Counter++;
 
+# 65
 }
-
-
-
-
-void Drive(unsigned char speedH, unsigned char speedL, unsigned char radH, unsigned char radL){
-ser_putch(137);
-ser_putch(speedH);
-ser_putch(speedL);
-ser_putch(radH);
-ser_putch(radL);
-}
-
-void DriveDirect(unsigned char RightSpeedH, unsigned char RightSpeedL, unsigned char LeftSpeedH, unsigned char LeftSpeedL){
-ser_putch(145);
-ser_putch(RightSpeedH);
-ser_putch(RightSpeedL);
-ser_putch(LeftSpeedH);
-ser_putch(LeftSpeedL);
 }
 
 
-signed int getSensorData(unsigned char packetID, unsigned char bytes){
-ser_putch(142);
-ser_putch(packetID);
-
-if (bytes == 2)
-highByte = ser_getch();
-else
-highByte = 0;
-
-lowByte = ser_getch();
-
-signed int sensor = (256*highByte + lowByte);
-
-return sensor;
+void main(void){
+_delay((unsigned long)((5000)*(20000000/4000.0)));
 
 
+setupSPI();
+ser_init();
+setupLCD();
+setupADC();
 
+unsigned char controlByte = 0b00001101;
+spi_transfer(controlByte);
+
+_delay((unsigned long)((1000)*(20000000/4000.0)));
+ser_putch(128);
+_delay((unsigned long)((1000)*(20000000/4000.0)));
+ser_putch(132);
+_delay((unsigned long)((1000)*(20000000/4000.0)));
+lcdWriteToDigitBCD(totalDistTrav);
+
+
+while(1){
+
+
+
+
+if (PB8Counter >= 10 && !RB0 == 0){
+adcClosest = 0;
+for (loop = 0; loop < 400; loop++){
+moveCW();
+ADCMain();
+if (adcRAW > adcClosest){
+adcClosest = adcRAW;
+stepClosest = stepCount;
+}
+}
+
+for (loop = stepCount; loop != stepClosest; loop++){
+moveCCW();
+}
+PB8Counter = 0;
+}
+
+
+
+
+if (getSensorData(18,1) == 0b00000001){
+DriveDirect(0,250,0,250);
+while (totalDistTrav < 4000){
+distTrav = getSensorData(19,2);
+totalDistTrav = (totalDistTrav + distTrav);
+
+lcdSetCursor(0x00);
+lcdWriteToDigitBCD(totalDistTrav);
+}
+
+DriveDirect(0,0,0,0);
+
+}
+
+
+if (getSensorData(18,1) == 0b00000100){
+totalDistTrav = 0;
+
+for (loop = 0; loop < 4; loop++){
+
+
+Drive(0,250,0xFF,0xFF);
+while (angleTurned > -90){
+angleTurned = getSensorData(20,2);
+}
+
+
+Drive(0,250,0x7F,0xFF);
+while (totalDistTrav < 1000){
+distTrav = getSensorData(19,2);
+totalDistTrav = (totalDistTrav + distTrav);
+
+lcdSetCursor(0x00);
+lcdWriteToDigitBCD(totalDistTrav);
+}
+totalDistTrav = 0;
+}
+
+DriveDirect(0,0,0,0);
+
+}
+
+
+if(getSensorData(18,1) == 0b00000101){
+
+
+
+
+}
+
+}
 }

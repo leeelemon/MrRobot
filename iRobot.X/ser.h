@@ -23,7 +23,7 @@ void ser_putch(unsigned char c);
 unsigned char ser_getch();
 
 //Drive command
-void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
+void Drive(unsigned char speedH, unsigned char speedL, unsigned char radH, unsigned char radL);
 
 void DriveDirect(unsigned char RightSpeedH, unsigned char RightSpeedL, unsigned char LeftSpeedH, unsigned char LeftSpeedL);
 
