@@ -130,14 +130,16 @@ __delay_ms(5000);
             totalDistTrav = 0;  //Resets distance traveled
                 
                 for (loop = 0; loop < 4; loop++){   //Loop 4 times
-                        
-                    while (totalangleTurned > -85){
+                   
+                    while (totalangleTurned >= -85){
                         Drive(0,250,0xFF,0xFF); //Drive on spot right
                         angleTurned = getSensorData(20,2);  //Angle packetID, 2 bytes expected
                         totalangleTurned = (totalangleTurned + angleTurned);
-                    }  
+                    }
+                    
                     totalangleTurned = 0;
                     angleTurned = 0;
+                    
                     Drive(0,250,0x7F,0xFF);     //Drive, 250mm/s, straight for 1m
                         
                     while (totalDistTrav < 1000){                        
@@ -146,7 +148,9 @@ __delay_ms(5000);
                         lcdSetCursor(0x00);     //Print distance on first row first position
                         lcdWriteToDigitBCD(totalDistTrav);                  
                     }
-                DriveDirect(0,0,0,0);
+                
+                    totalDistTrav = 0;    
+                    DriveDirect(0,0,0,0);
                 
                 }
             

@@ -1633,13 +1633,15 @@ totalDistTrav = 0;
 
 for (loop = 0; loop < 4; loop++){
 
-while (totalangleTurned > -85){
+while (totalangleTurned >= -85){
 Drive(0,250,0xFF,0xFF);
 angleTurned = getSensorData(20,2);
 totalangleTurned = (totalangleTurned + angleTurned);
 }
+
 totalangleTurned = 0;
 angleTurned = 0;
+
 Drive(0,250,0x7F,0xFF);
 
 while (totalDistTrav < 1000){
@@ -1648,6 +1650,7 @@ totalDistTrav = (totalDistTrav + distTrav);
 lcdSetCursor(0x00);
 lcdWriteToDigitBCD(totalDistTrav);
 }
+totalDistTrav = 0;
 DriveDirect(0,0,0,0);
 
 }
