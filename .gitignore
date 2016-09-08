@@ -1,1 +1,5 @@
 iRobot.X/nbproject/Makefile-genesis.properties
+*.obj
+iRobot.X/dist/default/production/iRobot.X.production.mum
+*.map
+*.p1
