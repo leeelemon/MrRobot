@@ -42,7 +42,7 @@ unsigned char ser_getch(){
 //Drive command (Velocity high, Velocity low, Radius high, Radius low)
 //Radius of 0x7FFF is a straight line
 //Negative radius turns right
-void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL){
+void Drive(unsigned char speedH, unsigned char speedL, unsigned char radH, unsigned char radL){
     ser_putch(137);
         ser_putch(speedH);
         ser_putch(speedL);
@@ -50,6 +50,13 @@ void Drive(signed int speedH, signed int speedL, signed int radH, signed int rad
         ser_putch(radL);
 }
 
+void DriveDirect(unsigned char RightSpeedH, unsigned char RightSpeedL, unsigned char LeftSpeedH, unsigned char LeftSpeedL){
+    ser_putch(145);
+        ser_putch(RightSpeedH);
+        ser_putch(RightSpeedL);
+        ser_putch(LeftSpeedH);
+        ser_putch(LeftSpeedL);
+}
 
 //Will return as requested sensor data, specify packetID and how many bytes the expected output is.
 signed int getSensorData(unsigned char packetID, unsigned char bytes){

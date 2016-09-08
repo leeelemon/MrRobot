@@ -112,7 +112,7 @@ __delay_ms(5000);
         //Drive forward 4m straight line
 
         if (getSensorData(18,1) == 0b00000001){ //Play button
-            Drive(1,144,0x7F,0xFF); //Drive, 400mm/s, straight
+            DriveDirect(0,250,0,250); //Drive, 250mm/s | 250mm/s
             while (totalDistTrav < 4000){
                 distTrav = getSensorData(19,2);   //Distance packetID, 2 bytes expected
                 totalDistTrav = (totalDistTrav + distTrav);
@@ -121,7 +121,7 @@ __delay_ms(5000);
                 lcdWriteToDigitBCD(totalDistTrav);  
             }            
                             
-            Drive(0,0,0x7F,0xFF);   //Drive, 0mm/s, straight (STOP)
+            DriveDirect(0,0,0,0);   //Drive, 0mm/s, straight (STOP)
            
         }
         
@@ -149,7 +149,7 @@ __delay_ms(5000);
                 totalDistTrav = 0;
             }
             
-            Drive(0,0,0x7F,0xFF); //Drive, 0mm/s, straight (STOP) 
+            DriveDirect(0,0,0,0); //Drive, 0mm/s, straight (STOP) 
                
         }
         
