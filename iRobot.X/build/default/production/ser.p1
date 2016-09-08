@@ -1091,6 +1091,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `i
 ]
 [; ;main.h: 36: signed int angleTurned = 0;
+"37
+[v _totalangleTurned `i ~T0 @X0 1 e ]
+[i _totalangleTurned
+-> 0 `i
+]
+[; ;main.h: 37: signed int totalangleTurned = 0;
 "6 ser.h
 [v _speedH `uc ~T0 @X0 1 e ]
 [i _speedH

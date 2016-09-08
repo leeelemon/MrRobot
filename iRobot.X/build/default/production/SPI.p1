@@ -1093,6 +1093,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `i
 ]
 [; ;main.h: 36: signed int angleTurned = 0;
+"37
+[v _totalangleTurned `i ~T0 @X0 1 e ]
+[i _totalangleTurned
+-> 0 `i
+]
+[; ;main.h: 37: signed int totalangleTurned = 0;
 [; ;SPI.h: 7: void setupSPI(void);
 [; ;SPI.h: 8: unsigned char spi_transfer(unsigned char data);
 "4 SPI.c
