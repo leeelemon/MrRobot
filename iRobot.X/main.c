@@ -159,11 +159,18 @@ __delay_ms(5000);
         }
         
         //Do something when both buttons are pushed (wall follow)
+        
         if(getSensorData(18,1) == 0b00000101){  //Play and Advanced at the same time
             
-            
-            
-            
+            for(scan = 0; scan <=420; scan++){                                  //420 should be round 360 degrees.
+                moveCW();                                                       //Step CW each count
+                if (getADC()> ADChigh){                                         //If new ADC value higher than previous
+                    getADC() = ADChigh;                                         //Make new value the high. I've called the function twice, shouldn't take too long.
+                    position = scan;                                            //This records the step count at the time of the highest ADC value
+                }
+            }
+            position = 420 - position;                                          //Steps required to go back CCW to ADChigh
+            moveCCW(position);                                                  //Moving back to that spot          
         }
         
     }

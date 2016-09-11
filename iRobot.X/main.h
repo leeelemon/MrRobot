@@ -35,6 +35,9 @@ signed int distTrav = 0;
 signed int totalDistTrav = 0;
 signed int angleTurned = 0;
 signed int totalangleTurned = 0;
+int scan = 0;
+int ADChigh = 0;
+int position = 0;
 
 
 
