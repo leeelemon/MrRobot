@@ -53,9 +53,9 @@
 [v _ser_getch ser_getch `(uc  1 e 1 0 ]
 "45
 [v _Drive Drive `(v  1 e 1 0 ]
-"53
+"54
 [v _DriveDirect DriveDirect `(v  1 e 1 0 ]
-"62
+"85
 [v _getSensorData getSensorData `(i  1 e 2 0 ]
 "4 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\SPI.c
 [v _setupSPI setupSPI `(v  1 e 1 0 ]
@@ -179,12 +179,20 @@
 [v _negativeFlag negativeFlag `uc  1 e 1 0 ]
 "11
 [v _currentStep currentStep `uc  1 e 1 0 ]
+"13 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\ser.h
+[v _RightSpeedH RightSpeedH `uc  1 e 1 0 ]
+"14
+[v _RightSpeedL RightSpeedL `uc  1 e 1 0 ]
+"15
+[v _LeftSpeedH LeftSpeedH `uc  1 e 1 0 ]
+"16
+[v _LeftSpeedL LeftSpeedL `uc  1 e 1 0 ]
 "69 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
 "76
 [v main@controlByte controlByte `uc  1 a 1 34 ]
-"165
+"172
 } 0
 "23 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\SPI.c
 [v _spi_transfer spi_transfer `(uc  1 e 1 0 ]
@@ -227,17 +235,17 @@
 {
 "103
 } 0
-"62 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\ser.c
+"85 C:\Users\Brendan\Documents\GitHub\MrRobot\iRobot.X\ser.c
 [v _getSensorData getSensorData `(i  1 e 2 0 ]
 {
 [v getSensorData@packetID packetID `uc  1 a 1 wreg ]
-"73
+"96
 [v getSensorData@sensor sensor `i  1 a 2 6 ]
-"62
+"85
 [v getSensorData@packetID packetID `uc  1 a 1 wreg ]
 [v getSensorData@bytes bytes `uc  1 p 1 2 ]
 [v getSensorData@packetID packetID `uc  1 a 1 8 ]
-"79
+"102
 } 0
 "35
 [v _ser_getch ser_getch `(uc  1 e 1 0 ]
@@ -246,16 +254,17 @@
 [v ser_getch@rxbyte rxbyte `uc  1 a 1 1 ]
 "40
 } 0
-"53
+"54
 [v _DriveDirect DriveDirect `(v  1 e 1 0 ]
 {
-[v DriveDirect@RightSpeedH RightSpeedH `uc  1 a 1 wreg ]
-[v DriveDirect@RightSpeedH RightSpeedH `uc  1 a 1 wreg ]
-[v DriveDirect@RightSpeedL RightSpeedL `uc  1 p 1 1 ]
-[v DriveDirect@LeftSpeedH LeftSpeedH `uc  1 p 1 2 ]
-[v DriveDirect@LeftSpeedL LeftSpeedL `uc  1 p 1 3 ]
-[v DriveDirect@RightSpeedH RightSpeedH `uc  1 a 1 4 ]
+"68
+[v DriveDirect@data_244 data `ui  1 a 2 8 ]
 "59
+[v DriveDirect@data data `ui  1 a 2 6 ]
+"54
+[v DriveDirect@VelocityRight VelocityRight `i  1 p 2 1 ]
+[v DriveDirect@VelocityLeft VelocityLeft `i  1 p 2 3 ]
+"81
 } 0
 "45
 [v _Drive Drive `(v  1 e 1 0 ]

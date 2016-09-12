@@ -92,6 +92,12 @@ __delay_ms(5000);
         //If it detects a closer object than the previous closest then it stores 
         //the stepCount corresponding to that object.
         if (PB8Counter >= 10 && PB8 == 0){
+            //Loops motor back to stepCount 0
+            while (stepCount < 0){
+                moveCCW();
+            }
+            
+            
             adcClosest = 0;
             for (loop = 0; loop < 400; loop++){           
                 moveCW();
@@ -112,8 +118,9 @@ __delay_ms(5000);
         //Drive forward 4m straight line
 
         if (getSensorData(18,1) == 0b00000001){ //Play button
-            DriveDirect(250,250); //Drive, 250mm/s | 250mm/s
-            while (totalDistTrav < 4000){
+            totalDistTrav = 0; 
+            DriveDirect(200,200); //Drive, 250mm/s | 250mm/s
+            while (totalDistTrav < 2){
                 distTrav = getSensorData(19,2);   //Distance packetID, 2 bytes expected
                 totalDistTrav = (totalDistTrav + distTrav);
                                         

@@ -1479,6 +1479,8 @@ unsigned char speedL = 0;
 unsigned char radH = 0;
 unsigned char radL = 0;
 
+unsigned int VelocityRight = 0;
+unsigned int VelocityLeft = 0;
 unsigned char RightSpeedH = 0;
 unsigned char RightSpeedL = 0;
 unsigned char LeftSpeedH = 0;
@@ -1496,7 +1498,7 @@ unsigned char ser_getch();
 
 void Drive(unsigned char speedH, unsigned char speedL, unsigned char radH, unsigned char radL);
 
-void DriveDirect(unsigned char RightSpeedH, unsigned char RightSpeedL, unsigned char LeftSpeedH, unsigned char LeftSpeedL);
+void DriveDirect(signed int VelocityRight, signed int VelocityLeft);
 
 
 signed int getSensorData(unsigned char packetID, unsigned char bytes);
@@ -1593,6 +1595,12 @@ while(1){
 
 
 if (PB8Counter >= 10 && !RB0 == 0){
+
+while (stepCount < 0){
+moveCCW();
+}
+
+
 adcClosest = 0;
 for (loop = 0; loop < 400; loop++){
 moveCW();
@@ -1613,8 +1621,9 @@ PB8Counter = 0;
 
 
 if (getSensorData(18,1) == 0b00000001){
-DriveDirect(0,250,0,250);
-while (totalDistTrav < 4000){
+totalDistTrav = 0;
+DriveDirect(200,200);
+while (totalDistTrav < 3000){
 distTrav = getSensorData(19,2);
 totalDistTrav = (totalDistTrav + distTrav);
 
@@ -1622,7 +1631,7 @@ lcdSetCursor(0x00);
 lcdWriteToDigitBCD(totalDistTrav);
 }
 
-DriveDirect(0,0,0,0);
+DriveDirect(0,0);
 
 }
 
@@ -1650,7 +1659,7 @@ lcdWriteToDigitBCD(totalDistTrav);
 totalDistTrav = 0;
 }
 
-DriveDirect(0,0,0,0);
+DriveDirect(0,0);
 
 }
 

@@ -27,7 +27,7 @@ unsigned char ser_getch();
 //Drive command
 void Drive(unsigned char speedH, unsigned char speedL, unsigned char radH, unsigned char radL);
 
-void DriveDirect(unsigned int VelocityRight, unsigned int VelocityLeft);
+void DriveDirect(signed int VelocityRight, signed int VelocityLeft);
 
 //Given sensor packetID and expected number of bytes, outputs sensor value in a single variable.
 signed int getSensorData(unsigned char packetID, unsigned char bytes);

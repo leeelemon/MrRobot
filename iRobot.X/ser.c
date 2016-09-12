@@ -51,7 +51,7 @@ void Drive(unsigned char speedH, unsigned char speedL, unsigned char radH, unsig
 }
 
 
-void DriveDirect(unsigned int VelocityRight, unsigned int VelocityLeft){
+void DriveDirect(signed int VelocityRight, signed int VelocityLeft){
     RightSpeedH = 0;
     LeftSpeedH = 0;
     
