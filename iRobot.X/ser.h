@@ -8,6 +8,8 @@ unsigned char speedL = 0;
 unsigned char radH = 0;
 unsigned char radL = 0;
 
+unsigned int VelocityRight = 0;
+unsigned int VelocityLeft = 0;
 unsigned char RightSpeedH = 0;
 unsigned char RightSpeedL = 0;
 unsigned char LeftSpeedH = 0;
@@ -23,9 +25,9 @@ void ser_putch(unsigned char c);
 unsigned char ser_getch();
 
 //Drive command
-void Drive(signed int speedH, signed int speedL, signed int radH, signed int radL);
+void Drive(unsigned char speedH, unsigned char speedL, unsigned char radH, unsigned char radL);
 
-void DriveDirect(unsigned char RightSpeedH, unsigned char RightSpeedL, unsigned char LeftSpeedH, unsigned char LeftSpeedL);
+void DriveDirect(unsigned int VelocityRight, unsigned int VelocityLeft);
 
 //Given sensor packetID and expected number of bytes, outputs sensor value in a single variable.
 signed int getSensorData(unsigned char packetID, unsigned char bytes);

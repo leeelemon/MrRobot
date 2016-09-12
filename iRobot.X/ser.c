@@ -50,13 +50,36 @@ void Drive(unsigned char speedH, unsigned char speedL, unsigned char radH, unsig
         ser_putch(radL);
 }
 
-void DriveDirect(unsigned char RightSpeedH, unsigned char RightSpeedL, unsigned char LeftSpeedH, unsigned char LeftSpeedL){
-    ser_putch(145);
+
+void DriveDirect(unsigned int VelocityRight, unsigned int VelocityLeft){
+    RightSpeedH = 0;
+    LeftSpeedH = 0;
+    
+	if(VelocityRight > 255){
+		unsigned int data = VelocityRight;	
+		for (RightSpeedH = 0; data > 255; RightSpeedH++){
+			data = data - 256;
+		}				
+	}
+    RightSpeedL = VelocityRight;
+    
+	
+	if(VelocityLeft > 255){
+		unsigned int data = VelocityLeft;		
+		for (LeftSpeedH = 0; data > 255; LeftSpeedH++){
+			data = data - 256;
+		}	        
+	}	
+    LeftSpeedL = VelocityLeft;
+	
+	
+	ser_putch(145);
         ser_putch(RightSpeedH);
         ser_putch(RightSpeedL);
         ser_putch(LeftSpeedH);
         ser_putch(LeftSpeedL);
 }
+
 
 //Will return as requested sensor data, specify packetID and how many bytes the expected output is.
 signed int getSensorData(unsigned char packetID, unsigned char bytes){
