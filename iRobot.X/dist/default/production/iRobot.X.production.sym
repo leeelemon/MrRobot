@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 ___lwdiv@dividend 51 0 BANK0 1
 ___aldiv@counter 58 0 BANK0 1
 ___lwdiv@counter 56 0 BANK0 1
+=======
+___lwdiv@dividend 4F 0 BANK0 1
+___aldiv@counter 56 0 BANK0 1
+___lwdiv@counter 54 0 BANK0 1
+>>>>>>> origin/master
 _GO FA 0 ABS 0
 __CFG_WRT$OFF 0 0 ABS 0
 _RB0 30 0 ABS 0
@@ -16,6 +22,7 @@ __S1 7E 0 ABS 0
 __S2 0 0 ABS 0
 __S3 0 0 ABS 0
 _GIE 5F 0 ABS 0
+<<<<<<< HEAD
 __end_of_setupLCD EF9 0 CODE 0
 __Hintentry 12 0 CODE 0
 __Lintentry 4 0 CODE 0
@@ -29,16 +36,39 @@ ser_getch@rxbyte 4A 0 BANK0 1
 _PEIE 5E 0 ABS 0
 _RCIF 65 0 ABS 0
 _TRMT 4C1 0 ABS 0
+=======
+__end_of_setupLCD F90 0 CODE 0
+__Hintentry 12 0 CODE 0
+__Lintentry 4 0 CODE 0
+_lcdWriteToDigitBCD 57C 0 CODE 0
+__size_of_ser_getch 0 0 ABS 0
+__pintentry 4 0 CODE 0
+_isr 735 0 CODE 0
+_lcdWriteControl E92 0 CODE 0
+_TMR0 1 0 ABS 0
+ser_getch@rxbyte 48 0 BANK0 1
+_PEIE 5E 0 ABS 0
+_RCIF 65 0 ABS 0
+_TRMT 4C1 0 ABS 0
+_totalangleTurned 34 0 BANK0 1
+>>>>>>> origin/master
 _main 36D 0 CODE 0
 ___sp 0 0 STACK 2
 btemp 7E 0 ABS 0
 ltemp 7E 0 ABS 0
 ttemp 7E 0 ABS 0
 wtemp 7E 0 ABS 0
+<<<<<<< HEAD
 _loop 2E 0 BANK0 1
 __size_of_ADCMain 0 0 ABS 0
 start 12 0 CODE 0
 __end_of___aldiv 6A4 0 CODE 0
+=======
+_loop 2A 0 BANK0 1
+__size_of_ADCMain 0 0 ABS 0
+start 12 0 CODE 0
+__end_of___aldiv 6A2 0 CODE 0
+>>>>>>> origin/master
 _Distance 20 0 BANK0 1
 _RCREG 1A 0 ABS 0
 _TRISA 85 0 ABS 0
@@ -56,8 +86,13 @@ _TRISE 89 0 ABS 0
 _PORTC 7 0 ABS 0
 _PORTD 8 0 ABS 0
 _PORTE 9 0 ABS 0
+<<<<<<< HEAD
 adcConvertMM@adcRAW 5E 0 BANK0 1
 lcdSetCursor@address 4C 0 BANK0 1
+=======
+adcConvertMM@adcRAW 5C 0 BANK0 1
+lcdSetCursor@address 4A 0 BANK0 1
+>>>>>>> origin/master
 ltemp0 7E 0 ABS 0
 ttemp0 7E 0 ABS 0
 wtemp0 7E 0 ABS 0
@@ -77,6 +112,7 @@ wtemp6 7F 0 ABS 0
 interrupt_function 4 0 CODE 0
 __Hconfig 2008 0 CONFIG 0
 __Lconfig 2007 0 CONFIG 0
+<<<<<<< HEAD
 lcdWriteControl@databyte 4B 0 BANK0 1
 ?___lwmod 70 0 COMMON 1
 _highByte 48 0 BANK0 1
@@ -84,6 +120,15 @@ __size_of_ser_putch 0 0 ABS 0
 __Hram 0 0 ABS 0
 __Lram 0 0 ABS 0
 _Drive EA8 0 CODE 0
+=======
+lcdWriteControl@databyte 49 0 BANK0 1
+?___lwmod 70 0 COMMON 1
+_highByte 46 0 BANK0 1
+__size_of_ser_putch 0 0 ABS 0
+__Hram 0 0 ABS 0
+__Lram 0 0 ABS 0
+_Drive F17 0 CODE 0
+>>>>>>> origin/master
 __size_of_isr 0 0 ABS 0
 __Hfunctab 0 0 CODE 0
 __Lfunctab 0 0 CODE 0
@@ -94,6 +139,7 @@ __Hcommon 0 0 ABS 0
 __Lcommon 0 0 ABS 0
 __Heeprom_data 0 0 EEDATA 3
 __Leeprom_data 0 0 EEDATA 3
+<<<<<<< HEAD
 _distTrav 2C 0 BANK0 1
 _TMR0IE 5D 0 ABS 0
 _TMR0IF 5A 0 ABS 0
@@ -102,6 +148,16 @@ ___int_sp 0 0 STACK 2
 _ser_init DF2 0 CODE 0
 _getADC F75 0 CODE 0
 ?___lwdiv 4F 0 BANK0 1
+=======
+_distTrav 28 0 BANK0 1
+_TMR0IE 5D 0 ABS 0
+_TMR0IF 5A 0 ABS 0
+___int_sp 0 0 STACK 2
+?___aldiv 4D 0 BANK0 1
+_ser_init E61 0 CODE 0
+_getADC 77B 0 CODE 0
+?___lwdiv 4D 0 BANK0 1
+>>>>>>> origin/master
 _SSPBUF 13 0 ABS 0
 _ADRESH 1E 0 ABS 0
 __Habs1 0 0 ABS 0
@@ -112,11 +168,16 @@ __Hsfr0 0 0 ABS 0
 __Lsfr0 0 0 ABS 0
 __Hsfr1 0 0 ABS 0
 __Lsfr1 0 0 ABS 0
+<<<<<<< HEAD
 __end_of_ADCMain E85 0 CODE 0
+=======
+__end_of_ADCMain EF4 0 CODE 0
+>>>>>>> origin/master
 __Hsfr2 0 0 ABS 0
 __Lsfr2 0 0 ABS 0
 __Hsfr3 0 0 ABS 0
 __Lsfr3 0 0 ABS 0
+<<<<<<< HEAD
 _adcRAW 26 0 BANK0 1
 _moveCW 731 0 CODE 0
 _ser_getch 7F6 0 CODE 0
@@ -136,18 +197,45 @@ _currentStep 7B 0 COMMON 1
 __HcstackBANK0 0 0 ABS 0
 __LcstackBANK0 0 0 ABS 0
 __pcstackBANK0 49 0 BANK0 1
+=======
+_adcRAW 22 0 BANK0 1
+_moveCW 6A2 0 CODE 0
+_ser_getch E4B 0 CODE 0
+__end_of_lcdSetCursor E4B 0 CODE 0
+spi_transfer@data 49 0 BANK0 1
+_negativeFlag 40 0 BANK0 1
+__end_of_lcdWriteControl EA6 0 CODE 0
+_ser_putch E55 0 CODE 0
+__Hcode 0 0 ABS 0
+__Lcode 0 0 ABS 0
+__size_of_spi_transfer 0 0 ABS 0
+stackhi 0 0 ABS 0
+_lcdWriteData E7F 0 CODE 0
+__end_of_Drive F3F 0 CODE 0
+_currentStep 7B 0 COMMON 1
+__HcstackBANK0 0 0 ABS 0
+__LcstackBANK0 0 0 ABS 0
+__pcstackBANK0 47 0 BANK0 1
+>>>>>>> origin/master
 stacklo 0 0 ABS 0
 __size_of_lcdSetCursor 0 0 ABS 0
 saved_w 7E 0 ABS 0
 __Hinit 12 0 CODE 0
 __Linit 12 0 CODE 0
+<<<<<<< HEAD
 ___wmul E85 0 CODE 0
 _stepCountNeg 32 0 BANK0 1
 __end_of_main 57E 0 CODE 0
+=======
+___wmul EF4 0 CODE 0
+_stepCountNeg 2E 0 BANK0 1
+__end_of_main 57C 0 CODE 0
+>>>>>>> origin/master
 __Htext 0 0 ABS 0
 __Ltext 0 0 ABS 0
 __size_of_setupADC 0 0 ABS 0
 _FLAG_1000MS 3E8 -36B COMMON 1
+<<<<<<< HEAD
 ___wmul@multiplier 49 0 BANK0 1
 __HdataBANK0 0 0 ABS 0
 __LdataBANK0 0 0 ABS 0
@@ -167,6 +255,27 @@ __Hstrings 0 0 ABS 0
 __Lstrings 0 0 ABS 0
 __end_of_setupSPI E65 0 CODE 0
 ?_getSensorData 4B 0 BANK0 1
+=======
+___wmul@multiplier 47 0 BANK0 1
+__HdataBANK0 0 0 ABS 0
+__LdataBANK0 0 0 ABS 0
+__pdataBANK0 6A 0 BANK0 1
+end_of_initialization 2B 0 CODE 0
+___aldiv@sign 57 0 BANK0 1
+main@controlByte 69 0 BANK0 1
+_DriveDirect F3F 0 CODE 0
+DriveDirect@LeftSpeedH 49 0 BANK0 1
+getSensorData@bytes 49 0 BANK0 1
+DriveDirect@LeftSpeedL 4A 0 BANK0 1
+___wmul@multiplicand 49 0 BANK0 1
+__size_of_getADC 0 0 ABS 0
+__end_of_spi_transfer E7F 0 CODE 0
+_lcdSetCursor E42 0 CODE 0
+__Hstrings 0 0 ABS 0
+__Lstrings 0 0 ABS 0
+__end_of_setupSPI ED4 0 CODE 0
+?_getSensorData 49 0 BANK0 1
+>>>>>>> origin/master
 __Hbank0 0 0 ABS 0
 __Lbank0 0 0 ABS 0
 __Hbank1 0 0 ABS 0
@@ -176,11 +285,16 @@ __Lbank2 0 0 ABS 0
 __Hbank3 0 0 ABS 0
 __Lbank3 0 0 ABS 0
 ___latbits 2 0 ABS 0
+<<<<<<< HEAD
 _stepCount 47 0 BANK0 1
+=======
+_stepCount 45 0 BANK0 1
+>>>>>>> origin/master
 __Hpowerup 0 0 CODE 0
 _SSPSTAT 94 0 ABS 0
 __Lpowerup 0 0 CODE 0
 __size_of_DriveDirect 0 0 ABS 0
+<<<<<<< HEAD
 _RightSpeedH 3D 0 BANK0 1
 __ptext1 E01 0 CODE 0
 getSensorData@sensor 4F 0 BANK0 1
@@ -237,10 +351,67 @@ __size_of_getSensorData 0 0 ABS 0
 clear_ram0 DD5 0 CODE 0
 __size_of___lwdiv 0 0 ABS 0
 __end_of_getADC FBA 0 CODE 0
+=======
+__ptext1 E70 0 CODE 0
+getSensorData@sensor 4D 0 BANK0 1
+_moveCCW 6ED 0 CODE 0
+__ptext2 EBC 0 CODE 0
+Drive@speedH 4B 0 BANK0 1
+__ptext3 F67 0 CODE 0
+__end_of_adcConvertMM 36D 0 CODE 0
+__ptext4 EA6 0 CODE 0
+__ptext5 E61 0 CODE 0
+__ptext6 6A2 0 CODE 0
+__ptext7 6ED 0 CODE 0
+__ptext8 7C0 0 CODE 0
+__ptext9 E4B 0 CODE 0
+__Hclrtext 0 0 ABS 0
+__Lclrtext 0 0 ABS 0
+__end_of__initialization 2B 0 CODE 0
+__end_of___lwdiv 1000 0 CODE 0
+__size_of_adcConvertMM 0 0 ABS 0
+_ADCMain ED4 0 CODE 0
+__Hidloc 0 0 IDLOC 0
+__Lidloc 0 0 IDLOC 0
+spi_transfer@temp 48 0 BANK0 1
+__Hstack 0 0 STACK 2
+__Lstack 0 0 STACK 2
+___lwmod F90 0 CODE 0
+__Hspace_0 2008 0 ABS 0
+__Lspace_0 0 0 ABS 0
+_lowByte 3F 0 BANK0 1
+__end_of_isr 77B 0 CODE 0
+__size_of_Drive 0 0 ABS 0
+__Hspace_1 3E9 0 ABS 0
+__Lspace_1 0 0 ABS 0
+_degrees 26 0 BANK0 1
+lcdWriteData@databyte 49 0 BANK0 1
+__Hspace_2 0 0 ABS 0
+__Lspace_2 0 0 ABS 0
+?___wmul 47 0 BANK0 1
+lcdWriteToDigitBCD@TenThouDigit 52 0 BANK0 1
+__Hcinit 2F 0 CODE 0
+__Lcinit 15 0 CODE 0
+__CFG_FOSC$HS 0 0 ABS 0
+___aldiv 613 0 CODE 0
+__Hspace_3 0 0 ABS 0
+___lwdiv FC2 0 CODE 0
+__Lspace_3 0 0 ABS 0
+__size_of_main 0 0 ABS 0
+Drive@speedL 48 0 BANK0 1
+__HidataBANK0 0 0 ABS 0
+__LidataBANK0 0 0 ABS 0
+__pidataBANK0 7FE 0 CODE 0
+__size_of_getSensorData 0 0 ABS 0
+clear_ram0 E3A 0 CODE 0
+__size_of___lwdiv 0 0 ABS 0
+__end_of_getADC 7C0 0 CODE 0
+>>>>>>> origin/master
 __HbssBANK0 0 0 ABS 0
 __LbssBANK0 0 0 ABS 0
 __pbssBANK0 20 0 BANK0 1
 __size_of_moveCW 0 0 ABS 0
+<<<<<<< HEAD
 lcdWriteToDigitBCD@data 4C 0 BANK0 1
 __end_of_ser_init E01 0 CODE 0
 __size_of_setupSPI 0 0 ABS 0
@@ -271,10 +442,43 @@ __end_of_lcdWriteData E23 0 CODE 0
 __end_of___lwmod 7F6 0 CODE 0
 ___lwmod@divisor 70 0 COMMON 1
 __ptext18 F75 0 CODE 0
+=======
+lcdWriteToDigitBCD@data 4A 0 BANK0 1
+__end_of_ser_init E70 0 CODE 0
+__size_of_setupSPI 0 0 ABS 0
+__ptext10 F3F 0 CODE 0
+__ptext20 EF4 0 CODE 0
+__ptext11 F17 0 CODE 0
+_getSensorData 7C0 0 CODE 0
+__ptext21 FC2 0 CODE 0
+__ptext12 E55 0 CODE 0
+__ptext22 613 0 CODE 0
+__ptext13 ED4 0 CODE 0
+__ptext23 735 0 CODE 0
+__ptext14 57C 0 CODE 0
+__ptext24 F90 0 CODE 0
+__ptext15 E7F 0 CODE 0
+getSensorData@packetID 4F 0 BANK0 1
+_stepClosest 2C 0 BANK0 1
+_totalDistTrav 32 0 BANK0 1
+_spi_transfer E70 0 CODE 0
+__ptext16 E42 0 CODE 0
+_PB6Counter 38 0 BANK0 1
+_PB7Counter 39 0 BANK0 1
+_PB8Counter 3A 0 BANK0 1
+__CFG_BOREN$OFF 0 0 ABS 0
+__ptext17 E92 0 CODE 0
+__end_of_lcdWriteData E92 0 CODE 0
+__end_of___lwmod FC2 0 CODE 0
+___lwmod@divisor 70 0 COMMON 1
+__ptext18 77B 0 CODE 0
+DriveDirect@RightSpeedH 4B 0 BANK0 1
+>>>>>>> origin/master
 __CFG_PWRTE$OFF 0 0 ABS 0
 __HbssCOMMON 0 0 ABS 0
 __LbssCOMMON 0 0 ABS 0
 __ptext19 2F 0 CODE 0
+<<<<<<< HEAD
 __pbssCOMMON 7B 0 COMMON 1
 __Hend_init 15 0 CODE 0
 __Lend_init 12 0 CODE 0
@@ -300,10 +504,38 @@ intlevel0 0 0 CODE 0
 __end_of_moveCW 77C 0 CODE 0
 __CFG_WDTE$OFF 0 0 ABS 0
 Drive@radH 4B 0 BANK0 1
+=======
+DriveDirect@RightSpeedL 48 0 BANK0 1
+__pbssCOMMON 7B 0 COMMON 1
+__Hend_init 15 0 CODE 0
+__Lend_init 12 0 CODE 0
+___aldiv@divisor 4D 0 BANK0 1
+___lwdiv@divisor 4D 0 BANK0 1
+_setupADC EA6 0 CODE 0
+_adcConvertMM 2F 0 CODE 0
+__end_of_lcdWriteToDigitBCD 613 0 CODE 0
+__size_of___wmul 0 0 ABS 0
+lcdWriteToDigitBCD@OnesDigit 54 0 BANK0 1
+_setupLCD F67 0 CODE 0
+__Hreset_vec 3 0 CODE 0
+__Lreset_vec 0 0 CODE 0
+lcdWriteToDigitBCD@TensDigit 4C 0 BANK0 1
+lcdWriteToDigitBCD@HunsDigit 4E 0 BANK0 1
+lcdWriteToDigitBCD@ThouDigit 50 0 BANK0 1
+__end_of_moveCCW 735 0 CODE 0
+__end_of_ser_getch E55 0 CODE 0
+__size_of___aldiv 0 0 ABS 0
+_angleTurned 24 0 BANK0 1
+intlevel0 0 0 CODE 0
+__end_of_moveCW 6ED 0 CODE 0
+__CFG_WDTE$OFF 0 0 ABS 0
+Drive@radH 49 0 BANK0 1
+>>>>>>> origin/master
 intlevel1 0 0 CODE 0
 intlevel2 0 0 CODE 0
 intlevel3 0 0 CODE 0
 intlevel4 0 0 CODE 0
+<<<<<<< HEAD
 _adcClosest 6C 0 BANK0 1
 intlevel5 0 0 CODE 0
 __size_of_lcdWriteData 0 0 ABS 0
@@ -313,41 +545,76 @@ _time_count 34 0 BANK0 1
 __size_of_setupLCD 0 0 ABS 0
 DriveDirect@VelocityRight 4A 0 BANK0 1
 Drive@radL 4C 0 BANK0 1
+=======
+_adcClosest 6A 0 BANK0 1
+intlevel5 0 0 CODE 0
+__size_of_lcdWriteData 0 0 ABS 0
+__end_of_ser_putch E61 0 CODE 0
+_setupSPI EBC 0 CODE 0
+_time_count 30 0 BANK0 1
+__size_of_setupLCD 0 0 ABS 0
+Drive@radL 4A 0 BANK0 1
+>>>>>>> origin/master
 __size_of___lwmod 0 0 ABS 0
 __HcstackCOMMON 0 0 ABS 0
 __LcstackCOMMON 0 0 ABS 0
 __pcstackCOMMON 70 0 COMMON 1
+<<<<<<< HEAD
 __end_of___wmul EA8 0 CODE 0
 __CFG_CPD$OFF 0 0 ABS 0
 start_initialization 15 0 CODE 0
 ___aldiv@quotient 5A 0 BANK0 1
 __size_of_ser_init 0 0 ABS 0
 ___lwdiv@quotient 54 0 BANK0 1
+=======
+__end_of___wmul F17 0 CODE 0
+__CFG_CPD$OFF 0 0 ABS 0
+start_initialization 15 0 CODE 0
+___aldiv@quotient 58 0 BANK0 1
+__size_of_ser_init 0 0 ABS 0
+___lwdiv@quotient 52 0 BANK0 1
+>>>>>>> origin/master
 __size_of_lcdWriteControl 0 0 ABS 0
 __size_of_moveCCW 0 0 ABS 0
 __Hmaintext 0 0 ABS 0
 __Lmaintext 0 0 ABS 0
 __pmaintext 36D 0 CODE 0
+<<<<<<< HEAD
 __end_of_setupADC E4D 0 CODE 0
 __end_of_getSensorData F75 0 CODE 0
 __end_of_DriveDirect 731 0 CODE 0
 ser_putch@c 49 0 BANK0 1
+=======
+__end_of_setupADC EBC 0 CODE 0
+__end_of_getSensorData 7FE 0 CODE 0
+__end_of_DriveDirect F67 0 CODE 0
+ser_putch@c 47 0 BANK0 1
+>>>>>>> origin/master
 __initialization 15 0 CODE 0
 ___lwmod@dividend 72 0 COMMON 1
 __HbitbssCOMMON 0 0 ABS 0
 __LbitbssCOMMON 0 0 ABS 0
+<<<<<<< HEAD
 ___wmul@product 4D 0 BANK0 1
+=======
+___wmul@product 4B 0 BANK0 1
+>>>>>>> origin/master
 ___lwmod@counter 75 0 COMMON 1
 __CFG_CP$OFF 0 0 ABS 0
 __pbitbssCOMMON 3E8 -36B COMMON 1
 __size_of_lcdWriteToDigitBCD 0 0 ABS 0
 __CFG_LVP$OFF 0 0 ABS 0
+<<<<<<< HEAD
 ___aldiv@dividend 53 0 BANK0 1
+=======
+___aldiv@dividend 51 0 BANK0 1
+>>>>>>> origin/master
 %segments
 reset_vec 0 5 CODE 0 0
 intentry 8 FFF CODE 8 0
 config 400E 400F CONFIG 400E 0
 cstackCOMMON 70 7D COMMON 70 1
+<<<<<<< HEAD
 bssBANK0 20 6D BANK0 20 1
 text23 1F74 1FFF CODE 1F74 0
 text18 1EEA 1F73 CODE 1EEA 0
@@ -397,6 +664,56 @@ C:\Users\Brendan\AppData\Local\Temp\shak.
 1066 DDA 0 CODE 0
 1067 DDB 0 CODE 0
 1068 DDC 0 CODE 0
+=======
+bssBANK0 20 6B BANK0 20 1
+text21 1F84 1FFF CODE 1F84 0
+text24 1F20 1F83 CODE 1F20 0
+text3 1ECE 1F1F CODE 1ECE 0
+text10 1E7E 1ECD CODE 1E7E 0
+text11 1E2E 1E7D CODE 1E2E 0
+text20 1DE8 1E2D CODE 1DE8 0
+text13 1DA8 1DE7 CODE 1DA8 0
+text2 1D78 1DA7 CODE 1D78 0
+text4 1D4C 1D77 CODE 1D4C 0
+text17 1D24 1D4B CODE 1D24 0
+text15 1CFE 1D23 CODE 1CFE 0
+text1 1CE0 1CFD CODE 1CE0 0
+text5 1CC2 1CDF CODE 1CC2 0
+text12 1CAA 1CC1 CODE 1CAA 0
+text9 1C96 1CA9 CODE 1C96 0
+text16 1C84 1C95 CODE 1C84 0
+clrtext 1C74 1C83 CODE 1C74 0
+%locals
+dist/default/production\iRobot.X.production.obj
+C:\Users\liamd\AppData\Local\Temp\s3nc.
+925 15 0 CODE 0
+928 15 0 CODE 0
+1044 15 0 CODE 0
+1045 1A 0 CODE 0
+1046 1B 0 CODE 0
+1047 20 0 CODE 0
+1066 21 0 CODE 0
+1067 22 0 CODE 0
+1068 23 0 CODE 0
+1069 24 0 CODE 0
+1070 25 0 CODE 0
+1073 28 0 CODE 0
+1074 29 0 CODE 0
+1077 2A 0 CODE 0
+1083 2B 0 CODE 0
+1085 2B 0 CODE 0
+1086 2C 0 CODE 0
+1053 E3A 0 CODE 0
+1054 E3A 0 CODE 0
+1055 E3B 0 CODE 0
+1056 E3B 0 CODE 0
+1057 E3C 0 CODE 0
+1058 E3D 0 CODE 0
+1059 E3E 0 CODE 0
+1060 E3F 0 CODE 0
+1061 E40 0 CODE 0
+1062 E41 0 CODE 0
+>>>>>>> origin/master
 main.c
 69 36D 0 CODE 0
 70 36D 0 CODE 0
@@ -413,6 +730,7 @@ main.c
 85 3C6 0 CODE 0
 86 3D5 0 CODE 0
 94 3E0 0 CODE 0
+<<<<<<< HEAD
 97 3E9 0 CODE 0
 96 3EE 0 CODE 0
 101 3F2 0 CODE 0
@@ -667,6 +985,247 @@ ADC.c
 49 FAB 0 CODE 0
 41 FAC 0 CODE 0
 52 FB9 0 CODE 0
+=======
+95 3E7 0 CODE 0
+96 3E9 0 CODE 0
+97 3F6 0 CODE 0
+98 3FB 0 CODE 0
+99 400 0 CODE 0
+100 40A 0 CODE 0
+101 40E 0 CODE 0
+96 413 0 CODE 0
+105 424 0 CODE 0
+106 433 0 CODE 0
+105 438 0 CODE 0
+108 441 0 CODE 0
+114 442 0 CODE 0
+115 450 0 CODE 0
+116 45F 0 CODE 0
+117 46C 0 CODE 0
+118 47E 0 CODE 0
+119 486 0 CODE 0
+120 48C 0 CODE 0
+116 497 0 CODE 0
+123 498 0 CODE 0
+128 4A3 0 CODE 0
+130 4B4 0 CODE 0
+132 4B6 0 CODE 0
+134 4B9 0 CODE 0
+135 4C6 0 CODE 0
+136 4DA 0 CODE 0
+137 4EC 0 CODE 0
+134 4F4 0 CODE 0
+140 4F5 0 CODE 0
+141 4F9 0 CODE 0
+143 4FB 0 CODE 0
+145 50D 0 CODE 0
+146 51A 0 CODE 0
+147 52C 0 CODE 0
+148 534 0 CODE 0
+149 53A 0 CODE 0
+145 545 0 CODE 0
+151 546 0 CODE 0
+152 54A 0 CODE 0
+132 553 0 CODE 0
+156 566 0 CODE 0
+161 571 0 CODE 0
+89 57B 0 CODE 0
+SPI.c
+23 E70 0 CODE 0
+24 E73 0 CODE 0
+26 E74 0 CODE 0
+27 E75 0 CODE 0
+29 E77 0 CODE 0
+30 E79 0 CODE 0
+31 E7D 0 CODE 0
+4 EBC 0 CODE 0
+6 EBC 0 CODE 0
+8 EBF 0 CODE 0
+9 EC1 0 CODE 0
+10 EC5 0 CODE 0
+11 EC9 0 CODE 0
+14 ECD 0 CODE 0
+16 ED1 0 CODE 0
+19 ED2 0 CODE 0
+20 ED3 0 CODE 0
+LCD.c
+86 F67 0 CODE 0
+88 F67 0 CODE 0
+90 F6B 0 CODE 0
+91 F6E 0 CODE 0
+93 F6F 0 CODE 0
+94 F72 0 CODE 0
+97 F73 0 CODE 0
+98 F79 0 CODE 0
+99 F7F 0 CODE 0
+100 F85 0 CODE 0
+101 F8B 0 CODE 0
+103 F8F 0 CODE 0
+ADC.c
+8 EA6 0 CODE 0
+9 EA6 0 CODE 0
+10 EA9 0 CODE 0
+13 EAD 0 CODE 0
+14 EB1 0 CODE 0
+16 EB5 0 CODE 0
+17 EBB 0 CODE 0
+ser.c
+5 E61 0 CODE 0
+7 E61 0 CODE 0
+8 E65 0 CODE 0
+24 E69 0 CODE 0
+26 E6D 0 CODE 0
+27 E6E 0 CODE 0
+28 E6F 0 CODE 0
+motor.c
+5 6A2 0 CODE 0
+8 6A2 0 CODE 0
+10 6A9 0 CODE 0
+13 6AD 0 CODE 0
+15 6AE 0 CODE 0
+19 6B0 0 CODE 0
+23 6B2 0 CODE 0
+27 6B4 0 CODE 0
+31 6B6 0 CODE 0
+35 6B8 0 CODE 0
+39 6BA 0 CODE 0
+40 6BC 0 CODE 0
+41 6BE 0 CODE 0
+43 6BF 0 CODE 0
+44 6C1 0 CODE 0
+45 6C5 0 CODE 0
+47 6C6 0 CODE 0
+49 6C8 0 CODE 0
+13 6C9 0 CODE 0
+51 6E3 0 CODE 0
+53 6EC 0 CODE 0
+55 6ED 0 CODE 0
+57 6ED 0 CODE 0
+59 6F2 0 CODE 0
+62 6F6 0 CODE 0
+63 6F7 0 CODE 0
+67 6F9 0 CODE 0
+71 6FB 0 CODE 0
+75 6FD 0 CODE 0
+79 6FF 0 CODE 0
+83 701 0 CODE 0
+87 703 0 CODE 0
+88 705 0 CODE 0
+89 709 0 CODE 0
+91 70A 0 CODE 0
+92 70C 0 CODE 0
+93 70D 0 CODE 0
+95 70E 0 CODE 0
+97 710 0 CODE 0
+62 711 0 CODE 0
+99 72B 0 CODE 0
+103 734 0 CODE 0
+ser.c
+62 7C0 0 CODE 0
+63 7C3 0 CODE 0
+64 7C9 0 CODE 0
+66 7D1 0 CODE 0
+67 7D7 0 CODE 0
+69 7E2 0 CODE 0
+71 7E3 0 CODE 0
+73 7EB 0 CODE 0
+75 7F9 0 CODE 0
+35 E4B 0 CODE 0
+36 E4B 0 CODE 0
+37 E4F 0 CODE 0
+38 E53 0 CODE 0
+53 F3F 0 CODE 0
+54 F42 0 CODE 0
+55 F48 0 CODE 0
+56 F50 0 CODE 0
+57 F58 0 CODE 0
+58 F60 0 CODE 0
+59 F66 0 CODE 0
+45 F17 0 CODE 0
+46 F1A 0 CODE 0
+47 F20 0 CODE 0
+48 F28 0 CODE 0
+49 F30 0 CODE 0
+50 F38 0 CODE 0
+51 F3E 0 CODE 0
+30 E55 0 CODE 0
+31 E58 0 CODE 0
+32 E5C 0 CODE 0
+33 E60 0 CODE 0
+ADC.c
+19 ED4 0 CODE 0
+21 ED4 0 CODE 0
+22 ED9 0 CODE 0
+23 EDF 0 CODE 0
+25 EEA 0 CODE 0
+26 EF3 0 CODE 0
+LCD.c
+42 57C 0 CODE 0
+46 57C 0 CODE 0
+47 582 0 CODE 0
+48 584 0 CODE 0
+49 586 0 CODE 0
+50 588 0 CODE 0
+53 58A 0 CODE 0
+54 591 0 CODE 0
+55 599 0 CODE 0
+53 59F 0 CODE 0
+59 5A0 0 CODE 0
+60 5A8 0 CODE 0
+58 5AE 0 CODE 0
+64 5B6 0 CODE 0
+65 5BE 0 CODE 0
+63 5C4 0 CODE 0
+69 5CC 0 CODE 0
+70 5D4 0 CODE 0
+68 5DA 0 CODE 0
+73 5E1 0 CODE 0
+74 5E5 0 CODE 0
+76 5EC 0 CODE 0
+77 5F2 0 CODE 0
+79 5F9 0 CODE 0
+80 602 0 CODE 0
+81 60B 0 CODE 0
+83 612 0 CODE 0
+20 E7F 0 CODE 0
+21 E82 0 CODE 0
+22 E83 0 CODE 0
+23 E84 0 CODE 0
+24 E85 0 CODE 0
+25 E87 0 CODE 0
+26 E88 0 CODE 0
+27 E89 0 CODE 0
+28 E91 0 CODE 0
+31 E42 0 CODE 0
+32 E45 0 CODE 0
+33 E46 0 CODE 0
+34 E4A 0 CODE 0
+9 E92 0 CODE 0
+10 E95 0 CODE 0
+11 E96 0 CODE 0
+12 E97 0 CODE 0
+13 E98 0 CODE 0
+14 E9A 0 CODE 0
+15 E9B 0 CODE 0
+16 E9C 0 CODE 0
+17 EA5 0 CODE 0
+ADC.c
+29 77B 0 CODE 0
+31 77B 0 CODE 0
+32 77E 0 CODE 0
+34 781 0 CODE 0
+35 784 0 CODE 0
+39 786 0 CODE 0
+41 793 0 CODE 0
+42 794 0 CODE 0
+43 79D 0 CODE 0
+44 79E 0 CODE 0
+45 7A7 0 CODE 0
+46 7A8 0 CODE 0
+49 7B1 0 CODE 0
+41 7B2 0 CODE 0
+52 7BF 0 CODE 0
+>>>>>>> origin/master
 59 2F 0 CODE 0
 61 2F 0 CODE 0
 62 3F 0 CODE 0
@@ -693,6 +1252,7 @@ ADC.c
 94 35C 0 CODE 0
 95 36A 0 CODE 0
 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\Umul16.c
+<<<<<<< HEAD
 15 E85 0 CODE 0
 43 E85 0 CODE 0
 45 E89 0 CODE 0
@@ -774,3 +1334,86 @@ C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwmod.c
 22 7E6 0 CODE 0
 23 7ED 0 CODE 0
 25 7F1 0 CODE 0
+=======
+15 EF4 0 CODE 0
+43 EF4 0 CODE 0
+45 EF8 0 CODE 0
+46 EFA 0 CODE 0
+47 F00 0 CODE 0
+48 F07 0 CODE 0
+49 F0E 0 CODE 0
+52 F12 0 CODE 0
+C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwdiv.c
+6 FC2 0 CODE 0
+14 FC2 0 CODE 0
+15 FC6 0 CODE 0
+16 FCA 0 CODE 0
+17 FCC 0 CODE 0
+18 FCE 0 CODE 0
+19 FD5 0 CODE 0
+17 FD9 0 CODE 0
+22 FDA 0 CODE 0
+23 FE1 0 CODE 0
+24 FE9 0 CODE 0
+25 FEF 0 CODE 0
+27 FF0 0 CODE 0
+28 FF7 0 CODE 0
+30 FFB 0 CODE 0
+C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\aldiv.c
+6 613 0 CODE 0
+14 613 0 CODE 0
+15 616 0 CODE 0
+16 618 0 CODE 0
+17 623 0 CODE 0
+18 625 0 CODE 0
+19 625 0 CODE 0
+20 627 0 CODE 0
+21 632 0 CODE 0
+23 636 0 CODE 0
+24 63E 0 CODE 0
+25 644 0 CODE 0
+26 646 0 CODE 0
+27 648 0 CODE 0
+28 651 0 CODE 0
+26 655 0 CODE 0
+31 656 0 CODE 0
+32 65F 0 CODE 0
+33 66F 0 CODE 0
+34 67D 0 CODE 0
+36 67E 0 CODE 0
+37 687 0 CODE 0
+39 68B 0 CODE 0
+40 68E 0 CODE 0
+41 699 0 CODE 0
+main.c
+26 735 0 CODE 0
+28 735 0 CODE 0
+29 737 0 CODE 0
+30 738 0 CODE 0
+31 73A 0 CODE 0
+35 740 0 CODE 0
+38 745 0 CODE 0
+39 756 0 CODE 0
+41 75A 0 CODE 0
+44 75C 0 CODE 0
+45 760 0 CODE 0
+46 764 0 CODE 0
+47 766 0 CODE 0
+48 76A 0 CODE 0
+49 76C 0 CODE 0
+66 770 0 CODE 0
+26 4 0 CODE 0
+C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwmod.c
+6 F90 0 CODE 0
+13 F90 0 CODE 0
+14 F94 0 CODE 0
+15 F96 0 CODE 0
+16 F98 0 CODE 0
+17 F9F 0 CODE 0
+15 FA3 0 CODE 0
+20 FA4 0 CODE 0
+21 FAC 0 CODE 0
+22 FB2 0 CODE 0
+23 FB9 0 CODE 0
+25 FBD 0 CODE 0
+>>>>>>> origin/master

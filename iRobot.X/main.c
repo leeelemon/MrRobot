@@ -127,34 +127,49 @@ __delay_ms(5000);
                 lcdSetCursor(0x00);     //Print distance on first row first position
                 lcdWriteToDigitBCD(totalDistTrav);  
             }            
+
+            DriveDirect(0,250,0,250); //Drive, 250mm/s | 250mm/s
+                while (totalDistTrav < 4000){
+                    distTrav = getSensorData(19,2);   //Distance packetID, 2 bytes expected
+                    totalDistTrav = (totalDistTrav + distTrav);                    
+                    lcdSetCursor(0x00);     //Print distance on first row first position
+                    lcdWriteToDigitBCD(totalDistTrav);  
+                }            
+
                             
             DriveDirect(0,0);   //Drive, 0mm/s, straight (STOP)
            
         }
         
         //Perform 'Square' manoeuvre
-        if (getSensorData(18,1) == 0b00000100){ //Advanced button
-            totalDistTrav = 0;  //Resets distance traveled
+        if (getSensorData(18,1) == 0b00000100){ //Advanced button pressed
             
-            for (loop = 0; loop < 4; loop++){   //Loop 4 times
+            totalDistTrav = 0;  //Resets distance traveled
                 
-                //Turn 90 degrees
-                Drive(0,250,0xFF,0xFF);     //Drive, 250mm/s, turn on spot right 
-                while (angleTurned > -90){
-                    angleTurned = getSensorData(20,2);  //Angle packetID, 2 bytes expected
-                }  
+                for (loop = 0; loop < 4; loop++){   //Loop 4 times
+                   
+                    while (totalangleTurned >= -85){
+                        Drive(0,250,0xFF,0xFF); //Drive on spot right
+                        angleTurned = getSensorData(20,2);  //Angle packetID, 2 bytes expected
+                        totalangleTurned = (totalangleTurned + angleTurned);
+                    }
+                    
+                    totalangleTurned = 0;
+                    angleTurned = 0;
+                    
+                    Drive(0,250,0x7F,0xFF);     //Drive, 250mm/s, straight for 1m
+                        
+                    while (totalDistTrav < 1000){                        
+                        distTrav = getSensorData(19,2);   //Distance packetID, 2 bytes expected
+                        totalDistTrav = (totalDistTrav + distTrav);            
+                        lcdSetCursor(0x00);     //Print distance on first row first position
+                        lcdWriteToDigitBCD(totalDistTrav);                  
+                    }
                 
-                //Drive 1m
-                Drive(0,250,0x7F,0xFF);     //Drive, 250mm/s, straight
-                while (totalDistTrav < 1000){                        
-                    distTrav = getSensorData(19,2);   //Distance packetID, 2 bytes expected
-                    totalDistTrav = (totalDistTrav + distTrav);
-                                        
-                    lcdSetCursor(0x00);     //Print distance on first row first position
-                    lcdWriteToDigitBCD(totalDistTrav);                  
+                    totalDistTrav = 0;    
+                    DriveDirect(0,0,0,0);
+                
                 }
-                totalDistTrav = 0;
-            }
             
             DriveDirect(0,0); //Drive, 0mm/s, straight (STOP) 
                

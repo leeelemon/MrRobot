@@ -1091,6 +1091,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `i
 ]
 [; ;main.h: 36: signed int angleTurned = 0;
+"37
+[v _totalangleTurned `i ~T0 @X0 1 e ]
+[i _totalangleTurned
+-> 0 `i
+]
+[; ;main.h: 37: signed int totalangleTurned = 0;
 "6 ser.h
 [v _speedH `uc ~T0 @X0 1 e ]
 [i _speedH
@@ -1116,6 +1122,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;ser.h: 9: unsigned char radL = 0;
 "11
+<<<<<<< HEAD
 [v _VelocityRight `ui ~T0 @X0 1 e ]
 [i _VelocityRight
 -> -> 0 `i `ui
@@ -1128,28 +1135,46 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;ser.h: 12: unsigned int VelocityLeft = 0;
 "13
+=======
+>>>>>>> origin/master
 [v _RightSpeedH `uc ~T0 @X0 1 e ]
 [i _RightSpeedH
 -> -> 0 `i `uc
 ]
+<<<<<<< HEAD
 [; ;ser.h: 13: unsigned char RightSpeedH = 0;
 "14
+=======
+[; ;ser.h: 11: unsigned char RightSpeedH = 0;
+"12
+>>>>>>> origin/master
 [v _RightSpeedL `uc ~T0 @X0 1 e ]
 [i _RightSpeedL
 -> -> 0 `i `uc
 ]
+<<<<<<< HEAD
 [; ;ser.h: 14: unsigned char RightSpeedL = 0;
 "15
+=======
+[; ;ser.h: 12: unsigned char RightSpeedL = 0;
+"13
+>>>>>>> origin/master
 [v _LeftSpeedH `uc ~T0 @X0 1 e ]
 [i _LeftSpeedH
 -> -> 0 `i `uc
 ]
+<<<<<<< HEAD
 [; ;ser.h: 15: unsigned char LeftSpeedH = 0;
 "16
+=======
+[; ;ser.h: 13: unsigned char LeftSpeedH = 0;
+"14
+>>>>>>> origin/master
 [v _LeftSpeedL `uc ~T0 @X0 1 e ]
 [i _LeftSpeedL
 -> -> 0 `i `uc
 ]
+<<<<<<< HEAD
 [; ;ser.h: 16: unsigned char LeftSpeedL = 0;
 [; ;ser.h: 19: void ser_init(void);
 [; ;ser.h: 22: void ser_putch(unsigned char c);
@@ -1157,6 +1182,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ser.h: 28: void Drive(unsigned char speedH, unsigned char speedL, unsigned char radH, unsigned char radL);
 [; ;ser.h: 30: void DriveDirect(signed int VelocityRight, signed int VelocityLeft);
 [; ;ser.h: 33: signed int getSensorData(unsigned char packetID, unsigned char bytes);
+=======
+[; ;ser.h: 14: unsigned char LeftSpeedL = 0;
+[; ;ser.h: 17: void ser_init(void);
+[; ;ser.h: 20: void ser_putch(unsigned char c);
+[; ;ser.h: 23: unsigned char ser_getch();
+[; ;ser.h: 26: void Drive(unsigned char speedH, unsigned char speedL, unsigned char radH, unsigned char radL);
+[; ;ser.h: 28: void DriveDirect(unsigned char RightSpeedH, unsigned char RightSpeedL, unsigned char LeftSpeedH, unsigned char LeftSpeedL);
+[; ;ser.h: 31: signed int getSensorData(unsigned char packetID, unsigned char bytes);
+>>>>>>> origin/master
 "17 lcd.h
 [v _stepCountNeg `Vui ~T0 @X0 1 e ]
 [i _stepCountNeg
@@ -1276,6 +1310,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "51
 [e :UE 105 ]
 }
+<<<<<<< HEAD
 "54
 [v _DriveDirect `(v ~T0 @X0 1 ef2`i`i ]
 {
@@ -1383,10 +1418,46 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _getSensorData `(i ~T0 @X0 1 ef2`uc`uc ]
 {
 [; ;ser.c: 85: signed int getSensorData(unsigned char packetID, unsigned char bytes){
+=======
+"53
+[v _DriveDirect `(v ~T0 @X0 1 ef4`uc`uc`uc`uc ]
+{
+[; ;ser.c: 53: void DriveDirect(unsigned char RightSpeedH, unsigned char RightSpeedL, unsigned char LeftSpeedH, unsigned char LeftSpeedL){
+[e :U _DriveDirect ]
+[v _RightSpeedH `uc ~T0 @X0 1 r1 ]
+[v _RightSpeedL `uc ~T0 @X0 1 r2 ]
+[v _LeftSpeedH `uc ~T0 @X0 1 r3 ]
+[v _LeftSpeedL `uc ~T0 @X0 1 r4 ]
+[f ]
+[; ;ser.c: 54: ser_putch(145);
+"54
+[e ( _ser_putch (1 -> -> 145 `i `uc ]
+[; ;ser.c: 55: ser_putch(RightSpeedH);
+"55
+[e ( _ser_putch (1 _RightSpeedH ]
+[; ;ser.c: 56: ser_putch(RightSpeedL);
+"56
+[e ( _ser_putch (1 _RightSpeedL ]
+[; ;ser.c: 57: ser_putch(LeftSpeedH);
+"57
+[e ( _ser_putch (1 _LeftSpeedH ]
+[; ;ser.c: 58: ser_putch(LeftSpeedL);
+"58
+[e ( _ser_putch (1 _LeftSpeedL ]
+[; ;ser.c: 59: }
+"59
+[e :UE 106 ]
+}
+"62
+[v _getSensorData `(i ~T0 @X0 1 ef2`uc`uc ]
+{
+[; ;ser.c: 62: signed int getSensorData(unsigned char packetID, unsigned char bytes){
+>>>>>>> origin/master
 [e :U _getSensorData ]
 [v _packetID `uc ~T0 @X0 1 r1 ]
 [v _bytes `uc ~T0 @X0 1 r2 ]
 [f ]
+<<<<<<< HEAD
 [; ;ser.c: 86: ser_putch(142);
 "86
 [e ( _ser_putch (1 -> -> 142 `i `uc ]
@@ -1421,4 +1492,40 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ser.c: 102: }
 "102
 [e :UE 115 ]
+=======
+[; ;ser.c: 63: ser_putch(142);
+"63
+[e ( _ser_putch (1 -> -> 142 `i `uc ]
+[; ;ser.c: 64: ser_putch(packetID);
+"64
+[e ( _ser_putch (1 _packetID ]
+[; ;ser.c: 66: if (bytes == 2)
+"66
+[e $ ! == -> _bytes `i -> 2 `i 108  ]
+[; ;ser.c: 67: highByte = ser_getch();
+"67
+[e = _highByte ( _ser_getch ..  ]
+[e $U 109  ]
+"68
+[e :U 108 ]
+[; ;ser.c: 68: else
+[; ;ser.c: 69: highByte = 0;
+"69
+[e = _highByte -> -> 0 `i `uc ]
+[e :U 109 ]
+[; ;ser.c: 71: lowByte = ser_getch();
+"71
+[e = _lowByte ( _ser_getch ..  ]
+"73
+[v _sensor `i ~T0 @X0 1 a ]
+[; ;ser.c: 73: signed int sensor = (256*highByte + lowByte);
+[e = _sensor + * -> 256 `i -> _highByte `i -> _lowByte `i ]
+[; ;ser.c: 75: return sensor;
+"75
+[e ) _sensor ]
+[e $UE 107  ]
+[; ;ser.c: 79: }
+"79
+[e :UE 107 ]
+>>>>>>> origin/master
 }

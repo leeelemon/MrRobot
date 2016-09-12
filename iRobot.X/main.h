@@ -34,6 +34,7 @@ unsigned char lowByte = 0;
 signed int distTrav = 0;
 signed int totalDistTrav = 0;
 signed int angleTurned = 0;
+signed int totalangleTurned = 0;
 
 
 

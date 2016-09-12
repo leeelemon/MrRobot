@@ -1447,6 +1447,10 @@ unsigned char lowByte = 0;
 signed int distTrav = 0;
 signed int totalDistTrav = 0;
 signed int angleTurned = 0;
+<<<<<<< HEAD
+=======
+signed int totalangleTurned = 0;
+>>>>>>> origin/master
 
 # 17 "LCD.h"
 volatile unsigned int stepCountNeg = 0;
@@ -1479,8 +1483,11 @@ unsigned char speedL = 0;
 unsigned char radH = 0;
 unsigned char radL = 0;
 
+<<<<<<< HEAD
 unsigned int VelocityRight = 0;
 unsigned int VelocityLeft = 0;
+=======
+>>>>>>> origin/master
 unsigned char RightSpeedH = 0;
 unsigned char RightSpeedL = 0;
 unsigned char LeftSpeedH = 0;
@@ -1498,7 +1505,11 @@ unsigned char ser_getch();
 
 void Drive(unsigned char speedH, unsigned char speedL, unsigned char radH, unsigned char radL);
 
+<<<<<<< HEAD
 void DriveDirect(signed int VelocityRight, signed int VelocityLeft);
+=======
+void DriveDirect(unsigned char RightSpeedH, unsigned char RightSpeedL, unsigned char LeftSpeedH, unsigned char LeftSpeedL);
+>>>>>>> origin/master
 
 
 signed int getSensorData(unsigned char packetID, unsigned char bytes);
@@ -1595,12 +1606,15 @@ while(1){
 
 
 if (PB8Counter >= 10 && !RB0 == 0){
+<<<<<<< HEAD
 
 while (stepCount < 0){
 moveCCW();
 }
 
 
+=======
+>>>>>>> origin/master
 adcClosest = 0;
 for (loop = 0; loop < 400; loop++){
 moveCW();
@@ -1621,26 +1635,42 @@ PB8Counter = 0;
 
 
 if (getSensorData(18,1) == 0b00000001){
+<<<<<<< HEAD
 totalDistTrav = 0;
 DriveDirect(200,200);
 while (totalDistTrav < 3000){
 distTrav = getSensorData(19,2);
 totalDistTrav = (totalDistTrav + distTrav);
 
+=======
+DriveDirect(0,250,0,250);
+while (totalDistTrav < 4000){
+distTrav = getSensorData(19,2);
+totalDistTrav = (totalDistTrav + distTrav);
+>>>>>>> origin/master
 lcdSetCursor(0x00);
 lcdWriteToDigitBCD(totalDistTrav);
 }
 
+<<<<<<< HEAD
 DriveDirect(0,0);
+=======
+DriveDirect(0,0,0,0);
+>>>>>>> origin/master
 
 }
 
 
 if (getSensorData(18,1) == 0b00000100){
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 totalDistTrav = 0;
 
 for (loop = 0; loop < 4; loop++){
 
+<<<<<<< HEAD
 
 Drive(0,250,0xFF,0xFF);
 while (angleTurned > -90){
@@ -1653,13 +1683,37 @@ while (totalDistTrav < 1000){
 distTrav = getSensorData(19,2);
 totalDistTrav = (totalDistTrav + distTrav);
 
+=======
+while (totalangleTurned >= -85){
+Drive(0,250,0xFF,0xFF);
+angleTurned = getSensorData(20,2);
+totalangleTurned = (totalangleTurned + angleTurned);
+}
+
+totalangleTurned = 0;
+angleTurned = 0;
+
+Drive(0,250,0x7F,0xFF);
+
+while (totalDistTrav < 1000){
+distTrav = getSensorData(19,2);
+totalDistTrav = (totalDistTrav + distTrav);
+>>>>>>> origin/master
 lcdSetCursor(0x00);
 lcdWriteToDigitBCD(totalDistTrav);
 }
 totalDistTrav = 0;
+<<<<<<< HEAD
 }
 
 DriveDirect(0,0);
+=======
+DriveDirect(0,0,0,0);
+
+}
+
+DriveDirect(0,0,0,0);
+>>>>>>> origin/master
 
 }
 
